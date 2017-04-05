@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -39,11 +40,12 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         listView= (ListView) view.findViewById(R.id.nofinish_listview);
         nofinishAdapter=new NofinishAdapter(getContext(),list);
         listView.setAdapter(nofinishAdapter);
-        //点击展开隐藏内容
-        listView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+        //点击展开隐藏内容
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                nofinishAdapter.changeImageVisable(view,i);
             }
         });
     }
@@ -56,4 +58,6 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="16dp">
+    <TextView
+        android:id="@+id/nofinishadapter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="项目名称：XXXXXXX"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
+    <ProgressBar
+        android:id="@+id/nofinishadapter_pb"
+        android:layout_below="@+id/nofinishadapter_tv"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/StyleProgressBarMini"
+        android:background="@drawable/shape_progressbar_bg"
+        android:max="100"
+        android:progress="40"/>
+    <include android:id="@+id/include"
+        layout="@layout/include_hint"/>
+</RelativeLayout>
