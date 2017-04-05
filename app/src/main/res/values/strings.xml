@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjectManagement</string>
+    <string name="nofinish">未完成</string>
+    <string name="finish">已完成</string>
 </resources>
