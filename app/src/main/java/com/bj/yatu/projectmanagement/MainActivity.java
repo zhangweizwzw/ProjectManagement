@@ -9,10 +9,11 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bj.yatu.projectmanagement.activity.BaseActivity;
 import com.bj.yatu.projectmanagement.fragment.FinishFragment;
 import com.bj.yatu.projectmanagement.fragment.NoFinishFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private String TAG="MainActivity";
     // 定义Fragment对象
     private NoFinishFragment noFinishFragment;
