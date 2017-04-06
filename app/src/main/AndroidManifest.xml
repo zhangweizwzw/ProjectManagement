@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddProjectActivity" />
+        <activity android:name=".activity.AddProjectActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"  />
         <activity android:name=".activity.AddPanelActivity"
             android:theme="@style/Transparent"  ></activity>
     </application>

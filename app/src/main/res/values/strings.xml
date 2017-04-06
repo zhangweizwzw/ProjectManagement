@@ -15,4 +15,10 @@
     <string name="extras">杂费:</string>
     <string name="setup">创建</string>
     <string name="proplecost">人工成本:</string>
+    <string name="canel">取消</string>
+    <string name="timepicker_title">选择起止时间</string>
+    <string name="timepicker_finish">完成</string>
+    <string name="timepicker_year">年</string>
+    <string name="timepicker_month">月</string>
+    <string name="timepicker_day">日</string>
 </resources>

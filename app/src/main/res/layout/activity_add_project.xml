@@ -1,169 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bj.yatu.projectmanagement.activity.AddProjectActivity">
 
-    <include android:id="@+id/title_bar"
-        layout="@layout/title_bar"/>
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/title_bar" />
 
-    <RelativeLayout android:id="@+id/rela1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_below="@id/title_bar"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="10dp">
 
-        <TextView android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/projectname"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
-
-        <EditText android:id="@+id/pro_name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/edittext"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="2dp"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_toRightOf="@+id/text_name"/>
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rela1"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
-    <RelativeLayout android:id="@+id/rela2"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/rela1"
-        android:layout_marginTop="3dp">
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/projectname"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
 
-        <TextView android:id="@+id/text_stime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/starttime"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
+                <EditText
+                    android:id="@+id/pro_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/text_name"
+                    android:background="@drawable/edittext"
+                    android:paddingLeft="2dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/canlendar"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
-        <EditText android:id="@+id/start_time"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/edittext"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="2dp"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_toRightOf="@+id/text_stime"/>
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rela2"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/rela1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="3dp">
 
-    <RelativeLayout android:id="@+id/rela3"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/rela2"
-        android:layout_marginTop="3dp">
+                <TextView
+                    android:id="@+id/text_stime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/starttime"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
 
-        <TextView android:id="@+id/text_etime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/endtime"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
+                <ImageView android:id="@+id/starttime_im"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/canlendar" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/canlendar"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+                <EditText
+                    android:id="@+id/start_time_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_toRightOf="@+id/text_stime"
+                    android:background="@drawable/edittext"
+                    android:paddingLeft="2dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
 
-        <EditText android:id="@+id/end_time"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/edittext"
-            android:layout_marginLeft="2dp"
-            android:paddingLeft="2dp"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_toRightOf="@+id/text_etime"/>
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rela3"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/rela2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/text_predicttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/endtime"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <ImageView android:id="@+id/predicttime_im"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/canlendar" />
+
+                <EditText
+                    android:id="@+id/predicttime_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_toRightOf="@+id/text_predicttime"
+                    android:background="@drawable/edittext"
+                    android:paddingLeft="2dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
 
 
-    <RelativeLayout android:id="@+id/rela4"
+            <RelativeLayout
+                android:id="@+id/rela4"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rela3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/manager_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/managername"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <com.bj.yatu.projectmanagement.widget.MaterialSpinner
+                    android:id="@+id/manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/manager_text"
+                    android:textSize="12sp"
+                    app:ms_dropdown_height="wrap_content"
+                    app:ms_dropdown_max_height="350dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rela5"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/rela4"
+                android:layout_marginTop="10dp"
+                android:background="@color/theme_color">
+
+                <TextView
+                    android:id="@+id/panel_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/project_panal"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/add_panel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/add_panel"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/panel_rv"
+                android:divider="#ffff0000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_below="@id/rela5"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout android:id="@+id/bottom_rela"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/rela3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
-
-        <TextView android:id="@+id/manager_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/managername"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
-
-        <com.bj.yatu.projectmanagement.widget.MaterialSpinner
-            android:id="@+id/manager"
-            app:ms_dropdown_max_height="350dp"
-            app:ms_dropdown_height="wrap_content"
-            android:layout_toRightOf="@+id/manager_text"
-            android:layout_marginLeft="2dp"
-            android:textSize="12sp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_red"
+                android:text="@string/canel"
+                android:textColor="@color/white" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_theme"
+                android:text="@string/setup"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout android:id="@+id/rela5"
-        android:layout_width="match_parent"
-        android:background="@color/theme_color"
-        android:layout_height="35dp"
-        android:layout_below="@+id/rela4"
-        android:layout_marginTop="10dp">
-
-        <TextView android:id="@+id/panel_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/project_panal"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
-
-        <TextView android:id="@+id/add_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_panel"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/white"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/normal_textsize"/>
-
-    </RelativeLayout>
 </RelativeLayout>

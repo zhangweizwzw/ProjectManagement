@@ -6,6 +6,12 @@
     <include android:id="@+id/title_bar"
         layout="@layout/title_bar"/>
 
+    <ListView
+        android:id="@+id/nofinish_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"/>
+
     <ImageView android:id="@+id/addproject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,10 +19,5 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:src="@mipmap/addproject"/>
-    <ListView
-        android:id="@+id/nofinish_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title_bar"></ListView>
 
 </RelativeLayout>
