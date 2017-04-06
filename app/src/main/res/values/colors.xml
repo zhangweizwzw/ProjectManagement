@@ -10,5 +10,6 @@
     <color name="theme_color">#169BD5</color>
     <color name="transparent">#00000000</color>
     <color name="title_color"> #4F94CD</color>
+    <color name="nofinish_bg">#4169E1</color>
     <color name="red"> #FF0000</color>
 </resources>

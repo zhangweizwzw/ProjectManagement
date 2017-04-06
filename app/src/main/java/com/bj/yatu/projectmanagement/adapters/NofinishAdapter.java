@@ -23,7 +23,7 @@ public class NofinishAdapter extends BaseAdapter{
     private List<Info> list;
 
     private View mLastView;
-    private int mLastPosition;
+    private int mLastPosition=-1;
     private int mLastVisibility;
     public NofinishAdapter(Context context, List<Info> list) {
         this.context = context;
@@ -60,7 +60,8 @@ public class NofinishAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         }
         viewHolder= (ViewHolder) convertView.getTag();
-
+        viewHolder.tv.setText(list.get(position).getName());
+        viewHolder.pb.setProgress(list.get(position).getProgress());
         if(mLastPosition == position){
 
             viewHolder.hint.setVisibility(mLastVisibility);

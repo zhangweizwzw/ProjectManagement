@@ -50,15 +50,16 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         addproject.setOnClickListener(this);
 
         listView= (ListView) view.findViewById(R.id.nofinish_listview);
-        nofinishAdapter=new NofinishAdapter(getContext(),list);
-        listView.setAdapter(nofinishAdapter);
         list=new ArrayList<>();
-        Info info1=new Info("项目一",40);
-        Info info2=new Info("项目二",60);
-        Info info3=new Info("项目三",70);
+        Info info1=new Info("项目名称：一一一一一一一",40);
+        Info info2=new Info("项目名称：二二二二二",80);
+        Info info3=new Info("项目名称：三三三三三三",20);
         list.add(info1);
         list.add(info2);
         list.add(info3);
+        nofinishAdapter=new NofinishAdapter(getContext(),list);
+        listView.setAdapter(nofinishAdapter);
+
         //点击展开隐藏内容
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
