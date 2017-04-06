@@ -35,4 +35,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="more">more</string>
+    <string name="projectmanager">项目经理:</string>
+    <string name="startdate">起始时间:</string>
+    <string name="nowtime">当前时间:</string>
+    <string name="expecttime">预计完成时间:</string>
+    <string name="ecpect">预计:</string>
+    <string name="infact">实际:</string>
+    <string name="people">人工:</string>
+    <string name="cost">费用:</string>
+    <string name="costmin">费用小计:</string>
 </resources>

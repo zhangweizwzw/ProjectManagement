@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout android:id="@+id/rela1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color">
+
+        <TextView android:id="@+id/projectname_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normal_textsize"
+            android:text="项目名称"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/text_color"/>
+
+        <TextView android:id="@+id/more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normal_textsize"
+            android:text="@string/more"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <com.bj.yatu.projectmanagement.common.MyProgress
+        android:id="@+id/projectrate_pro"
+        android:layout_width="match_parent"
+        android:layout_below="@id/rela1"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
+        style="@style/StyleProgressBarMini"
+        android:background="@drawable/shape_progressbar_bg"
+        android:max="100"
+        android:progress="40"/>
+
+    <LinearLayout android:id="@+id/lin1"
+        android:layout_below="@id/projectrate_pro"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+
+            <TextView android:id="@+id/projectmanager_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/projectmanager"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/projectManager_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="老王"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/projectmanager_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/starttitme_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/startdate"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/starttitme_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-1-8"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/starttitme_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/lin2"
+        android:layout_below="@id/lin1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+
+            <TextView android:id="@+id/nowtime_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nowtime"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/nowtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-1-8"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/nowtime_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/expectfinishtime_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expecttime"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/expectfinishtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-1-8"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/expectfinishtime_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/lin3"
+        android:layout_below="@id/lin2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/expect_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ecpect"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/expect_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/expect_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/fact_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/infact"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/fact_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/fact_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/lin4"
+        android:layout_below="@id/lin3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/people_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/people"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/people_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/people_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/cost_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cost"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/cost_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/cost_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/costmin_tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/costmin"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/costmin_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@id/costmin_tt"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

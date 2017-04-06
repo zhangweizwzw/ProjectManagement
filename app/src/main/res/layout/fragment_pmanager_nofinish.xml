@@ -6,10 +6,12 @@
     <include android:id="@+id/title_bar"
         layout="@layout/title_bar"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_bar"
-        android:text="已完成"/>
+    <ListView android:id="@+id/project_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
+        android:layout_marginTop="10dp">
+
+    </ListView>
 
 </RelativeLayout>
