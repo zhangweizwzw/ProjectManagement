@@ -21,10 +21,40 @@ public class Info {
     private String plan;
     //实际
     private String actual;
+    //人工
+    private String manual;
+    //费用
+    private String coast;
+    //费用小计
+    private String coastSubtotal;
     public Info(){}
     public Info(String name, int progress) {
         this.name = name;
         this.progress = progress;
+    }
+
+    public String getManual() {
+        return manual;
+    }
+
+    public void setManual(String manual) {
+        this.manual = manual;
+    }
+
+    public String getCoast() {
+        return coast;
+    }
+
+    public void setCoast(String coast) {
+        this.coast = coast;
+    }
+
+    public String getCoastSubtotal() {
+        return coastSubtotal;
+    }
+
+    public void setCoastSubtotal(String coastSubtotal) {
+        this.coastSubtotal = coastSubtotal;
     }
 
     public String getName() {

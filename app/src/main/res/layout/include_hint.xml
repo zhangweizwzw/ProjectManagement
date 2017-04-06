@@ -1,92 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
     <RelativeLayout
+        android:id="@+id/hint_relative1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/title_color">
         <TextView
+            android:id="@+id/hint_name"
             android:text="项目名称"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
+            android:layout_marginLeft="8dp"
             android:textColor="@color/black"
             />
         <TextView
+            android:id="@+id/hint_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="more"
             android:textSize="15dp"
             android:textColor="@color/white"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
             />
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_below="@+id/hint_relative1">
             <TextView
+                android:id="@+id/hint_pm"
                 android:text="项目经理：XXX"
-                style="@style/MyTextStyle"/>
+                style="@style/HintTextStyle"/>
             <TextView
+                android:id="@+id/hinttime"
                 android:text="起始时间：2010-01-01"
+                android:layout_marginLeft="170dp"
                 style="@style/MyTextStyle"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/hint_currenttime"
                 android:text="当前时间：2010-01-01"
-                style="@style/MyTextStyle"/>
+                style="@style/HintTextStyle"
+                android:layout_below="@+id/hint_pm"/>
             <TextView
+                android:id="@+id/predicttime"
                 android:text="预计完成时间：2010-02-02"
+                android:layout_below="@+id/hinttime"
+                android:layout_alignLeft="@+id/hinttime"
                 style="@style/MyTextStyle"/>
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="计划：XXXXX"/>
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="实际：XXXX"/>
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="人工：123424"/>
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="费用：24254"/>
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="费用小计：453"/>
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                style="@style/MyTextStyle"
-                android:text="当前问题：XXXXXXXXXXXXXXXXXXXXXXX"/>
-        </LinearLayout>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/hint_plan"
+                style="@style/HintTextStyle"
+                android:text="计划：XXXXX"
+                android:layout_below="@+id/hint_currenttime"/>
+            <TextView
+                android:id="@+id/hint_actual"
+                style="@style/MyTextStyle"
+                android:text="实际：XXXX"
+                android:layout_below="@+id/predicttime"
+                android:layout_alignLeft="@+id/predicttime"/>
 
+            <TextView
+                android:id="@+id/hint_manual"
+                style="@style/HintTextStyle"
+                android:text="人工：123424"
+                android:layout_below="@+id/hint_plan"/>
+            <TextView
+                android:id="@+id/hint_coast"
+                style="@style/MyTextStyle"
+                android:text="费用：24254"
+                android:layout_below="@+id/hint_plan"
+                android:layout_marginLeft="130dp"/>
+            <TextView
+                android:id="@+id/coastsubtotal"
+                style="@style/MyTextStyle"
+                android:text="费用小计：453"
+                android:layout_below="@id/hint_plan"
+                android:layout_marginLeft="230dp"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/hint_curentproblem"
+                style="@style/HintTextStyle"
+                android:text="当前问题：XXXXXXXXXXXXXXXXXXXXXXX"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_below="@+id/hint_manual"/>
+        <TextView
+            android:id="@+id/hint_curentproblem2"
+            style="@style/HintTextStyle"
+            android:text="当前问题：XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_below="@+id/hint_manual"/>
+    </RelativeLayout>
+
+</RelativeLayout>
