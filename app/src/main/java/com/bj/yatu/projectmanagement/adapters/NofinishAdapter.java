@@ -60,6 +60,7 @@ public class NofinishAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         }
         viewHolder= (ViewHolder) convertView.getTag();
+
         if(mLastPosition == position){
 
             viewHolder.hint.setVisibility(mLastVisibility);

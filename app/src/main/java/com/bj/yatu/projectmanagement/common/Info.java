@@ -8,7 +8,7 @@ public class Info {
     //项目名称
     private String name;
     //项目进度
-    private String progress;
+    private int progress;
     //项目经理
     private String pm;
     //起始时间
@@ -21,6 +21,11 @@ public class Info {
     private String plan;
     //实际
     private String actual;
+    public Info(){}
+    public Info(String name, int progress) {
+        this.name = name;
+        this.progress = progress;
+    }
 
     public String getName() {
         return name;
@@ -30,11 +35,11 @@ public class Info {
         this.name = name;
     }
 
-    public String getProgress() {
+    public int getProgress() {
         return progress;
     }
 
-    public void setProgress(String progress) {
+    public void setProgress(int progress) {
         this.progress = progress;
     }
 
