@@ -1,19 +1,22 @@
 package com.bj.yatu.projectmanagement;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.activity.BaseActivity;
+import com.bj.yatu.projectmanagement.common.ActivityCollector;
 import com.bj.yatu.projectmanagement.fragment.FinishFragment;
 import com.bj.yatu.projectmanagement.fragment.NoFinishFragment;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
     private String TAG="MainActivity";
     // 定义Fragment对象
     private NoFinishFragment noFinishFragment;
@@ -32,6 +35,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCollector.addActivity(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
         fragmentManager = getSupportFragmentManager();
         initView();
@@ -122,5 +131,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (finishFragment != null) {
             fragmentTransaction.hide(finishFragment);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

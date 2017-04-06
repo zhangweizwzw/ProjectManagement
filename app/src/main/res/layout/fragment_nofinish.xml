@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ListView
-        android:id="@+id/nofinish_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+
+    <include android:id="@+id/title_bar"
+        layout="@layout/title_bar"/>
+
     <ImageView android:id="@+id/addproject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

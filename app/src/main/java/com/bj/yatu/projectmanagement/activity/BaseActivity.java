@@ -1,12 +1,13 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.bj.yatu.projectmanagement.common.ActivityCollector;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
 
 
     @Override
@@ -15,10 +16,10 @@ public class BaseActivity extends AppCompatActivity {
 
         ActivityCollector.addActivity(this);
 
-//        //透明状态栏
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        //透明导航栏
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
     }
 

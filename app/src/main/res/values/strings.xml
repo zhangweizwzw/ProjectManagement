@@ -2,5 +2,17 @@
     <string name="app_name">ProjectManagement</string>
     <string name="nofinish">未完成</string>
     <string name="finish">已完成</string>
-    <string name="projectname">项目名称</string>
+    <string name="projectname">项目名称:</string>
+    <string name="starttime">起始时间:</string>
+    <string name="endtime">预计完成时间:</string>
+    <string name="managername">项目经理:</string>
+    <string name="add_panel">创建节点</string>
+    <string name="project_panal">项目节点</string>
+    <string name="panelname">节点名称:</string>
+    <string name="finishdate">完成日期:</string>
+    <string name="panerper">节点占比:</string>
+    <string name="yuan">元</string>
+    <string name="extras">杂费:</string>
+    <string name="setup">创建</string>
+    <string name="proplecost">人工成本:</string>
 </resources>
