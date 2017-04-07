@@ -23,6 +23,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         initView();
+         
     }
 
     private void initView() {

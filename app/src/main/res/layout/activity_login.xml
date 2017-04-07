@@ -7,27 +7,118 @@
 
     <include  android:id="@+id/title_bar"
         layout="@layout/title_bar"/>
-
-    <TextView android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
+    <RelativeLayout
+        android:id="@+id/login_relative1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_bar"
-        android:text="领导"/>
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/username"
+            style="@style/MyTextStyle"
+            android:text="用户名："
+            android:layout_centerVertical="true"/>
 
-    <TextView android:id="@+id/tv2"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/login_et1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/text_color"
+            android:background="@drawable/edittext"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/username"
+            android:layout_toEndOf="@+id/username"
+            android:singleLine="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/login_relative2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv1"
-        android:layout_marginTop="20dp"
-        android:text="生产主管"/>
+        android:layout_below="@+id/login_relative1"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/password"
+            style="@style/MyTextStyle"
+            android:text="密    码："
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/login_et2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/password"
+            android:textColor="@color/text_color"
+            android:layout_margin="2dp"
+            android:background="@drawable/edittext"
+            android:singleLine="true"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/login_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_relative2"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"></LinearLayout>
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="重置"
+            android:textColor="@color/white"
+            android:background="@drawable/reset"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"></LinearLayout>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:background="@drawable/login"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            ></LinearLayout>
+    </LinearLayout>
 
-    <TextView android:id="@+id/tv3"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv2"
-        android:layout_marginTop="20dp"
-        android:text="项目经理"/>
+        android:orientation="vertical"
+        android:layout_below="@+id/login_linear1"
+        android:layout_marginTop="20dp">
+        <TextView android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="领导"/>
+
+        <TextView android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="生产主管"/>
+
+        <TextView android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="项目经理"/>
+    </LinearLayout>
+
 
 
 
