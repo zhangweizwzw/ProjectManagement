@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="项目名称：XXXXXXX"
-            android:textSize="15dp"
+            android:textSize="@dimen/normal_textsize"
             android:layout_marginLeft="8dp"
             android:textColor="@color/black" />
         <com.bj.yatu.projectmanagement.common.MyProgress
