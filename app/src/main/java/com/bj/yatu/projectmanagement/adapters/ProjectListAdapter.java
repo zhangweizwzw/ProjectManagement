@@ -3,6 +3,7 @@ package com.bj.yatu.projectmanagement.adapters;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
-import com.bj.yatu.projectmanagement.bean.ProjectBean;
+import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
+import com.bj.yatu.projectmanagement.model.ProjectBean;
+import com.bj.yatu.projectmanagement.common.MyProgress;
 
 /***
  * 带复选框的listView的适配器
@@ -62,6 +65,8 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.people_tv = (TextView) convertView.findViewById(R.id.people_tv);
 		holder.cost_tv = (TextView) convertView.findViewById(R.id.cost_tv);
 		holder.costmin_tv = (TextView) convertView.findViewById(R.id.costmin_tv);
+		holder.more_tv = (TextView) convertView.findViewById(R.id.more_tv);
+		holder.projectrate_pro= (MyProgress) convertView.findViewById(R.id.projectrate_pro);
 
 		convertView.setTag(holder);
 //		} else {
@@ -81,7 +86,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectMinmoney=projectBean.getProjectMinmoney();
 		final String projectproblem=projectBean.getProjectproblem();
 
-
+		holder.projectrate_pro.setProgress(Integer.parseInt(projectRate));
 		holder.projectname_tv.setText(projectName);
 		holder.projectManager_tv.setText(projectManager);
 		holder.starttitme_tv.setText(projectStarttime);
@@ -93,14 +98,21 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.cost_tv.setText(projectmoney);
 		holder.costmin_tv.setText(projectMinmoney);
 
+		holder.more_tv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mcontext.startActivity(new Intent(mcontext, ProjectDetailActivity.class));
+			}
+		});
+
 		return convertView;
 
 	}
 
 	public final class OrderViewHolder {
 		private TextView projectname_tv,projectManager_tv,starttitme_tv,nowtime_tv,expectfinishtime_tv,expect_tv;
-		private TextView fact_tv,people_tv,cost_tv,costmin_tv;
-
+		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv;
+		private MyProgress projectrate_pro;
 	}
 
 }

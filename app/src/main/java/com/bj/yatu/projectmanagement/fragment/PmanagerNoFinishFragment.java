@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.ProjectListAdapter;
-import com.bj.yatu.projectmanagement.bean.ProjectBean;
+import com.bj.yatu.projectmanagement.model.ProjectBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class PmanagerNoFinishFragment extends Fragment{
 
         ProjectBean projectBean2=new ProjectBean();
         projectBean2.setProjectName("襄阳工业园区");
-        projectBean2.setProjectRate("150");
+        projectBean2.setProjectRate("50");
         projectBean2.setProjectManager("李老大");
         projectBean2.setProjectStarttime("2017-4-6");
         projectBean2.setProjectNowtime("2017-4-6");

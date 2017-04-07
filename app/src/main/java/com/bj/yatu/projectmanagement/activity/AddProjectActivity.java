@@ -9,15 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.PanelListAdapter;
-import com.bj.yatu.projectmanagement.bean.PanelBean;
+import com.bj.yatu.projectmanagement.model.MessageEvent;
+import com.bj.yatu.projectmanagement.model.PanelBean;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,16 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_add_project);
 
         initView();
+    }
+
+    /**
+     * 接收删除节点广播
+     * @param event
+     */
+    @Subscribe
+    public void onEventMainThread(MessageEvent event){
+        panelList.remove(Integer.parseInt(event.message));
+        panelListAdapter.notifyDataSetChanged();
     }
 
 
@@ -142,5 +154,21 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         }).create();
 
         dialog.show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

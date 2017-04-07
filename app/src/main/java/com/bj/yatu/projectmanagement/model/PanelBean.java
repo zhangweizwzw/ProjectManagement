@@ -1,4 +1,4 @@
-package com.bj.yatu.projectmanagement.bean;
+package com.bj.yatu.projectmanagement.model;
 
 /**
  * Created by admin on 2017/4/6.
