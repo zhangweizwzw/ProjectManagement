@@ -3,45 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/largerela"
     tools:context="com.bj.yatu.projectmanagement.activity.AddPanelActivity">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/smallrela"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/white"
-        android:layout_marginTop="280dp">
+        android:layout_marginTop="280dp"
+        android:background="@color/white">
 
-        <RelativeLayout android:id="@+id/rela1"
+        <RelativeLayout
+            android:id="@+id/rela1"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp">
 
-            <TextView android:id="@+id/panelname_tv"
+            <TextView
+                android:id="@+id/panelname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/panelname"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
-            <EditText android:id="@+id/panelname_et"
+            <EditText
+                android:id="@+id/panelname_et"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
                 android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/panelname_tv"
+                android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/panelname_tv"/>
+                android:textSize="@dimen/normal_textsize" />
 
         </RelativeLayout>
 
-        <RelativeLayout android:id="@+id/rela2"
+        <RelativeLayout
+            android:id="@+id/rela2"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@+id/rela1"
@@ -49,66 +54,74 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/finishsign_tv"
+            <TextView
+                android:id="@+id/finishsign_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="完成标志:"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
-            <EditText android:id="@+id/finishsign_et"
+            <EditText
+                android:id="@+id/finishsign_et"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
                 android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/finishsign_tv"
+                android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/finishsign_tv"/>
+                android:textSize="@dimen/normal_textsize" />
 
         </RelativeLayout>
 
 
-        <RelativeLayout android:id="@+id/rela3"
+        <RelativeLayout
+            android:id="@+id/rela3"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_below="@+id/rela2"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@+id/rela2"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/endtime_tv"
+            <TextView
+                android:id="@+id/endtime_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/finishdate"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
-            <ImageView android:id="@+id/endtime_im"
+            <ImageView
+                android:id="@+id/endtime_im"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/canlendar"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"/>
+                android:src="@mipmap/canlendar" />
 
-            <EditText android:id="@+id/endtime_et"
+            <EditText
+                android:id="@+id/endtime_et"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginRight="35dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
                 android:layout_marginLeft="2dp"
+                android:layout_marginRight="35dp"
+                android:inputType="date"
+                android:layout_toRightOf="@+id/endtime_tv"
+                android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/endtime_tv"/>
+                android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
 
 
-        <RelativeLayout android:id="@+id/rela4"
+        <RelativeLayout
+            android:id="@+id/rela4"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@id/rela3"
@@ -116,13 +129,14 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/pancelper_tv"
+            <TextView
+                android:id="@+id/pancelper_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/panerper"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/pancelper_et"
@@ -130,26 +144,29 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="2dp"
+                android:inputType="number"
                 android:layout_toRightOf="@+id/pancelper_tv"
                 android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
-            <TextView android:id="@+id/pancelper_tv2"
+            <TextView
+                android:id="@+id/pancelper_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/pancelper_et"
                 android:text="%"
-                android:layout_marginLeft="3dp"
-                android:textStyle="bold"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/large_textsize"/>
+                android:textSize="@dimen/large_textsize"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <RelativeLayout android:id="@+id/rela5"
+        <RelativeLayout
+            android:id="@+id/rela5"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@id/rela4"
@@ -157,13 +174,14 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/peoplecost_tv"
+            <TextView
+                android:id="@+id/peoplecost_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/proplecost"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/peoplecost_et"
@@ -174,29 +192,32 @@
                 android:layout_toRightOf="@+id/peoplecost_tv"
                 android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
+                android:inputType="number"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
-            <TextView android:id="@+id/peoplecost_tv2"
+            <TextView
+                android:id="@+id/peoplecost_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/peoplecost_et"
                 android:text="@string/yuan"
-                android:layout_marginLeft="3dp"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
 
-            <TextView android:id="@+id/extras_tv2"
+            <TextView
+                android:id="@+id/extras_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yuan"
-                android:layout_marginLeft="3dp"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/normal_textsize"/>
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                android:text="@string/yuan"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/extras_et"
@@ -207,35 +228,36 @@
                 android:layout_toLeftOf="@+id/extras_tv2"
                 android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
+                android:inputType="number"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
 
-            <TextView android:id="@+id/extras_tv"
+            <TextView
+                android:id="@+id/extras_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@+id/extras_et"
                 android:text="@string/extras"
                 android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/extras_et"
-                android:layout_marginRight="3dp"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
         </RelativeLayout>
 
-        <Button android:id="@+id/setup"
+        <Button
+            android:id="@+id/setup"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_theme"
             android:layout_below="@+id/rela5"
             android:layout_margin="10dp"
+            android:background="@drawable/button_theme"
             android:text="@string/setup"
             android:textColor="@color/white"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

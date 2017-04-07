@@ -70,22 +70,23 @@ public class DatePickerDialog extends Dialog {
         public DatePickerDialog create() {
             final DatePickerDialog dialog = new DatePickerDialog(context, params.shadow ? R.style.Theme_Light_NoTitle_Dialog : R.style.Theme_Light_NoTitle_NoShadow_Dialog);
             View view = LayoutInflater.from(context).inflate(R.layout.layout_picker_date, null);
+            Calendar c = Calendar.getInstance();
 
             final LoopView loopDay = (LoopView) view.findViewById(R.id.loop_day);
             loopDay.setArrayList(d(1, 30));
-            loopDay.setCurrentItem(15);
+            loopDay.setCurrentItem(c.DAY_OF_MONTH+1);
             loopDay.setNotLoop();
 
-            Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             final LoopView loopYear = (LoopView) view.findViewById(R.id.loop_year);
             loopYear.setArrayList(d(MIN_YEAR, 2050));
-            loopYear.setCurrentItem(year - MIN_YEAR - 25);
+//            loopYear.setCurrentItem(year - MIN_YEAR - 25);
+            loopYear.setCurrentItem(year- MIN_YEAR);
             loopYear.setNotLoop();
 
             final LoopView loopMonth = (LoopView) view.findViewById(R.id.loop_month);
             loopMonth.setArrayList(d(1, 12));
-            loopMonth.setCurrentItem(6);
+            loopMonth.setCurrentItem(c.MONTH+1);
             loopMonth.setNotLoop();
 
             final LoopListener maxDaySyncListener = new LoopListener() {

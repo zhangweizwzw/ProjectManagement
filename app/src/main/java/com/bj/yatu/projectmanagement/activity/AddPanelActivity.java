@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
@@ -16,6 +17,7 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
     private ImageView endtime_im;
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et;
     private Button setup;
+    private RelativeLayout largerela,smallrela;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,12 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
         extras_et= (EditText) findViewById(R.id.extras_et);//杂费
         setup= (Button) findViewById(R.id.setup);
         setup.setOnClickListener(this);
+        //点击空白部分关掉activity
+        largerela= (RelativeLayout) findViewById(R.id.largerela);
+        largerela.setOnClickListener(this);
+        smallrela= (RelativeLayout) findViewById(R.id.smallrela);
+        smallrela.setOnClickListener(this);
+
     }
 
     @Override
@@ -66,6 +74,12 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                 }else{
                     goSetup(panelname,finishsign,endtime,pancelper,peoplecost,extras);
                 }
+                break;
+            case R.id.largerela:
+                finish();
+                break;
+            case R.id.smallrela:
+
                 break;
         }
     }

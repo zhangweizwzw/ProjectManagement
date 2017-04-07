@@ -1,7 +1,9 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.PanelBean;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
+import com.bj.yatu.projectmanagement.widget.MyDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,8 +54,29 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
      */
     @Subscribe
     public void onEventMainThread(MessageEvent event){
-        panelList.remove(Integer.parseInt(event.message));
-        panelListAdapter.notifyDataSetChanged();
+
+        showNetAlert(event);
+    }
+
+    private void showNetAlert(final MessageEvent event) {
+        AlertDialog.Builder alert=new AlertDialog.Builder(this);
+        alert.setTitle("提示");
+        alert.setMessage("确定删除该节点？");
+        alert.setCancelable(false);
+        alert.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                panelList.remove(Integer.parseInt(event.message));
+                panelListAdapter.notifyDataSetChanged();
+            }
+        });
+        alert.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        alert.create();
+        alert.show();
     }
 
 
@@ -78,6 +102,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         panelListAdapter=new PanelListAdapter(this,panelList);
         panel_rv.setAdapter(panelListAdapter);
         panel_rv.setItemAnimator(new DefaultItemAnimator());
+        //这句就是添加我们自定义的分隔线
+        panel_rv.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
 
 
         manager= (MaterialSpinner) findViewById(R.id.manager);//项目经理

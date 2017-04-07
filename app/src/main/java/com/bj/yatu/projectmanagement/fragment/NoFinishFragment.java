@@ -14,10 +14,7 @@ import android.widget.TextView;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.AddProjectActivity;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
-import com.bj.yatu.projectmanagement.adapters.NofinishAdapter1;
 import com.bj.yatu.projectmanagement.common.Info;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;

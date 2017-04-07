@@ -15,13 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity
-            android:name=".activity.AddProjectActivity"
-            android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity
-            android:name=".activity.AddPanelActivity"
-            android:theme="@style/Transparent" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProjectManagerActivity" />
-        <activity android:name=".activity.ProjectDetailActivity"></activity>
+
+        <activity android:name=".MainActivity"
+            android:label="主界面"/>
+        <activity
+            android:name=".activity.AddProjectActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:label="添加项目页面"/>
+        <activity
+            android:name=".activity.AddPanelActivity"
+            android:theme="@style/Transparent"
+            android:label="添加节点界面"/>
+
+        <activity android:name=".activity.ProjectManagerActivity"
+            android:label="项目经理界面"/>
+        <activity android:name=".activity.ProjectDetailActivity"
+            android:label="项目详情界面"/>
     </application>
 
 </manifest>

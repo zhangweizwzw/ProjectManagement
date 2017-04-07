@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,13 +26,11 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <EditText android:id="@+id/panelname_et"
+            <TextView android:id="@+id/panelname_et"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
-                android:layout_marginLeft="2dp"
-                android:paddingLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
@@ -55,13 +54,11 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <EditText android:id="@+id/finishsign_et"
+            <TextView android:id="@+id/finishsign_et"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
-                android:layout_marginLeft="2dp"
-                android:paddingLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
@@ -86,21 +83,11 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <ImageView android:id="@+id/endtime_im"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/canlendar"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"/>
-
-            <EditText android:id="@+id/endtime_et"
+            <TextView android:id="@+id/endtime_et"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginRight="35dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/edittext"
-                android:layout_marginLeft="2dp"
-                android:paddingLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
@@ -124,15 +111,13 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/pancelper_et"
                 android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/pancelper_tv"
-                android:background="@drawable/edittext"
-                android:paddingLeft="2dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
@@ -166,15 +151,13 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/peoplecost_et"
                 android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/peoplecost_tv"
-                android:background="@drawable/edittext"
-                android:paddingLeft="2dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
@@ -200,15 +183,13 @@
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/extras_et"
                 android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="3dp"
                 android:layout_toLeftOf="@+id/extras_tv2"
-                android:background="@drawable/edittext"
-                android:paddingLeft="2dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
@@ -221,7 +202,7 @@
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/extras_et"
-                android:layout_marginRight="3dp"
+                android:layout_marginRight="5dp"
                 android:textSize="@dimen/normal_textsize"/>
 
         </RelativeLayout>

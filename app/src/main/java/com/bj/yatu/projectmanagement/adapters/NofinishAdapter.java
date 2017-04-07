@@ -97,7 +97,6 @@ public class NofinishAdapter extends BaseAdapter{
                     finalViewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
                     finalViewHolder.cp.setSingleLine(flag);
                 }
-                Toast.makeText(context,"当前问题",Toast.LENGTH_SHORT).show();
             }
         });
         /**

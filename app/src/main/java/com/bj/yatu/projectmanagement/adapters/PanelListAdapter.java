@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
@@ -48,17 +49,17 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private EditText panelname_et,finishsign_et,endtime_et,pancelper_et,peoplecost_et,extras_et;
+        private TextView panelname_et,finishsign_et,endtime_et,pancelper_et,peoplecost_et,extras_et;
         private Button delete_bt;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            panelname_et = (EditText) itemView.findViewById(R.id.panelname_et);
-            finishsign_et = (EditText) itemView.findViewById(R.id.finishsign_et);
-            endtime_et = (EditText) itemView.findViewById(R.id.endtime_et);
-            pancelper_et = (EditText) itemView.findViewById(R.id.pancelper_et);
-            peoplecost_et = (EditText) itemView.findViewById(R.id.peoplecost_et);
-            extras_et = (EditText) itemView.findViewById(R.id.extras_et);
+            panelname_et = (TextView) itemView.findViewById(R.id.panelname_et);
+            finishsign_et = (TextView) itemView.findViewById(R.id.finishsign_et);
+            endtime_et = (TextView) itemView.findViewById(R.id.endtime_et);
+            pancelper_et = (TextView) itemView.findViewById(R.id.pancelper_et);
+            peoplecost_et = (TextView) itemView.findViewById(R.id.peoplecost_et);
+            extras_et = (TextView) itemView.findViewById(R.id.extras_et);
 
             delete_bt= (Button) itemView.findViewById(R.id.delete_bt);
         }
