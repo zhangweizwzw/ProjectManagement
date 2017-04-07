@@ -33,7 +33,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
 
     private ListView listView;
     private List<Info> list;
-    private NofinishAdapter1 nofinishAdapter;
+    private NofinishAdapter nofinishAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_nofinish, container, false);
@@ -48,6 +48,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         text_center.setText("未完成");
 
         addproject= (ImageView) view.findViewById(R.id.addproject);
+        addproject.bringToFront();//将图片放在最上方
         addproject.setOnClickListener(this);
 
         listView= (ListView) view.findViewById(R.id.nofinish_listview);
@@ -58,16 +59,16 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         list.add(info1);
         list.add(info2);
         list.add(info3);
-        nofinishAdapter=new NofinishAdapter1(getActivity(),list);
+        nofinishAdapter=new NofinishAdapter(getActivity(),list);
         listView.setAdapter(nofinishAdapter);
 
-//        //点击展开隐藏内容
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                nofinishAdapter.changeImageVisable(view,i);
-//            }
-//        });
+//       点击展开隐藏内容
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                nofinishAdapter.changeImageVisable(view,i);
+            }
+        });
     }
 
     @Override

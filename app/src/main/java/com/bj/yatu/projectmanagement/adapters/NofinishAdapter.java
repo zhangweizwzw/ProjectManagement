@@ -21,14 +21,14 @@ import java.util.zip.Inflater;
  * Created by wxixis on 2017/4/5.
  */
 
-public class NofinishAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
+public class NofinishAdapter extends BaseAdapter{
     private Context context;
     private List<Info> list;
-
+    private boolean flag=true;
     private View mLastView;
     private int mLastPosition=-1;
     private int mLastVisibility;
-    private ViewHolder viewHolder=new ViewHolder();
+
     public NofinishAdapter(Context context, List<Info> list) {
         this.context = context;
         this.list = list;
@@ -54,12 +54,15 @@ public class NofinishAdapter extends BaseAdapter implements AdapterView.OnItemCl
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-
+        ViewHolder viewHolder;
         if (convertView==null){
+            viewHolder=new ViewHolder();
             convertView= LayoutInflater.from(context).inflate(R.layout.adapter_nofinish,null);
             viewHolder.tv= (TextView) convertView.findViewById(R.id.nofinishadapter_tv);
             viewHolder.pb= (ProgressBar) convertView.findViewById(R.id.nofinishadapter_pb);
             viewHolder.hint=convertView.findViewById(R.id.include);
+            viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
+            viewHolder.cp= (TextView) convertView.findViewById(R.id.hint_curentproblem);
             convertView.setTag(viewHolder);
         }
         viewHolder= (ViewHolder) convertView.getTag();
@@ -79,19 +82,20 @@ public class NofinishAdapter extends BaseAdapter implements AdapterView.OnItemCl
          * 当前问题点开详情
          */
 
+        final ViewHolder finalViewHolder = viewHolder;
         viewHolder.cp.setOnClickListener(new View.OnClickListener() {
-            boolean flag=true;
+
             @Override
             public void onClick(View view) {
                 if (flag){
                     flag=false;
-                    viewHolder.cp.setEllipsize(null);//文字展开
-                    viewHolder.cp.setSingleLine(flag);
+                    finalViewHolder.cp.setEllipsize(null);//文字展开
+                    finalViewHolder.cp.setSingleLine(flag);
 
                 }else {
                     flag=true;
-                    viewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
-                    viewHolder.cp.setSingleLine(flag);
+                    finalViewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
+                    finalViewHolder.cp.setSingleLine(flag);
                 }
                 Toast.makeText(context,"当前问题",Toast.LENGTH_SHORT).show();
             }
@@ -112,34 +116,6 @@ public class NofinishAdapter extends BaseAdapter implements AdapterView.OnItemCl
         return convertView;
     }
 
-    /**
-     * 文字的点击事件
-     * @param adapterView
-     * @param view
-     * @param i
-     * @param l
-     */
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (view.getId()){
-            case R.id.hint_more:
-                Toast.makeText(context,"more",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.hint_curentproblem:
-                boolean flag=true;
-                if (flag){
-                    flag=false;
-                    viewHolder.cp.setEllipsize(null);//文字展开
-                    viewHolder.cp.setSingleLine(flag);
-
-                }else {
-                    flag=true;
-                    viewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
-                    viewHolder.cp.setSingleLine(flag);
-                }
-                break;
-        }
-    }
 
     class ViewHolder{
         TextView tv;

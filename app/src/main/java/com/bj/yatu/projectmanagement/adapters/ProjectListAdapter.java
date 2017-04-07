@@ -94,6 +94,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.costmin_tv.setText(projectMinmoney);
 
 		return convertView;
+		
 	}
 
 	public final class OrderViewHolder {
