@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +18,16 @@ import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.PanelListAdapter;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.PanelBean;
+import com.bj.yatu.projectmanagement.utils.StringUtil;
+import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
 import com.bj.yatu.projectmanagement.widget.MyDecoration;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +36,7 @@ import java.util.List;
 public class AddProjectActivity extends BaseActivity implements View.OnClickListener {
     private final String TAG="AddProjectActivity";
     private TextView add_panel;
-    private static final String[] ANDROID_VERSIONS = {"王世勇", "哈哈哈", "3", "4", "5", "6"};
+    private static final String[] managers = {"王世勇", "哈哈哈", "3", "4", "5", "6"};
     private MaterialSpinner manager;
     private TextView text_center;
     private ImageView starttime_im,predicttime_im,image_left;
@@ -39,6 +44,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
     private RecyclerView panel_rv;
     private List<PanelBean> panelList=new ArrayList<PanelBean>();
     private PanelListAdapter panelListAdapter;
+    private Button cancel_button,create_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +102,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         predicttime_et= (EditText) findViewById(R.id.predicttime_et);//预计完成时间
         pro_name= (EditText) findViewById(R.id.pro_name);//项目名称
 
-        //项目经理列表
+        //项目节点列表
         panel_rv= (RecyclerView) findViewById(R.id.panel_rv);//节点列表
         panel_rv.setLayoutManager(new LinearLayoutManager(this));
         panelListAdapter=new PanelListAdapter(this,panelList);
@@ -105,9 +111,9 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         //这句就是添加我们自定义的分隔线
         panel_rv.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
 
-
-        manager= (MaterialSpinner) findViewById(R.id.manager);//项目经理
-        manager.setItems(ANDROID_VERSIONS);
+        //项目经理下拉框
+        manager= (MaterialSpinner) findViewById(R.id.manager);
+        manager.setItems(managers);
         manager.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
@@ -120,6 +126,11 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 Log.i(TAG,"没有选中什么");
             }
         });
+
+        cancel_button= (Button) findViewById(R.id.cancel_button);
+        create_btn= (Button) findViewById(R.id.create_btn);
+        cancel_button.setOnClickListener(this);
+        create_btn.setOnClickListener(this);
     }
 
     @Override
@@ -160,8 +171,36 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.predicttime_im:
                 showDialogDate(2);
+            case R.id.cancel_button:
+                finish();
+            case R.id.create_btn:
+                String  proName=pro_name.getText().toString();
+                String  startTime=start_time_et.getText().toString();
+                String  predictTime=predicttime_et.getText().toString();
+                String managerName=managers[manager.getSelectedIndex()];
+
+                Gson gson=new Gson();
+                String str=gson.toJson(panelList);
+
+                Log.i(TAG,str);
+
+                if(StringUtil.isEmpty(proName)){
+                    ToastUtil.showToast(this,"项目名称不为空！");
+                }else if(StringUtil.isEmpty(startTime)){
+                    ToastUtil.showToast(this,"起始时间不为空！");
+                }if(StringUtil.isEmpty(predictTime)){
+                    ToastUtil.showToast(this,"预计完成时间不为空！");
+                }if(StringUtil.isEmpty(managerName)){
+                    ToastUtil.showToast(this,"项目经理不为空！");
+                }else{
+                    goCreate(proName,startTime,predictTime,managerName);
+                }
                 break;
         }
+    }
+
+    private void goCreate(String proName,String startTime,String predictTime,String managerName) {
+
     }
 
     public void showDialogDate(final int type) {

@@ -10,7 +10,21 @@ public class PanelBean {
     private String endtime;
     private String pancelper;
     private String peoplecost;
+
+    @Override
+    public String toString() {
+        return "PanelBean{" +
+                "panelname='" + panelname + '\'' +
+                ", finishsign='" + finishsign + '\'' +
+                ", endtime='" + endtime + '\'' +
+                ", pancelper='" + pancelper + '\'' +
+                ", peoplecost='" + peoplecost + '\'' +
+                ", extras='" + extras + '\'' +
+                '}';
+    }
+
     private String extras;
+
 
     public String getPanelname() {
         return panelname;
