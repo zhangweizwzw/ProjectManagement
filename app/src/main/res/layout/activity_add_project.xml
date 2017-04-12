@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="@string/project_panal"
+                    android:text="@string/project_plan"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
@@ -187,7 +187,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:text="@string/add_panel"
+                    android:text="@string/add_plan"
                     android:textColor="@color/white"
                     android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>

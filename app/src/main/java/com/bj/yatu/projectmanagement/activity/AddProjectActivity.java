@@ -2,6 +2,7 @@ package com.bj.yatu.projectmanagement.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,9 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.PanelListAdapter;
+import com.bj.yatu.projectmanagement.common.RequstUrls;
+import com.bj.yatu.projectmanagement.model.ManagersBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.PanelBean;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
@@ -24,19 +28,26 @@ import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
 import com.bj.yatu.projectmanagement.widget.MyDecoration;
 import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.OkHttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 
 public class AddProjectActivity extends BaseActivity implements View.OnClickListener {
     private final String TAG="AddProjectActivity";
     private TextView add_panel;
-    private static final String[] managers = {"王世勇", "哈哈哈", "3", "4", "5", "6"};
     private MaterialSpinner manager;
     private TextView text_center;
     private ImageView starttime_im,predicttime_im,image_left;
@@ -45,6 +56,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
     private List<PanelBean> panelList=new ArrayList<PanelBean>();
     private PanelListAdapter panelListAdapter;
     private Button cancel_button,create_btn;
+    private List<String> mlist = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +64,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_add_project);
 
         initView();
+
+        getManagers();
     }
 
     /**
@@ -113,19 +127,19 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
         //项目经理下拉框
         manager= (MaterialSpinner) findViewById(R.id.manager);
-        manager.setItems(managers);
-        manager.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                Log.i(TAG,"AAA"+item);
-            }
-        });
-        manager.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
-            @Override public void onNothingSelected(MaterialSpinner spinner) {
-                Log.i(TAG,"没有选中什么");
-            }
-        });
+//        manager.setItems(managers);
+//        manager.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+//
+//            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                Log.i(TAG,"AAA"+item);
+//            }
+//        });
+//        manager.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+//
+//            @Override public void onNothingSelected(MaterialSpinner spinner) {
+//                Log.i(TAG,"没有选中什么");
+//            }
+//        });
 
         cancel_button= (Button) findViewById(R.id.cancel_button);
         create_btn= (Button) findViewById(R.id.create_btn);
@@ -157,6 +171,36 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    public void getManagers() {
+        OkHttpUtils
+                .post()
+                .url(RequstUrls.REQUEST_URL+"findManager")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                       ToastUtil.showToast(AddProjectActivity.this,"请求失败！请检查网络设置");
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG,"项目经理列表："+response);
+                        Gson gson=new Gson();
+                        ManagersBean managersBean=gson.fromJson(response,ManagersBean.class);
+                        String[] managers = new String[managersBean.getManager().size()];
+                        if(managersBean.isStatus()){
+                            for (int i=0;i<managersBean.getManager().size();i++){
+                               Log.i(TAG,"AAAAAAAAAAAAAAAA"+i+"<-->"+managersBean.getManager().get(i).getUsername());
+//                               list.add(managersBean.getManager().get(i).getUsername());
+                                managers[i]=managersBean.getManager().get(i).getUsername();
+                           }
+                            mlist= Arrays.asList(managers);
+                            manager.setItems(managers);
+                        }
+                    }
+                });
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -177,7 +221,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 String  proName=pro_name.getText().toString();
                 String  startTime=start_time_et.getText().toString();
                 String  predictTime=predicttime_et.getText().toString();
-                String managerName=managers[manager.getSelectedIndex()];
+                String managerName=mlist.get(manager.getSelectedIndex());
 
                 Gson gson=new Gson();
                 String str=gson.toJson(panelList);

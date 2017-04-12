@@ -17,11 +17,11 @@
         <TextView
             android:id="@+id/username"
             style="@style/MyTextStyle"
-            android:text="用户名："
+            android:text="@string/account"
             android:layout_centerVertical="true"/>
 
         <EditText
-            android:id="@+id/login_et1"
+            android:id="@+id/account_et"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textColor="@color/text_color"
@@ -38,10 +38,10 @@
         <TextView
             android:id="@+id/password"
             style="@style/MyTextStyle"
-            android:text="密    码："
+            android:text="@string/password"
             android:layout_centerVertical="true"/>
         <EditText
-            android:id="@+id/login_et2"
+            android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/password"

@@ -6,12 +6,13 @@
     <include android:id="@+id/title_bar"
         layout="@layout/title_bar"/>
 
-    <ListView android:id="@+id/project_lv"
+    <com.bj.yatu.projectmanagement.widget.NestFullListView
+        android:id="@+id/project_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title_bar"
-        android:layout_marginTop="10dp">
-
-    </ListView>
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:showDividers="middle"/>
 
 </RelativeLayout>
