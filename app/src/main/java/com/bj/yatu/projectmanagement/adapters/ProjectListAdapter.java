@@ -15,6 +15,7 @@ import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
 import com.bj.yatu.projectmanagement.model.ProjectBean;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.utils.Dateutil;
 
 /***
  * 带复选框的listView的适配器
@@ -74,30 +75,29 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder = (OrderViewHolder) convertView.getTag();
 //		}
 
-//		final String projectName=projectBean.getProject_name();
-//		final String projectRate=projectBean.getProjectRate();
-//		final String projectManager=projectBean.getProjectManager();
-//		final String projectStarttime=projectBean.getProject_begin_time();
-//		final String projectNowtime=projectBean.getProjectNowtime();
-//		final String projectFinishtime=projectBean.getProject_end_time();
-//		final String projectPlan=projectBean.getProjectPlan();
-//		final String projectFact=projectBean.getProjectFact();
-//		final String projectPeople=projectBean.getProjectPeople();
-//		final String projectmoney=projectBean.getProjectmoney();
-//		final String projectMinmoney=projectBean.getProjectMinmoney();
-//		final String projectproblem=projectBean.getProjectproblem();
-//
-//		holder.projectrate_pro.setProgress(Integer.parseInt(projectRate));
-//		holder.projectname_tv.setText(projectName);
-//		holder.projectManager_tv.setText(projectManager);
-//		holder.starttitme_tv.setText(projectStarttime);
-//		holder.nowtime_tv.setText(projectNowtime);
-//		holder.expectfinishtime_tv.setText(projectFinishtime);
-//		holder.expect_tv.setText(projectPlan);
-//		holder.fact_tv.setText(projectFact);
-//		holder.people_tv.setText(projectPeople);
-//		holder.cost_tv.setText(projectmoney);
-//		holder.costmin_tv.setText(projectMinmoney);
+		final String projectName=projectBean.getProject_name();
+		final String projectManager=projectBean.getProject_fzr();
+		final String projectStarttime=projectBean.getProject_begin_time();
+		final String projectNowtime= Dateutil.getTodayDate();
+		final String projectFinishtime=projectBean.getProject_end_time();
+		final String projectPlan=projectBean.getProject_plan();
+		final String projectFact=projectBean.getProject_fact();
+		final String projectPeople=projectBean.getTotalpersoncost()+"";
+		final String projectmoney=projectBean.getTotalextracost()+"";
+		final String projectMinmoney=projectBean.getTotalcost()+"";
+		final String projectproblem=projectBean.getQuestions();
+
+		holder.projectrate_pro.setProgress(10);
+		holder.projectname_tv.setText(projectName);
+		holder.projectManager_tv.setText(projectManager);
+		holder.starttitme_tv.setText(projectStarttime);
+		holder.nowtime_tv.setText(projectNowtime);
+		holder.expectfinishtime_tv.setText(projectFinishtime);
+		holder.expect_tv.setText(projectPlan);
+		holder.fact_tv.setText(projectFact);
+		holder.people_tv.setText(projectPeople);
+		holder.cost_tv.setText(projectmoney);
+		holder.costmin_tv.setText(projectMinmoney);
 
 		holder.more_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
