@@ -9,7 +9,7 @@ import java.util.List;
 public class ProjectsBean {
 
     /**
-     * project : [{"id":2,"project_name":"项目2","project_fzrid":2,"project_sqrid":1,"project_fzr":"管理员","project_begin_time":"2017-04-12","project_end_time":"2017-04-14","project_plan":null,"project_fact":null,"project_isfinish":false,"totalpersoncost":0,"totalextracost":0,"totalcost":0,"totalpercent":0,"questions":"","plans":null},{"id":1,"project_name":"项目1","project_fzrid":1,"project_sqrid":1,"project_fzr":"王世永","project_begin_time":"2017-04-12","project_end_time":"2017-04-30","project_plan":"计划1","project_fact":"计划2","project_isfinish":false,"totalpersoncost":200,"totalextracost":200,"totalcost":400,"totalpercent":20,"questions":"问题222222222222222222222222222222222222222222222222","plans":null}]
+     * project : [{"id":2,"project_name":"项目2","project_fzrid":2,"project_sqrid":1,"project_fzr":"管理员","project_begin_time":"2017-04-12","project_end_time":"2017-04-14","project_plan":"","project_fact":"","project_isfinish":false,"totalpersoncost":0,"totalextracost":0,"totalcost":0,"totalpercent":0,"questions":"","plans":null},{"id":1,"project_name":"项目1","project_fzrid":1,"project_sqrid":1,"project_fzr":"王世永","project_begin_time":"2017-04-12","project_end_time":"2017-04-30","project_plan":"计划1","project_fact":"计划2","project_isfinish":false,"totalpersoncost":200,"totalextracost":200,"totalcost":400,"totalpercent":20,"questions":"问题222222222222222222222222222222222222222222222222","plans":null}]
      * status : true
      */
 
@@ -41,8 +41,8 @@ public class ProjectsBean {
          * project_fzr : 管理员
          * project_begin_time : 2017-04-12
          * project_end_time : 2017-04-14
-         * project_plan : null
-         * project_fact : null
+         * project_plan :
+         * project_fact :
          * project_isfinish : false
          * totalpersoncost : 0.0
          * totalextracost : 0.0
@@ -59,8 +59,8 @@ public class ProjectsBean {
         private String project_fzr;
         private String project_begin_time;
         private String project_end_time;
-        private Object project_plan;
-        private Object project_fact;
+        private String project_plan;
+        private String project_fact;
         private boolean project_isfinish;
         private double totalpersoncost;
         private double totalextracost;
@@ -125,19 +125,19 @@ public class ProjectsBean {
             this.project_end_time = project_end_time;
         }
 
-        public Object getProject_plan() {
+        public String getProject_plan() {
             return project_plan;
         }
 
-        public void setProject_plan(Object project_plan) {
+        public void setProject_plan(String project_plan) {
             this.project_plan = project_plan;
         }
 
-        public Object getProject_fact() {
+        public String getProject_fact() {
             return project_fact;
         }
 
-        public void setProject_fact(Object project_fact) {
+        public void setProject_fact(String project_fact) {
             this.project_fact = project_fact;
         }
 

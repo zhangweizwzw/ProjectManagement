@@ -18,11 +18,13 @@ import com.bj.yatu.projectmanagement.model.UserLoginBean;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import okhttp3.Call;
@@ -83,6 +85,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onResponse(String response) {
                         Gson gson=new Gson();
                         UserLoginBean userLoginBean = gson.fromJson(response, UserLoginBean.class);
+//                        UserLoginBean userLoginBean = gson.fromJson(response, new TypeToken<ArrayList<UserLoginBean>>(){}.getType());
                         if(userLoginBean.isStatus()){
                             int identity= userLoginBean.getUser().getRemark();
 

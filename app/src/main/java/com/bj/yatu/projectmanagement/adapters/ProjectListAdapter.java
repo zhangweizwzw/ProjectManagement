@@ -74,12 +74,12 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder = (OrderViewHolder) convertView.getTag();
 //		}
 
-//		final String projectName=projectBean.getProjectName();
+//		final String projectName=projectBean.getProject_name();
 //		final String projectRate=projectBean.getProjectRate();
 //		final String projectManager=projectBean.getProjectManager();
-//		final String projectStarttime=projectBean.getProjectStarttime();
+//		final String projectStarttime=projectBean.getProject_begin_time();
 //		final String projectNowtime=projectBean.getProjectNowtime();
-//		final String projectFinishtime=projectBean.getProjectFinishtime();
+//		final String projectFinishtime=projectBean.getProject_end_time();
 //		final String projectPlan=projectBean.getProjectPlan();
 //		final String projectFact=projectBean.getProjectFact();
 //		final String projectPeople=projectBean.getProjectPeople();
