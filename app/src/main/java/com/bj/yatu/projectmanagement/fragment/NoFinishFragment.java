@@ -3,6 +3,7 @@ package com.bj.yatu.projectmanagement.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,18 @@ import android.widget.TextView;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.AddProjectActivity;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
-import com.bj.yatu.projectmanagement.common.Info;
+import com.bj.yatu.projectmanagement.common.RequstUrls;
+import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.utils.ToastUtil;
+
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by admin on 2017/4/5.
@@ -29,7 +38,9 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
     private TextView text_center;
 
     private ListView listView;
-    private List<Info> list;
+    private List<ProjectsBean.ProjectBean> mlist;
+    private List<ProjectsBean.ProjectBean> list;
+
     private NofinishAdapter nofinishAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,17 +58,9 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         addproject= (ImageView) view.findViewById(R.id.addproject);
         addproject.bringToFront();//将图片放在最上方
         addproject.setOnClickListener(this);
-
         listView= (ListView) view.findViewById(R.id.nofinish_listview);
-        list=new ArrayList<>();
-        Info info1=new Info("项目名称：一一一一一一一",40);
-        Info info2=new Info("项目名称：二二二二二",80);
-        Info info3=new Info("项目名称：三三三三三三",20);
-        list.add(info1);
-        list.add(info2);
-        list.add(info3);
-        nofinishAdapter=new NofinishAdapter(getActivity(),list);
-        listView.setAdapter(nofinishAdapter);
+
+        setBean();
 
 //       点击展开隐藏内容
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,6 +69,39 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
                 nofinishAdapter.changeImageVisable(view,i);
             }
         });
+    }
+
+    /**
+     * 设置内容
+     */
+    private void setBean() {
+        OkHttpUtils.get()
+                .url(RequstUrls.REQUEST_URL+"findprojectlist?project_sqrid=1")
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                ToastUtil.showToast(getActivity(),"请求失败！请检查网络设置");
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("===NoFinishRespnse====",response);
+                Gson gson=new Gson();
+                ProjectsBean mbean=gson.fromJson(response,ProjectsBean.class);
+                mlist=new ArrayList<ProjectsBean.ProjectBean>();
+                list=new ArrayList<ProjectsBean.ProjectBean>();
+                mlist=mbean.getProject();
+                //将未完成与已完成的分开
+                for (int i = 0; i < mlist.size(); i++) {
+                    if (!mlist.get(i).isProject_isfinish()){
+                        list.add(mlist.get(i));
+                    }
+                }
+                nofinishAdapter=new NofinishAdapter(getActivity(),list);
+                listView.setAdapter(nofinishAdapter);
+            }
+        });
+
     }
 
     @Override

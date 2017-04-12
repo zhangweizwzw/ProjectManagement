@@ -104,6 +104,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
 
         cstFullShowListView= (NestFullListView) findViewById(R.id.panel_lv);
 
+
         cstFullShowListView.setAdapter(new NestFullListViewAdapter<One>(R.layout.item_lv, ailist) {
             @Override
             public void onBind(int pos, One one, final NestFullViewHolder holder) {

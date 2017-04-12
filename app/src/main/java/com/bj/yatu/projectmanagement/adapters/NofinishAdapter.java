@@ -5,17 +5,17 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
-import com.bj.yatu.projectmanagement.common.Info;
+import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.utils.Dateutil;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Created by wxixis on 2017/4/5.
@@ -23,13 +23,14 @@ import java.util.zip.Inflater;
 
 public class NofinishAdapter extends BaseAdapter{
     private Context context;
-    private List<Info> list;
+    private List<ProjectsBean.ProjectBean> list;
     private boolean flag=true;
     private View mLastView;
     private int mLastPosition=-1;
     private int mLastVisibility;
 
-    public NofinishAdapter(Context context, List<Info> list) {
+    public NofinishAdapter(){}
+    public NofinishAdapter(Context context, List<ProjectsBean.ProjectBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -58,16 +59,15 @@ public class NofinishAdapter extends BaseAdapter{
         if (convertView==null){
             viewHolder=new ViewHolder();
             convertView= LayoutInflater.from(context).inflate(R.layout.adapter_nofinish,null);
-            viewHolder.tv= (TextView) convertView.findViewById(R.id.nofinishadapter_tv);
-            viewHolder.pb= (ProgressBar) convertView.findViewById(R.id.nofinishadapter_pb);
-            viewHolder.hint=convertView.findViewById(R.id.include);
-            viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
-            viewHolder.cp= (TextView) convertView.findViewById(R.id.hint_curentproblem);
+            init(viewHolder,convertView);
             convertView.setTag(viewHolder);
         }
         viewHolder= (ViewHolder) convertView.getTag();
-        viewHolder.tv.setText(list.get(position).getName());
-        viewHolder.pb.setProgress(list.get(position).getProgress());
+
+        viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
+        viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
+
+        setText(viewHolder,convertView,position);
 
         /**
          * textview的点击事件
@@ -97,6 +97,7 @@ public class NofinishAdapter extends BaseAdapter{
                     finalViewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
                     finalViewHolder.cp.setSingleLine(flag);
                 }
+                Toast.makeText(context,"当前问题",Toast.LENGTH_SHORT).show();
             }
         });
         /**
@@ -115,12 +116,74 @@ public class NofinishAdapter extends BaseAdapter{
         return convertView;
     }
 
+    /**
+     *
+     * @param viewHolder
+     * @param convertView
+     */
+    private void setText(ViewHolder viewHolder, View convertView,int position) {
+
+            viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
+            viewHolder.fzr.setText("项目经理:"+list.get(position).getProject_fzr());//项目经理
+            viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间
+            viewHolder.current_time.setText("当前时间："+ Dateutil.getTodayDate());//当前时间
+            viewHolder.end_time.setText("预计完成时间:"+list.get(position).getProject_end_time());//预计完成时间
+            viewHolder.plan.setText("计划："+list.get(position).getPlans());//计划
+            viewHolder.fact.setText("实际："+ list.get(position).getProject_fact());//实际
+            viewHolder.personcost.setText("人工："+list.get(position).getTotalpersoncost());//人工
+            viewHolder.extracost.setText("费用："+list.get(position).getTotalextracost());//费用
+            viewHolder.totalcost.setText("费用小计："+list.get(position).getTotalcost());//费用小计
+            //当前问题可能为空
+            String quesrion=list.get(position).getQuestions();
+            if (quesrion!=null){
+                viewHolder.cp.setText("当前问题："+list.get(position).getQuestions());//当前问题
+            }else{
+                viewHolder.cp.setVisibility(View.GONE);
+            }
+
+    }
+
+    /**
+     *
+     * @param viewHolder
+     * @param convertView
+     */
+    private void init(ViewHolder viewHolder, View convertView) {
+        viewHolder.name= (TextView) convertView.findViewById(R.id.nofinishadapter_tv);
+        viewHolder.pb= (ProgressBar) convertView.findViewById(R.id.nofinishadapter_pb);
+        viewHolder.hint=convertView.findViewById(R.id.include);
+        viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
+        viewHolder.cp= (TextView) convertView.findViewById(R.id.hint_curentproblem);//百分比
+        viewHolder.linear= (LinearLayout) convertView.findViewById(R.id.linaear);//是否超时的背景
+        viewHolder.hint_name= (TextView) convertView.findViewById(R.id.hint_name);//项目名称
+        viewHolder.fzr= (TextView) convertView.findViewById(R.id.hint_pm);//项目经理
+        viewHolder.begin_time= (TextView) convertView.findViewById(R.id.hinttime);//起始时间
+        viewHolder.current_time= (TextView) convertView.findViewById(R.id.hint_currenttime);//当前时间
+        viewHolder.end_time= (TextView) convertView.findViewById(R.id.predicttime);//预计完成时间
+        viewHolder.plan= (TextView) convertView.findViewById(R.id.hint_plan);//计划
+        viewHolder.fact= (TextView) convertView.findViewById(R.id.hint_actual);//实际
+        viewHolder.personcost= (TextView) convertView.findViewById(R.id.hint_manual);//人工
+        viewHolder.extracost= (TextView) convertView.findViewById(R.id.hint_coast);//费用
+        viewHolder.totalcost= (TextView) convertView.findViewById(R.id.coastsubtotal);//费用小计
+    }
+
 
     class ViewHolder{
-        TextView tv;
-        ProgressBar pb;
+        TextView name,hint_name,//项目名称
+                fzr,//项目经理
+                begin_time,//起始时间
+                end_time,//结束时间
+                current_time,//当前时间
+                plan,//计划
+                fact,//实际
+                personcost,//人工
+                extracost,//费用
+                totalcost,//小计
+                more,
+                cp;//当前问题
+        ProgressBar pb;//百分比
         View hint;
-        TextView more,cp;
+        LinearLayout linear;
     }
     public void changeImageVisable(View view,int position) {
 
