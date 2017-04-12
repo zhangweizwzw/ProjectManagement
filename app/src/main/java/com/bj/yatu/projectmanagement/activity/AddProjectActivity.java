@@ -22,6 +22,7 @@ import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ManagersBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.PanelBean;
+import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
