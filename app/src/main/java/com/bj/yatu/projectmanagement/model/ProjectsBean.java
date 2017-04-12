@@ -8,9 +8,8 @@ import java.util.List;
 
 public class ProjectsBean {
 
-
     /**
-     * project : [{"id":2,"project_name":"项目2","project_fzrid":2,"project_sqrid":1,"project_fzr":"管理员","project_begin_time":"2017-04-12","project_end_time":"2017-04-14","project_plan":null,"project_fact":null,"project_isfinish":false,"totalpersoncost":0,"totalextracost":0,"totalcost":0,"totalpercent":0,"questions":null,"plans":null},{"id":1,"project_name":"项目1","project_fzrid":1,"project_sqrid":1,"project_fzr":"王世永","project_begin_time":"2017-04-12","project_end_time":"2017-04-30","project_plan":"计划1","project_fact":"计划2","project_isfinish":false,"totalpersoncost":200,"totalextracost":200,"totalcost":400,"totalpercent":20,"questions":"问题222222222222222222222222222222222222222222222222","plans":null}]
+     * project : [{"id":2,"project_name":"项目2","project_fzrid":2,"project_sqrid":1,"project_fzr":"管理员","project_begin_time":"2017-04-12","project_end_time":"2017-04-14","project_plan":null,"project_fact":null,"project_isfinish":false,"totalpersoncost":0,"totalextracost":0,"totalcost":0,"totalpercent":0,"questions":"","plans":null},{"id":1,"project_name":"项目1","project_fzrid":1,"project_sqrid":1,"project_fzr":"王世永","project_begin_time":"2017-04-12","project_end_time":"2017-04-30","project_plan":"计划1","project_fact":"计划2","project_isfinish":false,"totalpersoncost":200,"totalextracost":200,"totalcost":400,"totalpercent":20,"questions":"问题222222222222222222222222222222222222222222222222","plans":null}]
      * status : true
      */
 
@@ -49,7 +48,7 @@ public class ProjectsBean {
          * totalextracost : 0.0
          * totalcost : 0.0
          * totalpercent : 0.0
-         * questions : null
+         * questions :
          * plans : null
          */
 
@@ -67,7 +66,7 @@ public class ProjectsBean {
         private double totalextracost;
         private double totalcost;
         private double totalpercent;
-        private Object questions;
+        private String questions;
         private Object plans;
 
         public int getId() {
@@ -182,11 +181,11 @@ public class ProjectsBean {
             this.totalpercent = totalpercent;
         }
 
-        public Object getQuestions() {
+        public String getQuestions() {
             return questions;
         }
 
-        public void setQuestions(Object questions) {
+        public void setQuestions(String questions) {
             this.questions = questions;
         }
 
