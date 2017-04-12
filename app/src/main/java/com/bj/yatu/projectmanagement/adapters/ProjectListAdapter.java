@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
 
 /***
- * 带复选框的listView的适配器
  * @author Administrator
  *
  */
@@ -28,6 +28,7 @@ public class ProjectListAdapter extends BaseAdapter {
 	private OrderViewHolder holder;
 	private Activity mcontext;
 	private List<ProjectsBean.ProjectBean> mData;
+	private boolean flag=true;
 
 	public ProjectListAdapter(Activity context, List<ProjectsBean.ProjectBean> list) {
 		mcontext=context;
@@ -68,6 +69,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.cost_tv = (TextView) convertView.findViewById(R.id.cost_tv);
 		holder.costmin_tv = (TextView) convertView.findViewById(R.id.costmin_tv);
 		holder.more_tv = (TextView) convertView.findViewById(R.id.more_tv);
+		holder.question_tv = (TextView) convertView.findViewById(R.id.question_tv);
 		holder.projectrate_pro= (MyProgress) convertView.findViewById(R.id.projectrate_pro);
 
 		convertView.setTag(holder);
@@ -98,6 +100,23 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.people_tv.setText(projectPeople);
 		holder.cost_tv.setText(projectmoney);
 		holder.costmin_tv.setText(projectMinmoney);
+		holder.question_tv.setText(projectproblem);
+
+		holder.question_tv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (flag){
+					flag=false;
+					holder.question_tv.setEllipsize(null);//文字展开
+					holder.question_tv.setSingleLine(flag);
+
+				}else {
+					flag=true;
+					holder.question_tv.setEllipsize(TextUtils.TruncateAt.END);//收缩
+					holder.question_tv.setSingleLine(flag);
+				}
+			}
+		});
 
 		holder.more_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,7 +131,7 @@ public class ProjectListAdapter extends BaseAdapter {
 
 	public final class OrderViewHolder {
 		private TextView projectname_tv,projectManager_tv,starttitme_tv,nowtime_tv,expectfinishtime_tv,expect_tv;
-		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv;
+		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv,question_tv;
 		private MyProgress projectrate_pro;
 	}
 

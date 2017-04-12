@@ -50,4 +50,5 @@
     <string name="delete">删除</string>
     <string name="account">账    户：</string>
     <string name="password">密 码：</string>
+    <string name="question">当前问题：</string>
 </resources>

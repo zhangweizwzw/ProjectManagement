@@ -30,6 +30,7 @@ import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
 import com.bj.yatu.projectmanagement.widget.MyDecoration;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.OkHttpRequest;
@@ -43,6 +44,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -67,6 +72,30 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         initView();
 
         getManagers();
+        save();
+    }
+
+    private void save() {
+        Log.i(TAG,"走走走走走走走走走走走走走走走走");
+        OkHttpClient client = new OkHttpClient();
+
+        OkHttpUtils
+                .post()
+                .url(RequstUrls.REQUEST_URL+"saveProject")
+                .addParams("aaa","{\"project_name\":\"项目1\",\"project_sqrid\":1,\"project_create_time\":\"2017-04-12 14:46:38\",\"project_fzrid\":1,\"project_begin_time\":\"2017-04-12 14:46:33\",\"project_end_time\":\"2017-04-30 14:46:42\",\"projectplans\":[{\"plan_name\":\"计划1\",\"plan_create_time\":\"2017-04-10 14:47:42\",\"plan_begin_time\":\"2017-04-10 14:47:37\",\"plan_end_time\":\"2017-04-14 14:47:44\",\"plan_proportion\":20.0,\"plan_labor_cost\":100.0,\"plan_extras_cost\":100.0,\"plan_complete_flat\":\"计划1完成标识\"}]}")
+                .addHeader("content-type", "application/json;charset:utf-8")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        ToastUtil.showToast(AddProjectActivity.this,"请求失败！请检查网络设置");
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG,"gggggggggg"+"<-->"+response);
+                    }
+                });
     }
 
     /**

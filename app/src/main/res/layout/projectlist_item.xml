@@ -288,7 +288,32 @@
                 android:layout_toRightOf="@id/costmin_tt"
                 android:layout_marginLeft="2dp"
                 android:textSize="@dimen/normal_textsize"/>
-
         </RelativeLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/lin4"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/question_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/normal_textsize"
+            android:text="@string/question"/>
+
+        <TextView android:id="@+id/question_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/question_tv1"
+            android:layout_marginLeft="2dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/normal_textsize"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>
