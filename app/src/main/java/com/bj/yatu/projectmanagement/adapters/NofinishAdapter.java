@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
 
@@ -99,7 +99,6 @@ public class NofinishAdapter extends BaseAdapter{
                     finalViewHolder.cp.setEllipsize(TextUtils.TruncateAt.END);//收缩
                     finalViewHolder.cp.setSingleLine(flag);
                 }
-                Toast.makeText(context,"当前问题",Toast.LENGTH_SHORT).show();
             }
         });
         /**
@@ -128,8 +127,7 @@ public class NofinishAdapter extends BaseAdapter{
         String todayDate=Dateutil.getTodayDate();//获取当前时间
         String endData=list.get(position).getProject_end_time();
         viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
-        viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
-
+        viewHolder.pb.setProgress(list.get(position).getTotalpercent());//百分比
         viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
         viewHolder.fzr.setText("项目经理:"+list.get(position).getProject_fzr());//项目经理
         viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间
@@ -167,7 +165,7 @@ public class NofinishAdapter extends BaseAdapter{
      */
     private void init(ViewHolder viewHolder, View convertView) {
         viewHolder.name= (TextView) convertView.findViewById(R.id.nofinishadapter_tv);
-        viewHolder.pb= (ProgressBar) convertView.findViewById(R.id.nofinishadapter_pb);
+        viewHolder.pb= (MyProgress) convertView.findViewById(R.id.nofinishadapter_pb);
         viewHolder.hint=convertView.findViewById(R.id.include);
         viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
         viewHolder.cp= (TextView) convertView.findViewById(R.id.hint_curentproblem);//百分比
@@ -198,7 +196,7 @@ public class NofinishAdapter extends BaseAdapter{
                 totalcost,//小计
                 more,
                 cp;//当前问题
-        ProgressBar pb;//百分比
+        MyProgress pb;//百分比
         View hint;
         LinearLayout linear;
     }
