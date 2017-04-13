@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.adapters.FinishAdapter;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class FinishFragment extends Fragment{
     private ListView listView;
     private List<ProjectsBean.ProjectBean> mlist;
     private List<ProjectsBean.ProjectBean> list;;
-    private NofinishAdapter nofinishAdapter;
+    private FinishAdapter finishAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_finish, container, false);
@@ -54,7 +56,7 @@ public class FinishFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                nofinishAdapter.changeImageVisable(view,i);
+                finishAdapter.changeImageVisable(view,i);
             }
         });
     }
@@ -78,12 +80,19 @@ public class FinishFragment extends Fragment{
                 mlist=mbean.getProject();
                 //将未完成与已完成的分开
                 for (int i = 0; i < mlist.size(); i++) {
-                    if (mlist.get(i).isProject_isfinish()){
+                    double a=mlist.get(i).getTotalpercent();//获取百分比
+                    double b=100.0;
+                    BigDecimal data1=new BigDecimal(a);
+                    BigDecimal data2=new BigDecimal(b);
+                    if (data1.compareTo(data2)==0){
                         list.add(mlist.get(i));
                     }
+//                    if (mlist.get(i).isProject_isfinish()){
+//                        list.add(mlist.get(i));
+//                    }
                 }
-                nofinishAdapter=new NofinishAdapter(getActivity(),list);
-                listView.setAdapter(nofinishAdapter);
+                finishAdapter=new FinishAdapter(getActivity(),list);
+                listView.setAdapter(finishAdapter);
             }
         });
     }

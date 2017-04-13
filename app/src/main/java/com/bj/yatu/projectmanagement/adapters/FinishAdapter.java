@@ -1,9 +1,7 @@
 package com.bj.yatu.projectmanagement.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,13 @@ import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by wxixis on 2017/4/5.
+ * Created by wxixis on 2017/4/13.
  */
 
-public class NofinishAdapter extends BaseAdapter{
+public class FinishAdapter extends BaseAdapter{
     private Context context;
     private List<ProjectsBean.ProjectBean> list;
     private boolean flag=true;
@@ -32,8 +29,8 @@ public class NofinishAdapter extends BaseAdapter{
     private int mLastPosition=-1;
     private int mLastVisibility;
 
-    public NofinishAdapter(){}
-    public NofinishAdapter(Context context, List<ProjectsBean.ProjectBean> list) {
+    public FinishAdapter(){}
+    public FinishAdapter(Context context, List<ProjectsBean.ProjectBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -123,18 +120,16 @@ public class NofinishAdapter extends BaseAdapter{
      * @param viewHolder
      * @param convertView
      */
-    private void setText(ViewHolder viewHolder, View convertView,int position) {
+    private void setText(ViewHolder viewHolder, View convertView, int position) {
 
-        String todayDate=Dateutil.getTodayDate();//获取当前时间
-        String endData=list.get(position).getProject_end_time();
         viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
         viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
 
         viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
         viewHolder.fzr.setText("项目经理:"+list.get(position).getProject_fzr());//项目经理
         viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间
-        viewHolder.current_time.setText("当前时间："+ todayDate);//当前时间
-        viewHolder.end_time.setText("预计完成时间:"+endData);//预计完成时间
+        viewHolder.current_time.setText("当前时间："+ Dateutil.getTodayDate());//当前时间
+        viewHolder.end_time.setText("预计完成时间:"+list.get(position).getProject_end_time());//预计完成时间
         viewHolder.plan.setText("计划："+list.get(position).getPlans());//计划
         viewHolder.fact.setText("实际："+ list.get(position).getProject_fact());//实际
         viewHolder.personcost.setText("人工："+list.get(position).getTotalpersoncost());//人工
@@ -147,16 +142,8 @@ public class NofinishAdapter extends BaseAdapter{
         }else{
             viewHolder.cp.setVisibility(View.GONE);
         }
-        /**
-         * 判断是否超时，更改背景颜色
-         */
-        if (Date.valueOf(todayDate).after(Date.valueOf(endData))){
-            Log.i("==比较日期大小===","超时");
-//            viewHolder.linear.setBackground(context.getResources().getColor(Color.RED));
-            viewHolder.linear.setBackgroundColor(Color.RED);
-        }else{
-            Log.i("===比较日期大小===","没有超时");
-        }
+
+
 
     }
 
@@ -206,7 +193,7 @@ public class NofinishAdapter extends BaseAdapter{
 
         if(mLastView != null && mLastPosition != position ) {
 
-            ViewHolder holder = (ViewHolder) mLastView.getTag();
+            NofinishAdapter.ViewHolder holder = (NofinishAdapter.ViewHolder) mLastView.getTag();
 
             switch(holder.hint.getVisibility()) {
 
@@ -230,7 +217,7 @@ public class NofinishAdapter extends BaseAdapter{
 
         mLastView = view;
 
-        ViewHolder holder = (ViewHolder) view.getTag();
+        NofinishAdapter.ViewHolder holder = (NofinishAdapter.ViewHolder) view.getTag();
 
         switch(holder.hint.getVisibility()) {
 
@@ -253,5 +240,4 @@ public class NofinishAdapter extends BaseAdapter{
         }
 
     }
-
 }

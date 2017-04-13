@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,9 +94,20 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
                 mlist=mbean.getProject();
                 //将未完成与已完成的分开
                 for (int i = 0; i < mlist.size(); i++) {
-                    if (!mlist.get(i).isProject_isfinish()){
+                    double a=mlist.get(i).getTotalpercent();//获取百分比
+                    Log.i("====百分比===",""+a);
+                    double b=100.0;
+                    BigDecimal data1=new BigDecimal(a);
+                    BigDecimal data2=new BigDecimal(b);
+                    int c=data1.compareTo(data2);
+                    Log.i("===百分比比较大小===",""+c);
+                    if (data1.compareTo(data2)==-1){
                         list.add(mlist.get(i));
                     }
+
+//                    if (!mlist.get(i).isProject_isfinish()){
+//                        list.add(mlist.get(i));
+//                    }
                 }
                 nofinishAdapter=new NofinishAdapter(getActivity(),list);
                 listView.setAdapter(nofinishAdapter);
