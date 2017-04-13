@@ -189,7 +189,7 @@ public class FinishAdapter extends BaseAdapter{
         View hint;
         LinearLayout linear;
     }
-    
+
     public void changeImageVisable(View view,int position) {
         if(mLastView != null && mLastPosition != position ) {
             NofinishAdapter.ViewHolder holder = (NofinishAdapter.ViewHolder) mLastView.getTag();
@@ -219,3 +219,5 @@ public class FinishAdapter extends BaseAdapter{
         }
     }
 }
+
+
