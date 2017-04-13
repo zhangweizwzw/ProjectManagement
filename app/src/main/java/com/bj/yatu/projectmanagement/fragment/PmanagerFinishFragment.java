@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class PmanagerFinishFragment extends Fragment{
     private View view;
     private TextView text_center;
     private ListView project_lv;
-    private List<ProjectsBean.ProjectBean> proList=new ArrayList<ProjectsBean.ProjectBean>();
+    private List<ProjectsBean.ProjectBean> profinishList=new ArrayList<ProjectsBean.ProjectBean>();
+    private List<ProjectsBean.ProjectBean> finishfList=new ArrayList<ProjectsBean.ProjectBean>();
     private ProjectListAdapter projectListAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class PmanagerFinishFragment extends Fragment{
         text_center.setText("已完成");
 
         project_lv= (ListView) view.findViewById(R.id.project_lv);
-        projectListAdapter=new ProjectListAdapter(true,getActivity(),proList);
+        projectListAdapter=new ProjectListAdapter(true,getActivity(),finishfList);
         project_lv.setAdapter(projectListAdapter);
     }
 
@@ -69,11 +71,16 @@ public class PmanagerFinishFragment extends Fragment{
                         Log.i(TAG,"response"+response);
                         Gson gson=new Gson();
                         ProjectsBean projectsBean=gson.fromJson(response,ProjectsBean.class);
-                        proList.addAll(projectsBean.getProject());
+                        profinishList.addAll(projectsBean.getProject());
                         if(projectsBean.isStatus()){
-                            for (int i=0;i<proList.size();i++){
-                                if(proList.get(i).getTotalpercent()<100){
-                                    proList.remove(i);
+                            Log.i(TAG,"cccccccccc==>"+profinishList.size());
+
+                            for (int i=0;i<profinishList.size();i++){
+                                Log.i(TAG,"bbbbbbb==>"+profinishList.get(i).getTotalpercent()+"<-->"+profinishList.get(i).getProject_fzr());
+                                if(profinishList.get(i).getTotalpercent()==100){
+                                    Log.i(TAG,"sssssss==>"+profinishList.get(i).getTotalpercent()+"<-->"+profinishList.get(i).getProject_fzr());
+//                                    profinishList.remove(profinishList.get(i));
+                                    finishfList.add(profinishList.get(i));
                                 }
                             }
                             projectListAdapter.notifyDataSetChanged();

@@ -24,6 +24,7 @@
             android:id="@+id/account_et"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:paddingLeft="5dp"
             android:textColor="@color/text_color"
             android:background="@drawable/edittext"
             android:layout_toRightOf="@+id/username"
@@ -44,9 +45,11 @@
             android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:paddingLeft="5dp"
             android:layout_toRightOf="@+id/password"
             android:textColor="@color/text_color"
             android:background="@drawable/edittext"
+            android:inputType="textPassword"
             android:singleLine="true"/>
     </RelativeLayout>
     <LinearLayout

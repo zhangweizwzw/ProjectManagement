@@ -40,7 +40,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/projectname_tt"
-                    android:text="天水工业园区"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
@@ -62,7 +61,6 @@
                     android:layout_below="@+id/projectname_tt"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/starttime_tt"
-                    android:text="2017-4-7"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
@@ -84,7 +82,6 @@
                     android:layout_below="@+id/projectname_tt"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/hopeendtime_tt"
-                    android:text="2017-4-7"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
@@ -106,7 +103,6 @@
                     android:layout_below="@+id/projectname_tt"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/projectmanager_tt"
-                    android:text="2017-4-7"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
@@ -125,21 +121,19 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:text="@string/project_panal"
+                    android:text="@string/project_plan"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>
 
             <com.bj.yatu.projectmanagement.widget.NestFullListView
-                android:id="@+id/panel_lv"
+                android:id="@+id/plans_lv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/rela2"
                 android:orientation="vertical"
                 android:visibility="gone"
-                android:showDividers="middle">
-
-            </com.bj.yatu.projectmanagement.widget.NestFullListView>
+                android:showDividers="middle"/>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

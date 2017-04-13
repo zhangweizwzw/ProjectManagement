@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
-import com.bj.yatu.projectmanagement.model.ProjectBean;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -96,7 +94,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectproblem=projectBean.getQuestions();
 		double projectPercent=projectBean.getTotalpercent();
 
-		holder.projectrate_pro.setProgress(10);
+		holder.projectrate_pro.setProgress((int)projectPercent);
 		holder.projectname_tv.setText(projectName);
 		holder.projectManager_tv.setText(projectManager);
 		holder.starttitme_tv.setText(projectStarttime);

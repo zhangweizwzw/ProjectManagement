@@ -30,6 +30,7 @@ import java.util.Arrays;
 import okhttp3.Call;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
+    private final String TAG="LoginActivity";
     private TextView text_center;
     private TextView tv1,tv2,tv3;
     private Button btn_reset,btn_login;
@@ -71,7 +72,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"verifyuser")
-                .addParams("userName",account)
+                .addParams("account",account)
                 .addParams("password",password)
                 .build()
                 .execute(new StringCallback() {
@@ -82,6 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                     @Override
                     public void onResponse(String response) {
+                        Log.i(TAG,response);
                         Gson gson=new Gson();
                         UserLoginBean userLoginBean = gson.fromJson(response, UserLoginBean.class);
 //                        UserLoginBean userLoginBean = gson.fromJson(response, new TypeToken<ArrayList<UserLoginBean>>(){}.getType());

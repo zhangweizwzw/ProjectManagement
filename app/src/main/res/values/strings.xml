@@ -51,4 +51,8 @@
     <string name="account">账    户：</string>
     <string name="password">密 码：</string>
     <string name="question">当前问题：</string>
+    <string name="planname">计划名称：</string>
+    <string name="planper">计划占比：</string>
+    <string name="question_context">问题描述：</string>
+    <string name="qustionanswer">领导回复：</string>
 </resources>
