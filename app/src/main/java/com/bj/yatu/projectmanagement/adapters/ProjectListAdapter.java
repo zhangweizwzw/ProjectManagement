@@ -5,10 +5,12 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
@@ -23,17 +25,20 @@ import com.bj.yatu.projectmanagement.utils.Dateutil;
  *
  */
 public class ProjectListAdapter extends BaseAdapter {
-
+	private final String TAG="ProjectListAdapter";
 	private LayoutInflater mInflater;
 	private OrderViewHolder holder;
 	private Activity mcontext;
 	private List<ProjectsBean.ProjectBean> mData;
 	private boolean flag=true;
+	private boolean isfinish=true;
 
-	public ProjectListAdapter(Activity context, List<ProjectsBean.ProjectBean> list) {
+	public ProjectListAdapter(boolean isfinish,Activity context, List<ProjectsBean.ProjectBean> list) {
 		mcontext=context;
 		mInflater = LayoutInflater.from(context);
 		this.mData=list;
+
+		this.isfinish=isfinish;
 	}
 
 	@Override
@@ -71,6 +76,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.more_tv = (TextView) convertView.findViewById(R.id.more_tv);
 		holder.question_tv = (TextView) convertView.findViewById(R.id.question_tv);
 		holder.projectrate_pro= (MyProgress) convertView.findViewById(R.id.projectrate_pro);
+		holder.largerela= (RelativeLayout) convertView.findViewById(R.id.largerela);
 
 		convertView.setTag(holder);
 //		} else {
@@ -88,6 +94,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectmoney=projectBean.getTotalextracost()+"";
 		final String projectMinmoney=projectBean.getTotalcost()+"";
 		final String projectproblem=projectBean.getQuestions();
+		double projectPercent=projectBean.getTotalpercent();
 
 		holder.projectrate_pro.setProgress(10);
 		holder.projectname_tv.setText(projectName);
@@ -133,6 +140,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		private TextView projectname_tv,projectManager_tv,starttitme_tv,nowtime_tv,expectfinishtime_tv,expect_tv;
 		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv,question_tv;
 		private MyProgress projectrate_pro;
+		private RelativeLayout largerela;
 	}
 
 }

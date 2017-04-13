@@ -49,6 +49,15 @@ public class PmanagerNoFinishFragment extends Fragment{
         return view;
     }
 
+    private void initView() {
+        text_center= (TextView) view.findViewById(R.id.text_center);
+        text_center.setText("未完成");
+
+        project_lv= (ListView) view.findViewById(R.id.project_lv);
+        projectListAdapter=new ProjectListAdapter(false,getActivity(),proList);
+        project_lv.setAdapter(projectListAdapter);
+    }
+
     private void initData() {
         OkHttpUtils
                 .post()
@@ -65,22 +74,17 @@ public class PmanagerNoFinishFragment extends Fragment{
                         Log.i(TAG,"response"+response);
                         Gson gson=new Gson();
                         ProjectsBean projectsBean=gson.fromJson(response,ProjectsBean.class);
+                        proList.addAll(projectsBean.getProject());
                         if(projectsBean.isStatus()){
-                            proList.addAll(projectsBean.getProject());
+                            for (int i=0;i<proList.size();i++){
+                                if(proList.get(i).getTotalpercent()==100){
+                                    proList.remove(i);
+                                }
+                            }
                             projectListAdapter.notifyDataSetChanged();
                         }
                     }
                 });
 
-    }
-
-    private void initView() {
-        text_center= (TextView) view.findViewById(R.id.text_center);
-        text_center.setText("项目管理");
-
-
-        project_lv= (ListView) view.findViewById(R.id.project_lv);
-        projectListAdapter=new ProjectListAdapter(getActivity(),proList);
-        project_lv.setAdapter(projectListAdapter);
     }
 }

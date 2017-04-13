@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/largerela">
 
     <RelativeLayout android:id="@+id/rela1"
         android:layout_width="match_parent"
@@ -41,8 +42,7 @@
         android:layout_margin="10dp"
         style="@style/StyleProgressBarMini"
         android:background="@drawable/shape_progressbar_bg"
-        android:max="100"
-        android:progress="40"/>
+        android:max="100"/>
 
     <LinearLayout android:id="@+id/lin1"
         android:layout_below="@id/projectrate_pro"
@@ -67,7 +67,6 @@
             <TextView android:id="@+id/projectManager_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="老王"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/projectmanager_tt"
                 android:layout_marginLeft="2dp"
@@ -90,7 +89,6 @@
             <TextView android:id="@+id/starttitme_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015-1-8"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/starttitme_tt"
                 android:layout_marginLeft="2dp"
@@ -124,7 +122,6 @@
             <TextView android:id="@+id/nowtime_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015-1-8"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/nowtime_tt"
                 android:layout_marginLeft="2dp"
@@ -147,7 +144,6 @@
             <TextView android:id="@+id/expectfinishtime_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015-1-8"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/expectfinishtime_tt"
                 android:layout_marginLeft="2dp"
@@ -180,7 +176,6 @@
             <TextView android:id="@+id/expect_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/expect_tt"
                 android:layout_marginLeft="2dp"
@@ -203,7 +198,6 @@
             <TextView android:id="@+id/fact_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="暂无"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/fact_tt"
                 android:layout_marginLeft="2dp"
@@ -236,7 +230,6 @@
             <TextView android:id="@+id/people_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="暂无"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/people_tt"
                 android:layout_marginLeft="2dp"
@@ -259,7 +252,6 @@
             <TextView android:id="@+id/cost_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/cost_tt"
                 android:layout_marginLeft="2dp"
@@ -283,7 +275,6 @@
             <TextView android:id="@+id/costmin_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000"
                 android:textColor="@color/text_color"
                 android:layout_toRightOf="@id/costmin_tt"
                 android:layout_marginLeft="2dp"
