@@ -189,55 +189,33 @@ public class FinishAdapter extends BaseAdapter{
         View hint;
         LinearLayout linear;
     }
+    
     public void changeImageVisable(View view,int position) {
-
         if(mLastView != null && mLastPosition != position ) {
-
             NofinishAdapter.ViewHolder holder = (NofinishAdapter.ViewHolder) mLastView.getTag();
-
             switch(holder.hint.getVisibility()) {
-
                 case View.VISIBLE:
-
                     holder.hint.setVisibility(View.GONE);
-
                     mLastVisibility = View.GONE;
-
                     break;
-
                 default :
 
                     break;
-
             }
-
         }
 
         mLastPosition = position;
-
         mLastView = view;
-
-        NofinishAdapter.ViewHolder holder = (NofinishAdapter.ViewHolder) view.getTag();
-
+        ViewHolder holder = (ViewHolder) view.getTag();
         switch(holder.hint.getVisibility()) {
-
             case View.GONE:
-
                 holder.hint.setVisibility(View.VISIBLE);
-
                 mLastVisibility = View.VISIBLE;
-
                 break;
-
             case View.VISIBLE:
-
                 holder.hint.setVisibility(View.GONE);
-
                 mLastVisibility = View.GONE;
-
                 break;
-
         }
-
     }
 }
