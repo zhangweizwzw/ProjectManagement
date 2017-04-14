@@ -10,7 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
+import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
 import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
@@ -21,29 +23,62 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProjectDetailActivity extends BaseActivity implements View.OnClickListener {
+import okhttp3.Call;
+import okhttp3.MediaType;
+
+public class BossProjectDetailActivity extends BaseActivity implements View.OnClickListener {
     private final String TAG="ProjectDetailActivity";
-    private TextView text_center,projectname_tv,starttime_tv,hopeendtime_tv,projectmanager_tv;
+    private TextView text_center,projectname_tv,starttime_tv,hopeendtime_tv,projectmanager_tv,addplan;
     private ImageView image_left;
     private RelativeLayout rela2;
     private  NestFullListView plans_lv;
     private ProjectDetailBean projectDetailBean=new ProjectDetailBean();
+    private List<AddPanelBean.ProjectplansBean> panelList=new ArrayList<AddPanelBean.ProjectplansBean>();
+    public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     boolean flag=true;
-    private String planid;//计划id
-    private String nodeid;//节点id
+    private String questionid;//问题id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_detail);
+        setContentView(R.layout.activity_boss_project_detail);
 
         initView();
         initData();
     }
 
+
+    private void initView() {
+        text_center= (TextView) findViewById(R.id.text_center);
+        text_center.setText("项目详情");
+        image_left= (ImageView) findViewById(R.id.image_left);
+        image_left.setImageResource(R.mipmap.title_back);
+        image_left.setOnClickListener(this);
+        rela2= (RelativeLayout) findViewById(R.id.rela2);
+        rela2.setOnClickListener(this);
+
+        plans_lv= (NestFullListView) findViewById(R.id.plans_lv);
+        projectname_tv= (TextView) findViewById(R.id.projectname_tv);
+        starttime_tv= (TextView) findViewById(R.id.starttime_tv);
+        hopeendtime_tv= (TextView) findViewById(R.id.hopeendtime_tv);
+        projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
+
+
+        addplan= (TextView) findViewById(R.id.addplan);//创建计划
+        addplan.setOnClickListener(this);
+        if(MyApplication.identity==0){
+            addplan.setVisibility(View.GONE);
+        }else{
+            addplan.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void initData() {
+        String projectid=getIntent().getStringExtra("projectid");//项目id
+
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"findoneproject?id=1")
@@ -51,7 +86,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        ToastUtil.showToast(ProjectDetailActivity.this,"请求失败！请检查网络设置");
+                        ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
@@ -72,9 +107,10 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
         hopeendtime_tv.setText(projectDetailBean.getProject().getProject_end_time());
         projectmanager_tv.setText(projectDetailBean.getProject().getProject_fzr());
 
-        plans_lv.setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean>(R.layout.projectplansitem_layout, projectDetailBean.getProject().getProjectplans()) {
+
+        plans_lv.setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean>(R.layout.managerprojectplansitem_layout, projectDetailBean.getProject().getProjectplans()) {
             @Override
-            public void onBind(int pos, final ProjectDetailBean.ProjectBean.ProjectplansBean plans, final NestFullViewHolder holder) {
+            public void onBind(int pos, ProjectDetailBean.ProjectBean.ProjectplansBean plans, final NestFullViewHolder holder) {
                 holder.setText(R.id.planname_et,plans.getPlan_name());
                 holder.setText(R.id.finishsign_et,plans.getPlan_complete_flat());
                 holder.setText(R.id.endtime_et,plans.getPlan_end_time());
@@ -93,36 +129,15 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
-                ((TextView)holder.getView(R.id.addpanel)).setOnClickListener(new View.OnClickListener() {
+                ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.managerprojectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes()) {
                     @Override
-                    public void onClick(View view) {
-                        planid=plans.getId()+"";
-                        Intent intent=new Intent();
-                        startActivityForResult(new Intent(ProjectDetailActivity.this,AddPlanActivity.class),1);
-                    }
-                });
-
-                ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.projectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes()) {
-                    @Override
-                    public void onBind(int pos, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
+                    public void onBind(int pos, ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
                         holder.setText(R.id.panelname_et,nodes.getNode_name());
                         holder.setText(R.id.finishsign_et,nodes.getNode_complete_flat());
                         holder.setText(R.id.endtime_et,nodes.getNode_end_time());
                         holder.setText(R.id.panelper_et,nodes.getNode_proportion()+"");
                         holder.setText(R.id.peoplecost_et,nodes.getNode_labor_cost()+"");
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
-
-                        ((TextView)holder.getView(R.id.addquestion)).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                nodeid=nodes.getId()+"";
-
-                                Intent intent=new Intent();
-                                intent.putExtra("ctype","提问");
-                                intent.setClass(ProjectDetailActivity.this,AddQuestionandAnswerActivity.class);
-                                startActivityForResult(intent,3);
-                            }
-                        });
 
                         ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -135,12 +150,27 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                             }
                         });
 
-                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.projectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes().get(pos).getQuestions()) {
+                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.managerprojectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes().get(pos).getQuestions()) {
                             @Override
-                            public void onBind(int pos, ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
+                            public void onBind(int pos,final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
                                 holder.setText(R.id.question_date,question.getQuestiondate());
                                 holder.setText(R.id.question_tv,question.getNode_question());
                                 holder.setText(R.id.answerquestion_tv,question.getNode_question_answer());
+
+                                if(MyApplication.identity==0){
+                                    ((TextView)holder.getView(R.id.answerq)).setVisibility(View.GONE);
+                                }
+
+                                ((TextView)holder.getView(R.id.answerq)).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        questionid=question.getId()+"";
+                                        Intent intent=new Intent();
+                                        intent.putExtra("ctype","答复");
+                                        intent.setClass(BossProjectDetailActivity.this,AddQuestionandAnswerActivity.class);
+                                        startActivityForResult(intent,3);
+                                    }
+                                });
 
 
                                 ((TextView)holder.getView(R.id.question_tv)).setOnClickListener(new View.OnClickListener() {
@@ -183,7 +213,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&resultCode==2){
+        if(requestCode==2&&resultCode==1){
             String panelname=data.getStringExtra("panelname").toString();
             String finishsign=data.getStringExtra("finishsign").toString();
             String endtime=data.getStringExtra("endtime").toString();
@@ -197,33 +227,33 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
             String iscontent=data.getStringExtra("iscontent").toString();
             if("1".equals(iscontent)){
                 String content=data.getStringExtra("content").toString();
-                Log.i(TAG,"提问===>"+content);
+                Log.i(TAG,"答复===>"+content);
                 goQusetion(content);
             }
         }
     }
 
     private void goQusetion(String content) {
-        Log.i(TAG,"nodeid=>"+nodeid);
+        Log.i(TAG,"questionid=>"+questionid);
         OkHttpUtils
                 .post()
-                .url(RequstUrls.REQUEST_URL+"addQuestion")
-                .addParams("node_id",nodeid)
-                .addParams("node_question",content)
+                .url(RequstUrls.REQUEST_URL+"answerQuestion")
+                .addParams("id",questionid)
+                .addParams("node_question_answer",content)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        ToastUtil.showToast(ProjectDetailActivity.this,"请求失败！请检查网络设置");
+                        ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response){
-                        Log.i(TAG,"ggggggggggg=="+response);
+                        Log.i(TAG,"fffffff=="+response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);
                         if(statusBean.isStatus()){
-                            ToastUtil.showToast(ProjectDetailActivity.this,"创建问题成功！");
+                            ToastUtil.showToast(BossProjectDetailActivity.this,"回复成功！");
                         }
                     }
                 });
@@ -231,47 +261,34 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void goCreate(String panelname,String panelstarttime,String endtime,String pancelper,String peoplecost,String extras,String finishsign) {
-        Log.i(TAG,"planid===>"+planid);
         OkHttpUtils
                 .post()
-                .url(RequstUrls.REQUEST_URL+"addNode")
-                .addParams("plan_id",planid)
-                .addParams("node_name",panelname)
-                .addParams("node_proportion",pancelper)
-                .addParams("node_extras_cost",extras)
-                .addParams("node_labor_cost",peoplecost)
-                .addParams("node_complete_flat",finishsign)
-                .addParams("node_end_time",endtime)
-                .addParams("node_begin_time",panelstarttime)
+                .url(RequstUrls.REQUEST_URL+"addPlan")
+                .addParams("project_id",projectDetailBean.getProject().getId()+"")
+                .addParams("plan_name",panelname)
+                .addParams("plan_proportion",pancelper)
+                .addParams("plan_extras_cost",extras)
+                .addParams("plan_labor_cost",peoplecost)
+                .addParams("plan_complete_flat",finishsign)
+                .addParams("plan_end_time",endtime)
+                .addParams("plan_begin_time",panelstarttime)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        ToastUtil.showToast(ProjectDetailActivity.this,"请求失败！请检查网络设置");
+                        ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response){
-                        Log.i(TAG,"bbbbbbbb=="+response);
+                        Log.i(TAG,response);
+                        Gson gson=new Gson();
+                        StatusBean statusBean=gson.fromJson(response,StatusBean.class);
+                        if(statusBean.isStatus()){
+                            ToastUtil.showToast(BossProjectDetailActivity.this,"添加计划成功！");
+                        }
                     }
                 });
-
-    }
-
-    private void initView() {
-        text_center= (TextView) findViewById(R.id.text_center);
-        text_center.setText("项目详情");
-        image_left= (ImageView) findViewById(R.id.image_left);
-        image_left.setImageResource(R.mipmap.title_back);
-        image_left.setOnClickListener(this);
-        rela2= (RelativeLayout) findViewById(R.id.rela2);
-        rela2.setOnClickListener(this);
-
-        plans_lv= (NestFullListView) findViewById(R.id.plans_lv);
-        projectname_tv= (TextView) findViewById(R.id.projectname_tv);
-        starttime_tv= (TextView) findViewById(R.id.starttime_tv);
-        hopeendtime_tv= (TextView) findViewById(R.id.hopeendtime_tv);
-        projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
 
     }
 
@@ -287,6 +304,9 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 }else{
                     plans_lv.setVisibility(View.VISIBLE);
                 }
+                break;
+            case R.id.addplan:
+                startActivityForResult(new Intent(this,AddPanelActivity.class),2);
                 break;
         }
     }

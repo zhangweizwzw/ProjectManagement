@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/planname"
+                android:text="@string/panelname"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
@@ -174,10 +174,10 @@
                 android:id="@+id/pancelper_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/planper"
+                android:layout_centerVertical="true"
+                android:text="@string/panerper"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_alignTop="@+id/pancelper_tv2" />
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/pancelper_et"

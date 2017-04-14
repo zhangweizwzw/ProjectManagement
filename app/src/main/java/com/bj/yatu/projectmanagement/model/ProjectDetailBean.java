@@ -72,7 +72,17 @@ public class ProjectDetailBean {
         private String project_plan;
         private String project_fact;
         private Object project_isfinish;
+        private String project_fzr;
         private List<ProjectplansBean> projectplans;
+
+
+        public String getProject_fzr() {
+            return project_fzr;
+        }
+
+        public void setProject_fzr(String project_fzr) {
+            this.project_fzr = project_fzr;
+        }
 
         public int getId() {
             return id;

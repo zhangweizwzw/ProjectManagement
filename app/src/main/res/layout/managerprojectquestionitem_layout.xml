@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout android:id="@+id/showquestion"
+            android:layout_width="match_parent"
+            android:background="@color/darkgray"
+            android:layout_height="wrap_content">
+
+            <TextView android:id="@+id/question_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/normal_textsize"
+                android:text="123544"
+                android:layout_margin="5dp"
+                android:textColor="@color/text_color"/>
+
+            <TextView android:id="@+id/answerq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:text="@string/answer"
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:textColor="@color/red"/>
+        </RelativeLayout>
+
+
+
+        <RelativeLayout android:id="@+id/question_rela"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:layout_below="@+id/showquestion">
+
+            <RelativeLayout android:id="@+id/qrela"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView android:id="@+id/question_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_context"
+                    android:textSize="@dimen/normal_textsize"
+                    android:textColor="@color/text_color"/>
+
+                <TextView android:id="@+id/question_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_toRightOf="@+id/question_tv1"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qrela"
+                android:layout_marginTop="5dp">
+
+                <TextView android:id="@+id/answerquestion_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qustionanswer"
+                    android:textSize="@dimen/normal_textsize"
+                    android:textColor="@color/text_color"/>
+
+                <TextView android:id="@+id/answerquestion_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_toRightOf="@+id/answerquestion_tv1"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/text_color"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -31,7 +31,7 @@
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView android:id="@+id/panelname_et"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
@@ -39,16 +39,6 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
                 android:layout_toRightOf="@+id/panelname_tv"/>
-
-            <TextView android:id="@+id/addquestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/red"
-                android:text="@string/addquestion"
-                android:textSize="@dimen/normal_textsize"/>
 
         </RelativeLayout>
 

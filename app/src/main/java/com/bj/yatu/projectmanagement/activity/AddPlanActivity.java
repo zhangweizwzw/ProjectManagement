@@ -13,7 +13,7 @@ import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 
-public class AddPanelActivity extends BaseActivity implements View.OnClickListener {
+public class AddPlanActivity extends BaseActivity implements View.OnClickListener {
     private ImageView endtime_im,starttime_im;
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et,starttime_et;
     private Button setup;
@@ -22,7 +22,7 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_panel);
+        setContentView(R.layout.activity_add_plan);
 
         initView();
     }
@@ -102,7 +102,7 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
         intent.putExtra("peoplecost",peoplecost);
         intent.putExtra("panelstarttime",panelstarttime);
         intent.putExtra("extras",extras);
-        setResult(1,intent);
+        setResult(2,intent);
         finish();
     }
 

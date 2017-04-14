@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.AddProjectActivity;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
@@ -52,6 +53,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+
     private void initView() {
         text_center= (TextView) view.findViewById(R.id.text_center);
         text_center.setText("未完成");
@@ -60,6 +62,14 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         addproject.bringToFront();//将图片放在最上方
         addproject.setOnClickListener(this);
         listView= (ListView) view.findViewById(R.id.nofinish_listview);
+
+        //如果是领导，不可以添加项目
+        if(MyApplication.identity==0){
+            addproject.setVisibility(View.GONE);
+        }else{
+            addproject.setVisibility(View.VISIBLE);
+        }
+
 
         setBean();
 

@@ -2,7 +2,6 @@ package com.bj.yatu.projectmanagement.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,15 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.PanelListAdapter;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
+import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.ManagersBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
-import com.bj.yatu.projectmanagement.model.PanelBean;
-import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
@@ -30,25 +29,19 @@ import com.bj.yatu.projectmanagement.widget.MaterialSpinner;
 import com.bj.yatu.projectmanagement.widget.MyDecoration;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.request.OkHttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class AddProjectActivity extends BaseActivity implements View.OnClickListener {
@@ -59,10 +52,12 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
     private ImageView starttime_im,predicttime_im,image_left;
     private EditText start_time_et,predicttime_et,pro_name;
     private RecyclerView panel_rv;
-    private List<PanelBean> panelList=new ArrayList<PanelBean>();
+    private List<AddPanelBean.ProjectplansBean> panelList=new ArrayList<AddPanelBean.ProjectplansBean>();
     private PanelListAdapter panelListAdapter;
     private Button cancel_button,create_btn;
     private List<String> mlist = new ArrayList<String>();
+    private ManagersBean managersBean;
+    public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,31 +67,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         initView();
 
         getManagers();
-        save();
     }
 
-    private void save() {
-        Log.i(TAG,"走走走走走走走走走走走走走走走走");
-        OkHttpClient client = new OkHttpClient();
-
-        OkHttpUtils
-                .post()
-                .url(RequstUrls.REQUEST_URL+"saveProject")
-                .addParams("aaa","{\"project_name\":\"项目1\",\"project_sqrid\":1,\"project_create_time\":\"2017-04-12 14:46:38\",\"project_fzrid\":1,\"project_begin_time\":\"2017-04-12 14:46:33\",\"project_end_time\":\"2017-04-30 14:46:42\",\"projectplans\":[{\"plan_name\":\"计划1\",\"plan_create_time\":\"2017-04-10 14:47:42\",\"plan_begin_time\":\"2017-04-10 14:47:37\",\"plan_end_time\":\"2017-04-14 14:47:44\",\"plan_proportion\":20.0,\"plan_labor_cost\":100.0,\"plan_extras_cost\":100.0,\"plan_complete_flat\":\"计划1完成标识\"}]}")
-                .addHeader("content-type", "application/json;charset:utf-8")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        ToastUtil.showToast(AddProjectActivity.this,"请求失败！请检查网络设置");
-                    }
-
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i(TAG,"gggggggggg"+"<-->"+response);
-                    }
-                });
-    }
 
     /**
      * 接收删除节点广播
@@ -187,16 +159,19 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
             String pancelper=data.getStringExtra("pancelper").toString();
             String peoplecost=data.getStringExtra("peoplecost").toString();
             String extras=data.getStringExtra("extras").toString();
+            String panelstarttime=data.getStringExtra("panelstarttime").toString();
 
-            PanelBean panelBean=new PanelBean();
-            panelBean.setPanelname(panelname);
-            panelBean.setFinishsign(finishsign);
-            panelBean.setEndtime(endtime);
-            panelBean.setPancelper(pancelper);
-            panelBean.setPeoplecost(peoplecost);
-            panelBean.setExtras(extras);
+            AddPanelBean.ProjectplansBean panelBean=new AddPanelBean.ProjectplansBean();
+            panelBean.setPlan_name(panelname);
+            panelBean.setPlan_begin_time(panelstarttime);
+            panelBean.setPlan_end_time(endtime);
+            panelBean.setPlan_proportion(Double.valueOf(pancelper));
+            panelBean.setPlan_labor_cost(Double.valueOf(peoplecost));
+            panelBean.setPlan_extras_cost(Double.valueOf(extras));
+            panelBean.setPlan_complete_flat(finishsign);
 
             panelList.add(panelBean);
+
             panelListAdapter.notifyDataSetChanged();
         }
     }
@@ -216,12 +191,12 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                     public void onResponse(String response) {
                         Log.i(TAG,"项目经理列表："+response);
                         Gson gson=new Gson();
-                        ManagersBean managersBean=gson.fromJson(response,ManagersBean.class);
+                        managersBean=gson.fromJson(response,ManagersBean.class);
                         String[] managers = new String[managersBean.getManager().size()];
+
                         if(managersBean.isStatus()){
                             for (int i=0;i<managersBean.getManager().size();i++){
                                Log.i(TAG,"AAAAAAAAAAAAAAAA"+i+"<-->"+managersBean.getManager().get(i).getUsername());
-//                               list.add(managersBean.getManager().get(i).getUsername());
                                 managers[i]=managersBean.getManager().get(i).getUsername();
                            }
                             mlist= Arrays.asList(managers);
@@ -245,18 +220,15 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.predicttime_im:
                 showDialogDate(2);
+                break;
             case R.id.cancel_button:
                 finish();
+                break;
             case R.id.create_btn:
                 String  proName=pro_name.getText().toString();
                 String  startTime=start_time_et.getText().toString();
                 String  predictTime=predicttime_et.getText().toString();
                 String managerName=mlist.get(manager.getSelectedIndex());
-
-                Gson gson=new Gson();
-                String str=gson.toJson(panelList);
-
-                Log.i(TAG,str);
 
                 if(StringUtil.isEmpty(proName)){
                     ToastUtil.showToast(this,"项目名称不为空！");
@@ -267,13 +239,56 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 }if(StringUtil.isEmpty(managerName)){
                     ToastUtil.showToast(this,"项目经理不为空！");
                 }else{
-                    goCreate(proName,startTime,predictTime,managerName);
+                    String managerid="";
+                    for (int i=0;i<managersBean.getManager().size();i++){
+                        if(managersBean.getManager().get(i).getUsername().equals(managerName)){
+                            managerid=managersBean.getManager().get(i).getId()+"";
+                        }
+                    }
+                    goCreate(proName,startTime,predictTime,managerName,managerid);
                 }
                 break;
         }
     }
 
-    private void goCreate(String proName,String startTime,String predictTime,String managerName) {
+    private void goCreate(String proName,String startTime,String predictTime,String managerName,String managerid) {
+        AddPanelBean addPanelBean=new AddPanelBean();
+        addPanelBean.setId("");
+        addPanelBean.setProject_name(proName);
+        addPanelBean.setProject_sqrid(MyApplication.account);
+        addPanelBean.setProject_fzr(managerName);
+        addPanelBean.setProject_fzrid(managerid);
+        addPanelBean.setProject_begin_time(startTime);
+        addPanelBean.setProject_end_time(predictTime);
+        addPanelBean.setProjectplans(panelList);
+
+        Gson gson=new Gson();
+        String jsonstr=gson.toJson(addPanelBean);
+        Log.i(TAG,"aaaaaaaaaaaaa=="+jsonstr);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body=RequestBody.create(JSON,jsonstr);
+        OkHttpUtils
+                .put()
+                .url(RequstUrls.REQUEST_URL+"saveProject")
+                .requestBody(body)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        ToastUtil.showToast(AddProjectActivity.this,"请求失败！请检查网络设置");
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG,"gggggggggg"+"<-->"+response);
+                        Gson gson=new Gson();
+                        StatusBean statusBean=gson.fromJson(response, StatusBean.class);
+                        if(statusBean.isStatus()){
+                            ToastUtil.showToast(AddProjectActivity.this,"添加成功！");
+                        }
+                    }
+                });
 
     }
 

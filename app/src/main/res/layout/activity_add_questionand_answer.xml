@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bj.yatu.projectmanagement.activity.AddQuestionandAnswerActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView android:id="@+id/addtype_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addanswer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/text_color"/>
+
+        <EditText android:id="@+id/content_et"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="top|left"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/large_textsize"
+            android:background="@drawable/edittext"
+            android:layout_below="@+id/addtype_tv"
+            android:paddingLeft="5dp"/>
+
+        <Button android:id="@+id/cancel_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/canel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_below="@+id/content_et"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/reset"/>
+
+        <Button android:id="@+id/sure_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/sure"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_below="@+id/content_et"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_theme"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.bj.yatu.projectmanagement.activity.ProjectDetailActivity">
+
+    <include
+        android:id="@id/title_bar"
+        layout="@layout/title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rela1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/projectname_tt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/projectname"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/projectname_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/projectname_tt"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/starttime_tt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/projectname_tt"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/starttime"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/starttime_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/starttime_tt"
+                    android:layout_below="@+id/projectname_tt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/starttime_tt"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/hopeendtime_tt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/starttime_tt"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/endtime"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/hopeendtime_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/hopeendtime_tt"
+                    android:layout_below="@+id/projectname_tt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/hopeendtime_tt"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/projectmanager_tt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hopeendtime_tt"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/managername"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/projectmanager_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/projectmanager_tt"
+                    android:layout_below="@+id/projectname_tt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/projectmanager_tt"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rela2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rela1"
+                android:layout_marginTop="10dp"
+                android:background="@color/theme_color">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/project_plan"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView android:id="@+id/addplan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/addplan"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <com.bj.yatu.projectmanagement.widget.NestFullListView
+                android:id="@+id/plans_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rela2"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:showDividers="middle"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

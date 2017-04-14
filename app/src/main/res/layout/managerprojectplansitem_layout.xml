@@ -9,11 +9,10 @@
         android:layout_height="1dp"
         android:background="@color/dividercolor"/>-->
 
-    <RelativeLayout android:id="@+id/showquestion"
+    <RelativeLayout android:id="@+id/showpanle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darkgray"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp">
 
         <RelativeLayout android:id="@+id/rela1"
@@ -22,33 +21,23 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
-            <TextView android:id="@+id/panelname_tv"
+            <TextView android:id="@+id/planname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/panelname"
+                android:text="@string/planname"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <TextView android:id="@+id/panelname_et"
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/planname_et"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/panelname_tv"/>
-
-            <TextView android:id="@+id/addquestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/red"
-                android:text="@string/addquestion"
-                android:textSize="@dimen/normal_textsize"/>
+                android:layout_toRightOf="@+id/planname_tv"/>
 
         </RelativeLayout>
 
@@ -117,29 +106,29 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/panelper_tv"
+            <TextView android:id="@+id/planper_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/panerper"
+                android:text="@string/planper"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
-                android:id="@+id/panelper_et"
+                android:id="@+id/planper_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/panelper_tv"
+                android:layout_toRightOf="@+id/planper_tv"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
-            <TextView android:id="@+id/panelper_tv2"
+            <TextView android:id="@+id/planper_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/panelper_et"
+                android:layout_toRightOf="@+id/planper_et"
                 android:text="%"
                 android:layout_marginLeft="3dp"
                 android:textStyle="bold"
@@ -222,7 +211,7 @@
         </RelativeLayout>
 
         <com.bj.yatu.projectmanagement.widget.NestFullListView
-            android:id="@+id/question_lv"
+            android:id="@+id/panel_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rela5"

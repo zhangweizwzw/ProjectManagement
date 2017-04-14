@@ -7,11 +7,11 @@ import android.app.Application;
  */
 
 public class MyApplication extends Application{
-    public static String account="";//用户账号
+    public static String account="1";//用户账号
 
     public static String username="";//用户姓名
 
-    public static int identity=0; //用户身份   0/1/2   领导/生产主管/项目经理
+    public static int identity=1; //用户身份   0/1/2   领导/生产主管/项目经理
 
 
     @Override

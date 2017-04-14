@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.PanelBean;
 
@@ -23,8 +24,9 @@ import java.util.List;
 public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.ViewHolder> {
     private final String TAG="DiaryListAdapter";
     private Context mContext;
-    private List<PanelBean> dataList;
-    public List<PanelBean> getDataList() {
+    private List<AddPanelBean.ProjectplansBean> dataList;
+
+    public List<AddPanelBean.ProjectplansBean> getDataList() {
         return dataList;
     }
     public void removeAllDataList() {
@@ -43,13 +45,13 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
         this.onItemClickListener = onItemClickListener;
     }
 
-    public PanelListAdapter(Context context, List<PanelBean> dataList) {
+    public PanelListAdapter(Context context, List<AddPanelBean.ProjectplansBean> dataList) {
         this.dataList = dataList;
         mContext = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView panelname_et,finishsign_et,endtime_et,pancelper_et,peoplecost_et,extras_et;
+        private TextView panelname_et,finishsign_et,endtime_et,pancelper_et,peoplecost_et,extras_et,panelstarttime_et;
         private Button delete_bt;
 
         public ViewHolder(View itemView) {
@@ -60,6 +62,7 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
             pancelper_et = (TextView) itemView.findViewById(R.id.pancelper_et);
             peoplecost_et = (TextView) itemView.findViewById(R.id.peoplecost_et);
             extras_et = (TextView) itemView.findViewById(R.id.extras_et);
+            panelstarttime_et = (TextView) itemView.findViewById(R.id.panelstarttime_et);
 
             delete_bt= (Button) itemView.findViewById(R.id.delete_bt);
         }
@@ -71,14 +74,23 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
         return new ViewHolder(v);
     }
 
+    private String plan_name;//计划名称
+    private String plan_begin_time;//计划开始时间
+    private String plan_end_time;//计划结束时间
+    private double plan_proportion;//计划占比
+    private double plan_labor_cost;//人工成本
+    private double plan_extras_cost;//杂费
+    private String plan_complete_flat;//计划完成标识
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.panelname_et.setText(dataList.get(position).getPanelname());
-        holder.finishsign_et.setText(dataList.get(position).getFinishsign());
-        holder.endtime_et.setText(dataList.get(position).getEndtime());
-        holder.pancelper_et.setText(dataList.get(position).getPeoplecost());
-        holder.peoplecost_et.setText(dataList.get(position).getPeoplecost());
-        holder.extras_et.setText(dataList.get(position).getExtras());
+        holder.panelname_et.setText(dataList.get(position).getPlan_name());
+        holder.finishsign_et.setText(dataList.get(position).getPlan_complete_flat());
+        holder.endtime_et.setText(dataList.get(position).getPlan_end_time());
+        holder.pancelper_et.setText(dataList.get(position).getPlan_proportion()+"");
+        holder.peoplecost_et.setText(dataList.get(position).getPlan_labor_cost()+"");
+        holder.extras_et.setText(dataList.get(position).getPlan_extras_cost()+"");
+        holder.panelstarttime_et.setText(dataList.get(position).getPlan_begin_time());
 
         holder.delete_bt.setOnClickListener(new View.OnClickListener() {
             @Override
