@@ -133,15 +133,27 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         for (int i=0;i<projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size();i++){
                             prodouble=prodouble+projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(i).getNode_proportion();
                         }
+
+                        Log.i(TAG,"prodouble="+prodouble);
+
                         //上一个计划是否完成
                         Double ious=0.0;
+                        Log.i(TAG,"pos1"+pos1);
                         if(pos1!=0){
                             for (int i=0;i<projectDetailBean.getProject().getProjectplans().get(pos1-1).getNodes().size();i++){
                                 ious=ious+projectDetailBean.getProject().getProjectplans().get(pos1-1).getNodes().get(i).getNode_proportion();
                             }
-                        }
-                        if(ious<100){
-                            ToastUtil.showToast(ProjectDetailActivity.this,"上一个计划没完成，暂时不能添加节点！");
+                            if(ious<100){
+                                ToastUtil.showToast(ProjectDetailActivity.this,"上一个计划没完成，暂时不能添加节点！");
+                            }else{
+                                planpoistion=pos1;
+                                planid=plans.getId()+"";
+                                Intent intent=new Intent();
+                                intent.setClass(ProjectDetailActivity.this,AddPlanActivity.class);
+                                intent.putExtra("planstarttime",plans.getPlan_begin_time());
+                                intent.putExtra("prodouble",prodouble);
+                                startActivityForResult(intent,1);
+                            }
                         }else{
                             planpoistion=pos1;
                             planid=plans.getId()+"";
@@ -151,7 +163,6 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                             intent.putExtra("prodouble",prodouble);
                             startActivityForResult(intent,1);
                         }
-//                        startActivityForResult(new Intent(ProjectDetailActivity.this,AddPlanActivity.class),1);
                     }
                 });
 
@@ -164,6 +175,8 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         holder.setText(R.id.panelper_et,nodes.getNode_proportion()+"");
                         holder.setText(R.id.peoplecost_et,nodes.getNode_labor_cost()+"");
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
+                        holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
+
 
                         ((TextView)holder.getView(R.id.addquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override

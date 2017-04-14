@@ -110,6 +110,8 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                     ToastUtil.showToast(this,"请输入开始日期！");
                 }else if(StringUtil.isEmpty(endtime)){
                     ToastUtil.showToast(this,"请输入完成日期！");
+                }else if(Dateutil.compare_date(starttime,endtime)==1){
+                    ToastUtil.showToast(this,"计划结束时间不能在计划开始时间之前！");
                 }else if(StringUtil.isEmpty(pancelper)){
                     ToastUtil.showToast(this,"请输入计划占比！");
                 }else if(Double.valueOf(pancelper).doubleValue()>100){//节点占比小于等于100%

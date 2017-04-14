@@ -145,6 +145,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         holder.setText(R.id.panelper_et,nodes.getNode_proportion()+"");
                         holder.setText(R.id.peoplecost_et,nodes.getNode_labor_cost()+"");
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
+                        holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
 
                         ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override

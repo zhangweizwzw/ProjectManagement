@@ -34,7 +34,7 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
         //计划开始时间
         planstarttime=getIntent().getStringExtra("planstarttime");
-        prodouble=getIntent().getDoubleExtra("planstarttime",0.0);
+        prodouble=getIntent().getDoubleExtra("prodouble",0.0);
 
         endtime_im= (ImageView) findViewById(R.id.endtime_im);
         starttime_im= (ImageView) findViewById(R.id.starttime_im);
@@ -70,10 +70,10 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                 showDialogDate(2);
                 break;
             case R.id.starttime_et:
-                showDialogDate(1);
+                showDialogDate(2);
                 break;
             case R.id.endtime_et:
-                showDialogDate(2);
+                showDialogDate(1);
                 break;
             case R.id.setup:
                 String panelname=panelname_et.getText().toString().trim();
@@ -92,7 +92,9 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                     ToastUtil.showToast(this,"请输入完成标志！");
                 }else if(StringUtil.isEmpty(starttime)){
                     ToastUtil.showToast(this,"请输入开始日期！");
-                }else if(Dateutil.judgeTime2Time(starttime,planstarttime)){
+                }else if(Dateutil.compare_date(starttime,endtime)==1){
+                    ToastUtil.showToast(this,"节点结束时间不能在计划开始时间之前！");
+                }else if(Dateutil.compare_date(starttime,planstarttime)==1){
                     ToastUtil.showToast(this,"节点开始时间不能在计划开始时间之前！");
                 }else if(StringUtil.isEmpty(endtime)){
                     ToastUtil.showToast(this,"请输入完成日期！");
