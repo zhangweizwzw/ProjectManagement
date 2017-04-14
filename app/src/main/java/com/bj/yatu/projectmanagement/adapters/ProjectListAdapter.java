@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectproblem=projectBean.getQuestions();
 		double projectPercent=projectBean.getTotalpercent();
 
-		holder.projectrate_pro.setProgress((int)projectPercent);
+		holder.projectrate_pro.setProgress(projectPercent);
 		holder.projectname_tv.setText(projectName);
 		holder.projectManager_tv.setText(projectManager);
 		holder.starttitme_tv.setText(projectStarttime);
@@ -126,7 +127,11 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.more_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mcontext.startActivity(new Intent(mcontext, ProjectDetailActivity.class));
+				Log.i("aaaaaaaaa",projectBean.getId()+"");
+				Intent intent=new Intent();
+				intent.setClass(mcontext, ProjectDetailActivity.class);
+				intent.putExtra("projectid",projectBean.getId()+"");
+				mcontext.startActivity(intent);
 			}
 		});
 

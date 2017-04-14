@@ -1,6 +1,7 @@
 package com.bj.yatu.projectmanagement.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.activity.BossProjectDetailActivity;
+import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -57,7 +60,7 @@ public class NofinishAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if (convertView==null){
             viewHolder=new ViewHolder();
@@ -77,7 +80,11 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"more",Toast.LENGTH_SHORT).show();
+//                context.startActivity(new Intent(context, BossProjectDetailActivity.class));
+                Intent intent=new Intent();
+                intent.setClass(context, BossProjectDetailActivity.class);
+                intent.putExtra("projectid",list.get(position).getId()+"");
+                context.startActivity(intent);
             }
         });
         /**

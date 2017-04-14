@@ -15,6 +15,7 @@ import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
 import com.bj.yatu.projectmanagement.model.StatusBean;
+import com.bj.yatu.projectmanagement.utils.Dateutil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.NestFullListView;
 import com.bj.yatu.projectmanagement.widget.NestFullListViewAdapter;
@@ -40,6 +41,11 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     boolean flag=true;
     private String questionid;//问题id
+    private String projectid;//项目id
+    private int planpoistion=0;//问题poistion
+    private int nodepoistion=0;//节点poistion
+    private int questionpoistion=0;//问题poistion
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,8 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
 
 
     private void initView() {
+        projectid=getIntent().getStringExtra("projectid");
+
         text_center= (TextView) findViewById(R.id.text_center);
         text_center.setText("项目详情");
         image_left= (ImageView) findViewById(R.id.image_left);
@@ -77,11 +85,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     }
 
     private void initData() {
-        String projectid=getIntent().getStringExtra("projectid");//项目id
-
         OkHttpUtils
                 .post()
-                .url(RequstUrls.REQUEST_URL+"findoneproject?id=1")
+                .url(RequstUrls.REQUEST_URL+"findoneproject?id="+projectid)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -110,7 +116,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
 
         plans_lv.setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean>(R.layout.managerprojectplansitem_layout, projectDetailBean.getProject().getProjectplans()) {
             @Override
-            public void onBind(int pos, ProjectDetailBean.ProjectBean.ProjectplansBean plans, final NestFullViewHolder holder) {
+            public void onBind(final int pos1, ProjectDetailBean.ProjectBean.ProjectplansBean plans, final NestFullViewHolder holder) {
                 holder.setText(R.id.planname_et,plans.getPlan_name());
                 holder.setText(R.id.finishsign_et,plans.getPlan_complete_flat());
                 holder.setText(R.id.endtime_et,plans.getPlan_end_time());
@@ -129,9 +135,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                     }
                 });
 
-                ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.managerprojectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes()) {
+                ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.managerprojectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
-                    public void onBind(int pos, ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
+                    public void onBind(final int pos2, ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
                         holder.setText(R.id.panelname_et,nodes.getNode_name());
                         holder.setText(R.id.finishsign_et,nodes.getNode_complete_flat());
                         holder.setText(R.id.endtime_et,nodes.getNode_end_time());
@@ -150,9 +156,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                             }
                         });
 
-                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.managerprojectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos).getNodes().get(pos).getQuestions()) {
+                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.managerprojectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions()) {
                             @Override
-                            public void onBind(int pos,final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
+                            public void onBind(final int pos3, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
                                 holder.setText(R.id.question_date,question.getQuestiondate());
                                 holder.setText(R.id.question_tv,question.getNode_question());
                                 holder.setText(R.id.answerquestion_tv,question.getNode_question_answer());
@@ -165,6 +171,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                                     @Override
                                     public void onClick(View view) {
                                         questionid=question.getId()+"";
+                                        planpoistion=pos1;
+                                        nodepoistion=pos2;
+                                        questionpoistion=pos3;
                                         Intent intent=new Intent();
                                         intent.putExtra("ctype","答复");
                                         intent.setClass(BossProjectDetailActivity.this,AddQuestionandAnswerActivity.class);
@@ -233,7 +242,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    private void goQusetion(String content) {
+    private void goQusetion(final String content) {
         Log.i(TAG,"questionid=>"+questionid);
         OkHttpUtils
                 .post()
@@ -254,13 +263,18 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);
                         if(statusBean.isStatus()){
                             ToastUtil.showToast(BossProjectDetailActivity.this,"回复成功！");
+
+                            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(questionpoistion).setAnswerdate(Dateutil.getTodayDate());
+                            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(questionpoistion).setNode_question_answer(content);
+                            plans_lv.updateUI();
+
                         }
                     }
                 });
 
     }
 
-    private void goCreate(String panelname,String panelstarttime,String endtime,String pancelper,String peoplecost,String extras,String finishsign) {
+    private void goCreate(final String panelname,final String panelstarttime,final String endtime,final String pancelper,final String peoplecost,final String extras,final String finishsign) {
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"addPlan")
@@ -286,6 +300,19 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);
                         if(statusBean.isStatus()){
                             ToastUtil.showToast(BossProjectDetailActivity.this,"添加计划成功！");
+
+                            ProjectDetailBean.ProjectBean.ProjectplansBean pBean=new ProjectDetailBean.ProjectBean.ProjectplansBean();
+                            pBean.setPlan_name(panelname);
+                            pBean.setPlan_create_time(Dateutil.getTodayDate());
+                            pBean.setPlan_begin_time(panelstarttime);
+                            pBean.setPlan_end_time(endtime);
+                            pBean.setPlan_proportion(Double.valueOf(pancelper).doubleValue());
+                            pBean.setPlan_labor_cost(Double.valueOf(peoplecost).doubleValue());
+                            pBean.setPlan_extras_cost(Double.valueOf(extras).doubleValue());
+                            pBean.setPlan_complete_flat(finishsign);
+
+                            projectDetailBean.getProject().getProjectplans().add(pBean);
+                            plans_lv.updateUI();
                         }
                     }
                 });

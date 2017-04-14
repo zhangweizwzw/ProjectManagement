@@ -381,6 +381,9 @@ public class ProjectDetailBean {
 
                     private int id;
                     private String node_question;
+                    private String node_question_answer;
+                    private String questiondate;
+                    private String answerdate;
 
                     public String getNode_question_answer() {
                         return node_question_answer;
@@ -406,9 +409,7 @@ public class ProjectDetailBean {
                         this.answerdate = answerdate;
                     }
 
-                    private String node_question_answer;
-                    private String questiondate;
-                    private String answerdate;
+
 
                     public int getId() {
                         return id;
