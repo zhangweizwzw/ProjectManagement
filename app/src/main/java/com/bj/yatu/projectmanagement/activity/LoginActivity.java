@@ -24,8 +24,11 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import okhttp3.Call;
 
@@ -41,9 +44,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
+
         initView();
     }
+
+
+
 
     private void initView() {
         text_center= (TextView) findViewById(R.id.text_center);

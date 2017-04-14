@@ -69,13 +69,40 @@
 
         </RelativeLayout>
 
+        <RelativeLayout android:id="@+id/relan"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/rela2"
+            android:layout_marginTop="10dp">
+
+            <TextView android:id="@+id/starttime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/starttime"
+                android:textColor="@color/text_color"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView android:id="@+id/starttime_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:focusable="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_toRightOf="@+id/starttime_tv"/>
+        </RelativeLayout>
+
 
         <RelativeLayout android:id="@+id/rela3"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@+id/rela2"
+            android:layout_below="@+id/relan"
             android:layout_marginTop="10dp">
 
             <TextView android:id="@+id/endtime_tv"

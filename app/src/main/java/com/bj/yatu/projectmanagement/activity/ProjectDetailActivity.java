@@ -106,6 +106,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 holder.setText(R.id.planname_et,plans.getPlan_name());
                 holder.setText(R.id.finishsign_et,plans.getPlan_complete_flat());
                 holder.setText(R.id.endtime_et,plans.getPlan_end_time());
+                holder.setText(R.id.starttime_et,plans.getPlan_begin_time());
                 holder.setText(R.id.planper_et,plans.getPlan_proportion()+"");
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
@@ -121,14 +122,36 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
+
                 //添加节点
                 ((TextView)holder.getView(R.id.addpanel)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        planpoistion=pos1;
-                        planid=plans.getId()+"";
-                        Intent intent=new Intent();
-                        startActivityForResult(new Intent(ProjectDetailActivity.this,AddPlanActivity.class),1);
+
+                        //节点总占比
+                        Double prodouble=0.0;
+                        for (int i=0;i<projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size();i++){
+                            prodouble=prodouble+projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(i).getNode_proportion();
+                        }
+                        //上一个计划是否完成
+                        Double ious=0.0;
+                        if(pos1!=0){
+                            for (int i=0;i<projectDetailBean.getProject().getProjectplans().get(pos1-1).getNodes().size();i++){
+                                ious=ious+projectDetailBean.getProject().getProjectplans().get(pos1-1).getNodes().get(i).getNode_proportion();
+                            }
+                        }
+                        if(ious<100){
+                            ToastUtil.showToast(ProjectDetailActivity.this,"上一个计划没完成，暂时不能添加节点！");
+                        }else{
+                            planpoistion=pos1;
+                            planid=plans.getId()+"";
+                            Intent intent=new Intent();
+                            intent.setClass(ProjectDetailActivity.this,AddPlanActivity.class);
+                            intent.putExtra("planstarttime",plans.getPlan_begin_time());
+                            intent.putExtra("prodouble",prodouble);
+                            startActivityForResult(intent,1);
+                        }
+//                        startActivityForResult(new Intent(ProjectDetailActivity.this,AddPlanActivity.class),1);
                     }
                 });
 

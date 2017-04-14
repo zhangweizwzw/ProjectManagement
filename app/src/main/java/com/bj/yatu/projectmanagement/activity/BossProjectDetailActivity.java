@@ -120,6 +120,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 holder.setText(R.id.planname_et,plans.getPlan_name());
                 holder.setText(R.id.finishsign_et,plans.getPlan_complete_flat());
                 holder.setText(R.id.endtime_et,plans.getPlan_end_time());
+                holder.setText(R.id.starttime_et,plans.getPlan_begin_time());
                 holder.setText(R.id.planper_et,plans.getPlan_proportion()+"");
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
@@ -333,7 +334,27 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 }
                 break;
             case R.id.addplan:
-                startActivityForResult(new Intent(this,AddPanelActivity.class),2);
+                //上一个计划结束时间
+                String firstplanendtime="";
+                if(projectDetailBean.getProject().getProjectplans().size()!=0){
+                    firstplanendtime=projectDetailBean.getProject().getProjectplans().get(projectDetailBean.getProject().getProjectplans().size()-1).getPlan_end_time();
+                }
+
+
+                //计划总占比
+                Double planpro=0.0;
+                for (int i=0;i<projectDetailBean.getProject().getProjectplans().size();i++){
+                    planpro=planpro+projectDetailBean.getProject().getProjectplans().get(i).getPlan_proportion();
+                }
+
+
+                Intent intent=new Intent();
+                intent.setClass(this,AddPanelActivity.class);
+                intent.putExtra("prostarttime",projectDetailBean.getProject().getProject_begin_time());
+                intent.putExtra("firstplanendtime",firstplanendtime);
+                intent.putExtra("planpro",planpro);
+                startActivityForResult(intent,2);
+//                startActivityForResult(new Intent(this,AddPanelActivity.class),2);
                 break;
         }
     }

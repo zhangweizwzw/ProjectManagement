@@ -86,7 +86,8 @@
                     android:layout_toRightOf="@+id/text_stime"
                     android:background="@drawable/edittext"
                     android:paddingLeft="2dp"
-                   android:inputType="date"
+                    android:inputType=""
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>

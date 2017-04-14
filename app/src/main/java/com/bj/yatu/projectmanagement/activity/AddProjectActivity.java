@@ -7,8 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -118,6 +120,11 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         predicttime_et= (EditText) findViewById(R.id.predicttime_et);//预计完成时间
         pro_name= (EditText) findViewById(R.id.pro_name);//项目名称
 
+        start_time_et.setOnClickListener(this);
+        start_time_et.setInputType(InputType.TYPE_NULL);
+        predicttime_et.setOnClickListener(this);
+        predicttime_et.setInputType(InputType.TYPE_NULL);
+
         //项目节点列表
         panel_rv= (RecyclerView) findViewById(R.id.panel_rv);//节点列表
         panel_rv.setLayoutManager(new LinearLayoutManager(this));
@@ -129,25 +136,13 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
         //项目经理下拉框
         manager= (MaterialSpinner) findViewById(R.id.manager);
-//        manager.setItems(managers);
-//        manager.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-//
-//            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                Log.i(TAG,"AAA"+item);
-//            }
-//        });
-//        manager.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-//
-//            @Override public void onNothingSelected(MaterialSpinner spinner) {
-//                Log.i(TAG,"没有选中什么");
-//            }
-//        });
 
         cancel_button= (Button) findViewById(R.id.cancel_button);
         create_btn= (Button) findViewById(R.id.create_btn);
         cancel_button.setOnClickListener(this);
         create_btn.setOnClickListener(this);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,12 +208,46 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                finish();
                 break;
             case R.id.add_panel:
-                startActivityForResult(new Intent(this,AddPanelActivity.class),1);
+                //项目开始时间
+                String pstarttime=start_time_et.getText().toString();
+
+                //上一个计划结束时间
+                String firstplanendtime="";
+                if(panelList.size()>0){
+                    firstplanendtime=panelList.get(panelList.size()-1).getPlan_end_time();
+                }
+
+
+                //计划相加不能大于100%
+                Double planpro=0.0;
+                for(int i=0;i<panelList.size();i++){
+                    planpro=planpro+panelList.get(i).getPlan_proportion();
+                }
+
+                if(StringUtil.isEmpty(pstarttime)){
+                    ToastUtil.showToast(this,"请输入项目开始时间！");
+                }else{
+                    Intent intent=new Intent();
+                    intent.setClass(this,AddPanelActivity.class);
+                    intent.putExtra("prostarttime",pstarttime);
+                    intent.putExtra("firstplanendtime",firstplanendtime);
+                    intent.putExtra("planpro",planpro);
+                    startActivityForResult(intent,1);
+                }
+
+
+//                startActivityForResult(new Intent(this,AddPanelActivity.class),1);
                 break;
             case R.id.starttime_im:
                 showDialogDate(1);
                 break;
             case R.id.predicttime_im:
+                showDialogDate(2);
+                break;
+            case R.id.start_time_et:
+                showDialogDate(1);
+                break;
+            case R.id.predicttime_et:
                 showDialogDate(2);
                 break;
             case R.id.cancel_button:
@@ -239,13 +268,25 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 }if(StringUtil.isEmpty(managerName)){
                     ToastUtil.showToast(this,"项目经理不为空！");
                 }else{
+                    //获取项目经理id
                     String managerid="";
                     for (int i=0;i<managersBean.getManager().size();i++){
                         if(managersBean.getManager().get(i).getUsername().equals(managerName)){
                             managerid=managersBean.getManager().get(i).getId()+"";
                         }
                     }
-                    goCreate(proName,startTime,predictTime,managerName,managerid);
+
+
+//                    //计划相加不能大于100%
+//                    Double planpro=0.0;
+//                    for(int i=0;i<panelList.size();i++){
+//                        planpro=planpro+panelList.get(i).getPlan_proportion();
+//                    }
+//                    if(planpro<100){
+//                        ToastUtil.showToast(this,"计划占比相加不能大于100%！");
+//                    }else{
+                        goCreate(proName,startTime,predictTime,managerName,managerid);
+//                    }
                 }
                 break;
         }

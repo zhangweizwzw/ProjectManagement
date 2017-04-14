@@ -2,6 +2,7 @@ package com.bj.yatu.projectmanagement.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.utils.Dateutil;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
@@ -18,6 +20,8 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et,starttime_et;
     private Button setup;
     private RelativeLayout largerela,smallrela;
+    private String planstarttime;//计划开始时间
+    private Double prodouble;//计划中的节点总占比
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +32,20 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
+        //计划开始时间
+        planstarttime=getIntent().getStringExtra("planstarttime");
+        prodouble=getIntent().getDoubleExtra("planstarttime",0.0);
+
         endtime_im= (ImageView) findViewById(R.id.endtime_im);
         starttime_im= (ImageView) findViewById(R.id.starttime_im);
         starttime_im.setOnClickListener(this);
         endtime_im.setOnClickListener(this);
         starttime_et= (EditText) findViewById(R.id.starttime_et);//开始日期
+        starttime_et.setOnClickListener(this);
+        starttime_et.setInputType(InputType.TYPE_NULL);
         endtime_et= (EditText) findViewById(R.id.endtime_et);//完成日期
+        endtime_et.setOnClickListener(this);
+        endtime_et.setInputType(InputType.TYPE_NULL);
         panelname_et= (EditText) findViewById(R.id.panelname_et);//节点名称
         finishsign_et= (EditText) findViewById(R.id.finishsign_et);//完成标志
         pancelper_et= (EditText) findViewById(R.id.pancelper_et);//节点占比
@@ -48,7 +60,6 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
         smallrela.setOnClickListener(this);
 
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -56,6 +67,12 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                 showDialogDate(1);
                 break;
             case R.id.starttime_im:
+                showDialogDate(2);
+                break;
+            case R.id.starttime_et:
+                showDialogDate(1);
+                break;
+            case R.id.endtime_et:
                 showDialogDate(2);
                 break;
             case R.id.setup:
@@ -66,16 +83,23 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                 String peoplecost=peoplecost_et.getText().toString().trim();
                 String extras=extras_et.getText().toString().trim();
                 String starttime=starttime_et.getText().toString().trim();
+                //节点总占比
+                Double dou=prodouble+Double.valueOf(pancelper).doubleValue();
+
                 if(StringUtil.isEmpty(panelname)){
                     ToastUtil.showToast(this,"请输入节点名称！");
                 }else if(StringUtil.isEmpty(finishsign)){
                     ToastUtil.showToast(this,"请输入完成标志！");
                 }else if(StringUtil.isEmpty(starttime)){
                     ToastUtil.showToast(this,"请输入开始日期！");
+                }else if(Dateutil.judgeTime2Time(starttime,planstarttime)){
+                    ToastUtil.showToast(this,"节点开始时间不能在计划开始时间之前！");
                 }else if(StringUtil.isEmpty(endtime)){
                     ToastUtil.showToast(this,"请输入完成日期！");
                 }else if(StringUtil.isEmpty(pancelper)){
                     ToastUtil.showToast(this,"请输入节点占比！");
+                }else if(dou>100){
+                    ToastUtil.showToast(this,"节点总占比不能大于100%！");
                 }else if(StringUtil.isEmpty(peoplecost)){
                     ToastUtil.showToast(this,"请输入人工成本！");
                 }else if(StringUtil.isEmpty(extras)){

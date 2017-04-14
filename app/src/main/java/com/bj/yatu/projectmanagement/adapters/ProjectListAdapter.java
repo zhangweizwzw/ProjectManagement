@@ -95,7 +95,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectproblem=projectBean.getQuestions();
 		double projectPercent=projectBean.getTotalpercent();
 
-		holder.projectrate_pro.setProgress(projectPercent);
+		holder.projectrate_pro.setProgress((int)projectPercent);
 		holder.projectname_tv.setText(projectName);
 		holder.projectManager_tv.setText(projectManager);
 		holder.starttitme_tv.setText(projectStarttime);

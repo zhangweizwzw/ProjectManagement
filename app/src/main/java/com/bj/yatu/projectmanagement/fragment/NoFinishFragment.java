@@ -35,6 +35,7 @@ import okhttp3.Call;
  */
 
 public class NoFinishFragment extends Fragment implements View.OnClickListener {
+    private final String TAG="TAG";
     private View view;
     private ImageView addproject;
     private TextView text_center;
@@ -69,8 +70,6 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         }else{
             addproject.setVisibility(View.VISIBLE);
         }
-
-
         setBean();
 
 //       点击展开隐藏内容
