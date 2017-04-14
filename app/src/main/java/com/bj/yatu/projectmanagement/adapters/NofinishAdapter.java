@@ -134,7 +134,7 @@ public class NofinishAdapter extends BaseAdapter{
         String todayDate=Dateutil.getTodayDate();//获取当前时间
         String endData=list.get(position).getProject_end_time();
         viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
-        viewHolder.pb.setProgress(list.get(position).getTotalpercent());//百分比
+        viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
         viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
         viewHolder.fzr.setText("项目经理:"+list.get(position).getProject_fzr());//项目经理
         viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间

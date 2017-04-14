@@ -45,10 +45,10 @@ public class MyProgress extends ProgressBar{
 //        this.mPaint.setTextSize(15);
     }
 
-
-    public synchronized void setProgress(double progress) {
+    @Override
+    public synchronized void setProgress(int progress) {
         setText(progress);
-//        super.setProgress(progress);
+        super.setProgress(progress);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class MyProgress extends ProgressBar{
      * 设置文字内容
      * @param progress
      */
-    private void setText(double progress){
-        double i = (progress * 100)/this.getMax();
+    private void setText(int progress){
+        int i = (progress * 100)/this.getMax();
         this.text = String.valueOf(i) + "%";
     }
 }
