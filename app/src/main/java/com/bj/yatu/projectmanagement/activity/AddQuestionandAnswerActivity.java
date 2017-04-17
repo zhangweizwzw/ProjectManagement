@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 
-public class AddQuestionandAnswerActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddQuestionandAnswerActivity extends BaseActivity implements View.OnClickListener {
     private TextView addtype_tv;
     private EditText content_et;
     private Button cancel_bt,sure_bt;
+    private RelativeLayout large_rela,small_rela;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,11 @@ public class AddQuestionandAnswerActivity extends AppCompatActivity implements V
         sure_bt= (Button) findViewById(R.id.sure_bt);
         cancel_bt.setOnClickListener(this);
         sure_bt.setOnClickListener(this);
+
+        large_rela= (RelativeLayout) findViewById(R.id.large_rela);
+        small_rela= (RelativeLayout) findViewById(R.id.small_rela);
+        large_rela.setOnClickListener(this);
+        small_rela.setOnClickListener(this);
 
         String ctype=getIntent().getStringExtra("ctype");
         if("提问".equals(ctype)){
@@ -62,6 +69,12 @@ public class AddQuestionandAnswerActivity extends AppCompatActivity implements V
                 }else{
                     goBack("1",content);
                 }
+                break;
+            case R.id.large_rela:
+                finish();
+                break;
+            case R.id.small_rela:
+                finish();
                 break;
         }
     }

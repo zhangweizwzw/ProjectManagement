@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/large_rela"
     tools:context="com.bj.yatu.projectmanagement.activity.AddQuestionandAnswerActivity">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/small_rela"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

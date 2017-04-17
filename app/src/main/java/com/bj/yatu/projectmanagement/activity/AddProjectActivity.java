@@ -266,7 +266,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                     ToastUtil.showToast(this,"起始时间不为空！");
                 }else if(StringUtil.isEmpty(predictTime)){
                     ToastUtil.showToast(this,"预计完成时间不为空！");
-                }else if(Dateutil.compare_date(startTime,predictTime)==1){
+                }else if(Dateutil.compare_date(predictTime,startTime)==1){
                     ToastUtil.showToast(this,"结束时间不能在开始时间之前！");
                 }else if(StringUtil.isEmpty(managerName)){
                     ToastUtil.showToast(this,"项目经理不为空！");

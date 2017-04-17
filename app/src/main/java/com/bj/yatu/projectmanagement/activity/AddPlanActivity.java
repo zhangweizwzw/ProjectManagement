@@ -3,6 +3,7 @@ package com.bj.yatu.projectmanagement.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
 
 public class AddPlanActivity extends BaseActivity implements View.OnClickListener {
+    private final String TAG="AddPlanActivity";
     private ImageView endtime_im,starttime_im;
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et,starttime_et;
     private Button setup;
@@ -92,8 +94,8 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                     ToastUtil.showToast(this,"请输入完成标志！");
                 }else if(StringUtil.isEmpty(starttime)){
                     ToastUtil.showToast(this,"请输入开始日期！");
-                }else if(Dateutil.compare_date(starttime,endtime)==1){
-                    ToastUtil.showToast(this,"节点结束时间不能在计划开始时间之前！");
+                }else if(Dateutil.compare_date(endtime,starttime)==1){
+                    ToastUtil.showToast(this,"节点结束时间不能在节点开始时间之前！");
                 }else if(Dateutil.compare_date(starttime,planstarttime)==1){
                     ToastUtil.showToast(this,"节点开始时间不能在计划开始时间之前！");
                 }else if(StringUtil.isEmpty(endtime)){
