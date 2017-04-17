@@ -30,7 +30,6 @@ import okhttp3.Call;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private final String TAG="LoginActivity";
     private TextView text_center;
-    private TextView tv1,tv2,tv3;
     private Button btn_reset,btn_login;
     private EditText account_et,password_et;
 
@@ -84,13 +83,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         account_et= (EditText) findViewById(R.id.account_et);
         password_et= (EditText) findViewById(R.id.password_et);
 
-        tv1= (TextView) findViewById(R.id.tv1);
-        tv2= (TextView) findViewById(R.id.tv2);
-        tv3= (TextView) findViewById(R.id.tv3);
-
-        tv1.setOnClickListener(this);
-        tv2.setOnClickListener(this);
-        tv3.setOnClickListener(this);
     }
 
     /**
@@ -166,7 +158,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         int identity= userLoginBean.getUser().getRemark();
 
                        MyApplication.identity= identity;
-                       MyApplication.account=userLoginBean.getUser().getAccount();
+                       MyApplication.account=userLoginBean.getUser().getId()+"";
                        MyApplication.username=userLoginBean.getUser().getUsername();
 
                        Intent intent=new Intent();
@@ -219,18 +211,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }else{
                     goLogin(account,password);
                 }
-                break;
-            case R.id.tv1:
-                MyApplication.identity=0;
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-            case R.id.tv2:
-                MyApplication.identity=1;
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-            case R.id.tv3:
-                MyApplication.identity=2;
-                startActivity(new Intent(this, ProjectManagerActivity.class));
                 break;
         }
     }

@@ -72,7 +72,7 @@ public class PmanagerNoFinishFragment extends Fragment{
 
                     @Override
                     public void onResponse(String response) {
-                        Log.i(TAG,"response"+response);
+                        Log.i(TAG,"response=="+response);
                         Gson gson=new Gson();
                         ProjectsBean projectsBean=gson.fromJson(response,ProjectsBean.class);
                         proList.addAll(projectsBean.getProject());

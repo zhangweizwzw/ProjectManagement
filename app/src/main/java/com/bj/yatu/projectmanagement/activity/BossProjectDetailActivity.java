@@ -125,16 +125,20 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
 
-                ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
-                            ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
-                        }else{
-                            ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
+                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size()==0){
+                    ToastUtil.showToast(BossProjectDetailActivity.this,"暂无节点！");
+                }else{
+                    ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
+                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
+                            }else{
+                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
+                            }
                         }
-                    }
-                });
+                    });
+                }
 
                 ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.managerprojectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
@@ -147,16 +151,20 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
                         holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
 
-                        ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
-                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
-                                }else{
-                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
+                        if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0){
+                            ToastUtil.showToast(BossProjectDetailActivity.this,"暂无问题");
+                        }else{
+                            ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
+                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
+                                    }else{
+                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
 
                         ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.managerprojectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions()) {
                             @Override
@@ -328,10 +336,14 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.rela2:
-                if(plans_lv.getVisibility()==View.VISIBLE){
-                    plans_lv.setVisibility(View.GONE);
+                if(projectDetailBean.getProject().getProjectplans().size()==0){
+                    ToastUtil.showToast(this,"暂无计划！");
                 }else{
-                    plans_lv.setVisibility(View.VISIBLE);
+                    if(plans_lv.getVisibility()==View.VISIBLE){
+                        plans_lv.setVisibility(View.GONE);
+                    }else{
+                        plans_lv.setVisibility(View.VISIBLE);
+                    }
                 }
                 break;
             case R.id.addplan:
