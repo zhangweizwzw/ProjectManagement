@@ -54,12 +54,24 @@ public class MyProgress extends ProgressBar{
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Rect rect = new Rect();
-        this.mPaint.getTextBounds(this.text, 0, this.text.length(), rect);
-        this.mPaint.setTextSize(30);
-        int x = (getWidth() / 2) - rect.centerX();
-        int y = (getHeight() / 2) - rect.centerY();
-        canvas.drawText(this.text, x, y, this.mPaint);
+//        Rect rect = new Rect();
+//        this.mPaint.getTextBounds(this.text, 0, this.text.length(), rect);
+//        this.mPaint.setTextSize(30);
+//        int x = (getWidth() / 2) - rect.centerX();
+//        int y = (getHeight() / 2) - rect.centerY();
+//        canvas.drawText(this.text, x, y, this.mPaint);
+
+        //居中显示
+        Paint mPaint = new Paint();
+        mPaint.setStrokeWidth(3);
+        mPaint.setTextSize(30);
+        mPaint.setColor(Color.RED);
+        mPaint.setTextAlign(Paint.Align.LEFT);
+        Rect bounds = new Rect();
+        mPaint.getTextBounds(this.text, 0, this.text.length(), bounds);
+        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
+        int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
+        canvas.drawText(this.text,getMeasuredWidth() / 2 - bounds.width() / 2, baseline, mPaint);
     }
 
     private void setText() {

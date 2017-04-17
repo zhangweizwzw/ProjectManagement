@@ -134,7 +134,6 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.more_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Log.i("aaaaaaaaa",projectBean.getId()+"");
 				Intent intent=new Intent();
 				intent.setClass(mcontext, ProjectDetailActivity.class);
 				intent.putExtra("projectid",projectBean.getId()+"");

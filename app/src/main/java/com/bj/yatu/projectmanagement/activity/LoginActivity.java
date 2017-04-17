@@ -34,16 +34,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btn_reset,btn_login;
     private EditText account_et,password_et;
 
-    // 定义一个变量，来标识是否退出
-    private static boolean isExit = false;
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case 0:
-                    isExit = false;
-                    break;
                 case 1:
                     showConectionDialog();
                     break;
@@ -239,4 +234,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
 }
