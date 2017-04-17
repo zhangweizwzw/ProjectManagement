@@ -140,8 +140,20 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间
         viewHolder.current_time.setText("当前时间："+ todayDate);//当前时间
         viewHolder.end_time.setText("预计完成时间:"+endData);//预计完成时间
-        viewHolder.plan.setText("计划："+list.get(position).getPlans());//计划
-        viewHolder.fact.setText("实际："+ list.get(position).getProject_fact());//实际
+        String mplan=list.get(position).getProject_plan();
+        if (mplan!=null){
+            viewHolder.plan.setText("计划："+mplan);//计划
+        }else {
+            viewHolder.plan.setText("计划：");//计划
+        }
+        String mfact=list.get(position).getProject_fact();
+        if (mfact!=null){
+            viewHolder.fact.setText("实际："+ mfact);//实际
+        }else{
+            viewHolder.fact.setText("实际：");//实际
+        }
+
+
         viewHolder.personcost.setText("人工："+list.get(position).getTotalpersoncost());//人工
         viewHolder.extracost.setText("费用："+list.get(position).getTotalextracost());//费用
         viewHolder.totalcost.setText("费用小计："+list.get(position).getTotalcost());//费用小计
