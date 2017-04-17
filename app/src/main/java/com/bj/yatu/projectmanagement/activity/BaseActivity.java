@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.bj.yatu.projectmanagement.common.ActivityCollector;
+import com.bj.yatu.projectmanagement.common.AndroidWorkaround;
 
 public class BaseActivity extends Activity {
 
@@ -20,6 +21,10 @@ public class BaseActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        //底部虚拟按键适配
+        if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) {
+            AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
+        }
 
     }
 

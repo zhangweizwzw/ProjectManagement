@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bj.yatu.projectmanagement.activity.BaseActivity;
 import com.bj.yatu.projectmanagement.common.ActivityCollector;
+import com.bj.yatu.projectmanagement.common.AndroidWorkaround;
 import com.bj.yatu.projectmanagement.fragment.FinishFragment;
 import com.bj.yatu.projectmanagement.fragment.NoFinishFragment;
 
@@ -63,6 +64,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragmentManager = getSupportFragmentManager();
         initView();
         setChioceItem(0);   // 初始化页面加载时显示第一个选项卡
+        //底部虚拟按键适配
+        if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) {
+            AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
+        }
     }
 
     /**
