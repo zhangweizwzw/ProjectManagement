@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,7 +131,6 @@ public class NofinishAdapter extends BaseAdapter{
      * @param convertView
      */
     private void setText(ViewHolder viewHolder, View convertView,int position) {
-
         String todayDate=Dateutil.getTodayDate();//获取当前时间
         String endData=list.get(position).getProject_end_time();
         viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
@@ -170,7 +170,8 @@ public class NofinishAdapter extends BaseAdapter{
         if (Date.valueOf(todayDate).after(Date.valueOf(endData))){
             Log.i("==比较日期大小===","超时");
 //            viewHolder.linear.setBackground(context.getResources().getColor(Color.RED));
-            viewHolder.linear.setBackgroundColor(Color.RED);
+            viewHolder.linear.setBackgroundColor(context.getResources().getColor(R.color.overtime_bg));
+            viewHolder.relative.setBackgroundColor(context.getResources().getColor(R.color.overtime_title));
         }else{
             Log.i("===比较日期大小===","没有超时");
         }
@@ -199,6 +200,7 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.personcost= (TextView) convertView.findViewById(R.id.hint_manual);//人工
         viewHolder.extracost= (TextView) convertView.findViewById(R.id.hint_coast);//费用
         viewHolder.totalcost= (TextView) convertView.findViewById(R.id.coastsubtotal);//费用小计
+        viewHolder.relative= (RelativeLayout) convertView.findViewById(R.id.hint_relative1);
     }
 
 
@@ -218,6 +220,7 @@ public class NofinishAdapter extends BaseAdapter{
         MyProgress pb;//百分比
         View hint;
         LinearLayout linear;
+        RelativeLayout relative;
     }
 
     public void changeImageVisable(View view,int position) {

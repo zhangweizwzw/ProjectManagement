@@ -65,7 +65,7 @@ public class MyProgress extends ProgressBar{
         Paint mPaint = new Paint();
         mPaint.setStrokeWidth(3);
         mPaint.setTextSize(30);
-        mPaint.setColor(Color.RED);
+        mPaint.setColor(Color.BLACK);
         mPaint.setTextAlign(Paint.Align.LEFT);
         Rect bounds = new Rect();
         mPaint.getTextBounds(this.text, 0, this.text.length(), bounds);

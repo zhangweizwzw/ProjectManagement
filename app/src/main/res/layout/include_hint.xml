@@ -7,7 +7,8 @@
         android:id="@+id/hint_relative1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/title_color">
+        android:background="@color/title_color"
+        android:layout_marginTop="1dp">
         <TextView
             android:id="@+id/hint_name"
             android:text="项目名称"
