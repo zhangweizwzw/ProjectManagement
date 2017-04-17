@@ -111,20 +111,22 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
 
-                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size()==0){
-                    ToastUtil.showToast(ProjectDetailActivity.this,"暂无节点！");
-                }else{
-                    ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+
+                ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size()==0){
+                            ToastUtil.showToast(ProjectDetailActivity.this,"暂无节点！");
+                        }else{
                             if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
                             }else{
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
                             }
                         }
-                    });
-                }
+
+                    }
+                });
 
                 //添加节点
                 ((TextView)holder.getView(R.id.addpanel)).setOnClickListener(new View.OnClickListener() {
@@ -193,20 +195,24 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                             }
                         });
 
-                        if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0){
-                            ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
-                        }else{
-                            ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
+
+                        ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0){
+                                    ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
+                                }else{
                                     if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
                                         ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
                                     }else{
                                         ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
                                     }
                                 }
-                            });
-                        }
+                            }
+                        });
+
+
+
 
                         ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.projectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions()) {
                             @Override
