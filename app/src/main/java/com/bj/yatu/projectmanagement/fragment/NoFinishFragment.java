@@ -50,7 +50,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_nofinish, container, false);
 
         initView();
-
+        initData();
         return view;
     }
 
@@ -70,7 +70,6 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         }else{
             addproject.setVisibility(View.VISIBLE);
         }
-        setBean();
 
 //       点击展开隐藏内容
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,7 +83,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
     /**
      * 设置内容
      */
-    private void setBean() {
+    private void initData() {
         OkHttpUtils.get()
                 .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+MyApplication.account)
                 .build().execute(new StringCallback() {
@@ -126,10 +125,22 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 4 && resultCode == 4) {
+
+            String isReflash=data.getStringExtra("isReflash");
+            if("1".equals(isReflash)){
+                initData();
+            }
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.addproject:
-                startActivity(new Intent(getActivity(), AddProjectActivity.class));
+                startActivityForResult(new Intent(getActivity(), AddProjectActivity.class),4);
                 break;
         }
     }

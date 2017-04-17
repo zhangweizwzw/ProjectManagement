@@ -43,7 +43,7 @@ public class FinishFragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_finish, container, false);
 
         initView();
-
+        initData();
         return view;
     }
 
@@ -51,7 +51,6 @@ public class FinishFragment extends Fragment{
         text_center= (TextView) view.findViewById(R.id.text_center);
         text_center.setText("已完成");
         listView= (ListView) view.findViewById(R.id.finish_listview);
-        setBean();
 
 //       点击展开隐藏内容
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +61,7 @@ public class FinishFragment extends Fragment{
         });
     }
 
-    private void setBean() {
+    private void initData() {
         OkHttpUtils.get()
                 .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+ MyApplication.account)
                 .build().execute(new StringCallback() {

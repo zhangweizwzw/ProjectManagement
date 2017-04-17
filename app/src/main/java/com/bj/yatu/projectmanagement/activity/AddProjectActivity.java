@@ -206,7 +206,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.image_left:
-               finish();
+                goBack("0");
                 break;
             case R.id.add_panel:
                 //项目开始时间
@@ -235,8 +235,6 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                     intent.putExtra("planpro",planpro);
                     startActivityForResult(intent,1);
                 }
-
-
 //                startActivityForResult(new Intent(this,AddPanelActivity.class),1);
                 break;
             case R.id.starttime_im:
@@ -252,7 +250,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 showDialogDate(2);
                 break;
             case R.id.cancel_button:
-                finish();
+                goBack("0");
                 break;
             case R.id.create_btn:
                 String  proName=pro_name.getText().toString();
@@ -319,10 +317,19 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                         StatusBean statusBean=gson.fromJson(response, StatusBean.class);
                         if(statusBean.isStatus()){
                             ToastUtil.showToast(AddProjectActivity.this,"添加成功！");
+
+                            goBack("1");
                         }
                     }
                 });
 
+    }
+
+    private void goBack(String isReflash) {
+        Intent intent=new Intent();
+        intent.putExtra("isReflash",isReflash);
+        setResult(4,intent);
+        finish();
     }
 
     public void showDialogDate(final int type) {
