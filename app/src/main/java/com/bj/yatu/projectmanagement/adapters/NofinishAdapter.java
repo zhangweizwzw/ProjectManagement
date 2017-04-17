@@ -136,27 +136,17 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
         viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
         viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
-        viewHolder.fzr.setText("项目经理:"+list.get(position).getProject_fzr());//项目经理
-        viewHolder.begin_time.setText("起始时间："+list.get(position).getProject_begin_time());//起始时间
-        viewHolder.current_time.setText("当前时间："+ todayDate);//当前时间
-        viewHolder.end_time.setText("预计完成时间:"+endData);//预计完成时间
+        viewHolder.fzr.setText(list.get(position).getProject_fzr());//项目经理
+        viewHolder.begin_time.setText(list.get(position).getProject_begin_time());//起始时间
+        viewHolder.current_time.setText( todayDate);//当前时间
+        viewHolder.end_time.setText(endData);//预计完成时间
         String mplan=list.get(position).getProject_plan();
-        if (mplan!=null){
-            viewHolder.plan.setText("计划："+mplan);//计划
-        }else {
-            viewHolder.plan.setText("计划：");//计划
-        }
+        viewHolder.plan.setText(mplan);//计划
         String mfact=list.get(position).getProject_fact();
-        if (mfact!=null){
-            viewHolder.fact.setText("实际："+ mfact);//实际
-        }else{
-            viewHolder.fact.setText("实际：");//实际
-        }
-
-
-        viewHolder.personcost.setText("人工："+list.get(position).getTotalpersoncost());//人工
-        viewHolder.extracost.setText("费用："+list.get(position).getTotalextracost());//费用
-        viewHolder.totalcost.setText("费用小计："+list.get(position).getTotalcost());//费用小计
+        viewHolder.fact.setText(mfact);//实际
+        viewHolder.personcost.setText(""+list.get(position).getTotalpersoncost());//人工
+        viewHolder.extracost.setText(""+list.get(position).getTotalextracost());//费用
+        viewHolder.totalcost.setText(""+list.get(position).getTotalcost());//费用小计
         //当前问题可能为空
         String quesrion=list.get(position).getQuestions();
         if (quesrion!=null){

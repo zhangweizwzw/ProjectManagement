@@ -29,71 +29,191 @@
             android:layout_marginRight="8dp"
             />
     </RelativeLayout>
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/hint_lin1"
+        android:layout_below="@+id/hint_relative1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hint_relative1">
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv1"
+                android:text="项目经理："
+                style="@style/MyTextStyle"/>
             <TextView
                 android:id="@+id/hint_pm"
-                android:text="项目经理：XXX"
-                style="@style/HintTextStyle"/>
+                android:layout_toRightOf="@+id/hint_tv1"
+                android:layout_marginLeft="2dp"
+                style="@style/MyTextStyle"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv2"
+                android:text="起始时间："
+                style="@style/MyTextStyle"/>
             <TextView
                 android:id="@+id/hinttime"
-                android:text="起始时间：2010-01-01"
-                android:layout_marginLeft="170dp"
+                android:layout_toRightOf="@+id/hint_tv2"
+                android:layout_marginLeft="2dp"
                 style="@style/MyTextStyle"/>
-
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/hint_lin2"
+        android:layout_below="@+id/hint_lin1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv3"
+                android:text="当前时间："
+                style="@style/MyTextStyle" />
             <TextView
                 android:id="@+id/hint_currenttime"
-                android:text="当前时间：2010-01-01"
-                style="@style/HintTextStyle"
-                android:layout_below="@+id/hint_pm"/>
+                style="@style/MyTextStyle"
+                android:layout_toRightOf="@+id/hint_tv3"
+                android:layout_marginLeft="2dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv4"
+                android:text="预计完成时间："
+                style="@style/MyTextStyle"/>
             <TextView
                 android:id="@+id/predicttime"
-                android:text="预计完成时间：2010-02-02"
-                android:layout_below="@+id/hinttime"
-                android:layout_alignLeft="@+id/hinttime"
+                android:layout_toRightOf="@+id/hint_tv4"
+                android:layout_marginLeft="2dp"
                 style="@style/MyTextStyle"/>
-
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/hint_lin3"
+        android:layout_below="@+id/hint_lin2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv5"
+                style="@style/MyTextStyle"
+                android:text="计划：" />
             <TextView
                 android:id="@+id/hint_plan"
-                style="@style/HintTextStyle"
-                android:text="计划：XXXXX"
-                android:layout_below="@+id/hint_currenttime"/>
+                style="@style/MyTextStyle"
+                android:layout_toRightOf="@+id/hint_tv5"
+                android:layout_marginLeft="2dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv6"
+                style="@style/MyTextStyle"
+                android:text="实际：" />
             <TextView
                 android:id="@+id/hint_actual"
                 style="@style/MyTextStyle"
-                android:text="实际：XXXX"
-                android:layout_below="@+id/predicttime"
-                android:layout_alignLeft="@+id/predicttime"/>
-
+                android:layout_toRightOf="@+id/hint_tv6"
+                android:layout_marginLeft="2dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/hint_lin4"
+        android:layout_below="@+id/hint_lin3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+            android:id="@+id/hint_tv7"
+            style="@style/MyTextStyle"
+            android:text="人工：" />
             <TextView
                 android:id="@+id/hint_manual"
-                style="@style/HintTextStyle"
-                android:text="人工：123424"
-                android:layout_below="@+id/hint_plan"/>
+                style="@style/MyTextStyle"
+                android:layout_toRightOf="@+id/hint_tv7"
+                android:layout_marginLeft="2dp"/>
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv8"
+                style="@style/MyTextStyle"
+                android:text="费用：" />
             <TextView
                 android:id="@+id/hint_coast"
                 style="@style/MyTextStyle"
-                android:text="费用：24254"
-                android:layout_below="@+id/hint_plan"
-                android:layout_marginLeft="130dp"/>
+                android:layout_toRightOf="@+id/hint_tv8"
+                android:layout_marginLeft="2dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/hint_tv9"
+                style="@style/MyTextStyle"
+                android:text="费用小计：" />
             <TextView
                 android:id="@+id/coastsubtotal"
                 style="@style/MyTextStyle"
                 android:text="费用小计：453"
-                android:layout_below="@id/hint_plan"
-                android:layout_marginLeft="230dp"/>
-
-
+                android:layout_toRightOf="@+id/hint_tv9"
+                android:layout_marginLeft="2dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <!---->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hint_lin4"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
         <TextView
             android:id="@+id/hint_curentproblem"
-            style="@style/HintTextStyle"
+            style="@style/MyTextStyle"
             android:text="当前问题：XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:layout_below="@+id/hint_manual"/>
+            android:singleLine="true" />
     </RelativeLayout>
 
 </RelativeLayout>
