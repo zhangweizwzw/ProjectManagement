@@ -24,6 +24,7 @@ import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.ManagersBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.StatusBean;
+import com.bj.yatu.projectmanagement.utils.Dateutil;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
@@ -263,9 +264,11 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                     ToastUtil.showToast(this,"项目名称不为空！");
                 }else if(StringUtil.isEmpty(startTime)){
                     ToastUtil.showToast(this,"起始时间不为空！");
-                }if(StringUtil.isEmpty(predictTime)){
+                }else if(StringUtil.isEmpty(predictTime)){
                     ToastUtil.showToast(this,"预计完成时间不为空！");
-                }if(StringUtil.isEmpty(managerName)){
+                }else if(Dateutil.compare_date(startTime,predictTime)==1){
+                    ToastUtil.showToast(this,"结束时间不能在开始时间之前！");
+                }else if(StringUtil.isEmpty(managerName)){
                     ToastUtil.showToast(this,"项目经理不为空！");
                 }else{
                     //获取项目经理id
@@ -275,18 +278,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                             managerid=managersBean.getManager().get(i).getId()+"";
                         }
                     }
-
-
-//                    //计划相加不能大于100%
-//                    Double planpro=0.0;
-//                    for(int i=0;i<panelList.size();i++){
-//                        planpro=planpro+panelList.get(i).getPlan_proportion();
-//                    }
-//                    if(planpro<100){
-//                        ToastUtil.showToast(this,"计划占比相加不能大于100%！");
-//                    }else{
-                        goCreate(proName,startTime,predictTime,managerName,managerid);
-//                    }
+                    goCreate(proName,startTime,predictTime,managerName,managerid);
                 }
                 break;
         }
@@ -305,7 +297,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
         Gson gson=new Gson();
         String jsonstr=gson.toJson(addPanelBean);
-        Log.i(TAG,"aaaaaaaaaaaaa=="+jsonstr);
+        Log.i(TAG,"jsonstr=="+jsonstr);
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body=RequestBody.create(JSON,jsonstr);
@@ -322,7 +314,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
                     @Override
                     public void onResponse(String response) {
-                        Log.i(TAG,"gggggggggg"+"<-->"+response);
+                        Log.i(TAG,"response"+"<-->"+response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response, StatusBean.class);
                         if(statusBean.isStatus()){

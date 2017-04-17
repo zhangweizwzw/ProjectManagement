@@ -86,7 +86,7 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
      */
     private void setBean() {
         OkHttpUtils.get()
-                .url(RequstUrls.REQUEST_URL+"findprojectlist?project_sqrid=1")
+                .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+MyApplication.account)
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {

@@ -18,6 +18,7 @@ import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
+import com.bj.yatu.projectmanagement.utils.StringUtil;
 
 /***
  * @author Administrator
@@ -76,6 +77,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.question_tv = (TextView) convertView.findViewById(R.id.question_tv);
 		holder.projectrate_pro= (MyProgress) convertView.findViewById(R.id.projectrate_pro);
 		holder.largerela= (RelativeLayout) convertView.findViewById(R.id.largerela);
+		holder.rela5= (RelativeLayout) convertView.findViewById(R.id.rela5);
 
 		convertView.setTag(holder);
 //		} else {
@@ -106,7 +108,12 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.people_tv.setText(projectPeople);
 		holder.cost_tv.setText(projectmoney);
 		holder.costmin_tv.setText(projectMinmoney);
-		holder.question_tv.setText(projectproblem);
+
+		if(StringUtil.isEmpty(projectproblem)){
+			holder.rela5.setVisibility(View.GONE);
+		}else{
+			holder.question_tv.setText(projectproblem);
+		}
 
 		holder.question_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -143,7 +150,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		private TextView projectname_tv,projectManager_tv,starttitme_tv,nowtime_tv,expectfinishtime_tv,expect_tv;
 		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv,question_tv;
 		private MyProgress projectrate_pro;
-		private RelativeLayout largerela;
+		private RelativeLayout largerela,rela5;
 	}
 
 }

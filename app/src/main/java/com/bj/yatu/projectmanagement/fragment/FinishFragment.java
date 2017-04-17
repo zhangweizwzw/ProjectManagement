@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.FinishAdapter;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
@@ -63,7 +64,7 @@ public class FinishFragment extends Fragment{
 
     private void setBean() {
         OkHttpUtils.get()
-                .url(RequstUrls.REQUEST_URL+"findprojectlist?project_sqrid=1")
+                .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+ MyApplication.account)
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {

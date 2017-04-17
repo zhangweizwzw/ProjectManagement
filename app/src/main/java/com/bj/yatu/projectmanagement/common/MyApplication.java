@@ -13,6 +13,10 @@ public class MyApplication extends Application{
 
     public static int identity=1; //用户身份   0/1/2   领导/生产主管/项目经理
 
+    public static boolean isFirstMain=true; //是否第一次进入项目
+
+
+
 
     @Override
     public void onCreate() {

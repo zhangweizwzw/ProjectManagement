@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.adapters.ProjectListAdapter;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
@@ -58,7 +59,7 @@ public class PmanagerFinishFragment extends Fragment{
     private void initData() {
         OkHttpUtils
                 .post()
-                .url(RequstUrls.REQUEST_URL+"findprojectlist?project_sqrid=1")
+                .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+ MyApplication.account)
                 .build()
                 .execute(new StringCallback() {
                     @Override
