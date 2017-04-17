@@ -77,10 +77,10 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                 showDialogDate(2);
                 break;
             case R.id.starttime_et:
-                showDialogDate(1);
+                showDialogDate(2);
                 break;
             case R.id.endtime_et:
-                showDialogDate(2);
+                showDialogDate(1);
                 break;
             case R.id.setup:
                 String panelname=panelname_et.getText().toString().trim();
