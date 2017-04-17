@@ -18,6 +18,7 @@ import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
 import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.utils.ProcessUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 
 import com.google.gson.Gson;
@@ -84,16 +85,19 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
      * 设置内容
      */
     private void initData() {
+        ProcessUtil.showProcess(getActivity(),"正在查询，请稍后...");
         OkHttpUtils.get()
                 .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+MyApplication.account)
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+                ProcessUtil.dismiss();
                 ToastUtil.showToast(getActivity(),"请求失败！请检查网络设置");
             }
 
             @Override
             public void onResponse(String response) {
+                ProcessUtil.dismiss();
                 Log.i("===NoFinishRespnse====",response);
                 Gson gson=new Gson();
                 ProjectsBean mbean=gson.fromJson(response,ProjectsBean.class);

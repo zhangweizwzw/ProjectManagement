@@ -25,6 +25,7 @@ import com.bj.yatu.projectmanagement.model.ManagersBean;
 import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
+import com.bj.yatu.projectmanagement.utils.ProcessUtil;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.DatePickerDialog;
@@ -299,6 +300,9 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body=RequestBody.create(JSON,jsonstr);
+
+
+        ProcessUtil.showProcess(this,"正在添加，请稍后...");
         OkHttpUtils
                 .put()
                 .url(RequstUrls.REQUEST_URL+"saveProject")
@@ -307,11 +311,13 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        ProcessUtil.dismiss();
                         ToastUtil.showToast(AddProjectActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response) {
+                        ProcessUtil.dismiss();
                         Log.i(TAG,"response"+"<-->"+response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response, StatusBean.class);

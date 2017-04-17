@@ -16,6 +16,7 @@ import com.bj.yatu.projectmanagement.model.AddPanelBean;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
 import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
+import com.bj.yatu.projectmanagement.utils.ProcessUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.NestFullListView;
 import com.bj.yatu.projectmanagement.widget.NestFullListViewAdapter;
@@ -85,6 +86,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     }
 
     private void initData() {
+        ProcessUtil.showProcess(this,"正在查询，请稍后...");
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"findoneproject?id="+projectid)
@@ -92,11 +94,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        ProcessUtil.dismiss();
                         ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response) {
+                        ProcessUtil.dismiss();
                         Gson gson=new Gson();
                         projectDetailBean=gson.fromJson(response, ProjectDetailBean.class);
                         if(projectDetailBean.isStatus()){
@@ -254,6 +258,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     }
 
     private void goQusetion(final String content) {
+        ProcessUtil.showProcess(this,"正在回复，请稍后...");
         Log.i(TAG,"questionid=>"+questionid);
         OkHttpUtils
                 .post()
@@ -264,11 +269,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        ProcessUtil.dismiss();
                         ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response){
+                        ProcessUtil.dismiss();
                         Log.i(TAG,"fffffff=="+response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);
@@ -286,6 +293,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     }
 
     private void goCreate(final String panelname,final String panelstarttime,final String endtime,final String pancelper,final String peoplecost,final String extras,final String finishsign) {
+        ProcessUtil.showProcess(this,"正在添加，请稍后...");
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"addPlan")
@@ -301,11 +309,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        ProcessUtil.dismiss();
                         ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response){
+                        ProcessUtil.dismiss();
                         Log.i(TAG,response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);

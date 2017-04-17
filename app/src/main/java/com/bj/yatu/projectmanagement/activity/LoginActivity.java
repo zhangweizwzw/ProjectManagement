@@ -18,6 +18,7 @@ import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.UserLoginBean;
 import com.bj.yatu.projectmanagement.utils.Netutil;
+import com.bj.yatu.projectmanagement.utils.ProcessUtil;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -136,6 +137,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private void goLogin(String account,String password) {
+        ProcessUtil.showProcess(this,"正在登录，请稍后...");
         OkHttpUtils
             .post()
             .url(RequstUrls.REQUEST_URL+"verifyuser")
@@ -145,11 +147,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             .execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e) {
+                    ProcessUtil.dismiss();
                     ToastUtil.showToast(LoginActivity.this,"请求失败！请检查网络设置");
                 }
 
                 @Override
                 public void onResponse(String response) {
+                    ProcessUtil.dismiss();
                     Log.i(TAG,response);
                     Gson gson=new Gson();
                     UserLoginBean userLoginBean = gson.fromJson(response, UserLoginBean.class);

@@ -15,6 +15,7 @@ import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
+import com.bj.yatu.projectmanagement.utils.ProcessUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.bj.yatu.projectmanagement.widget.NestFullListView;
 import com.bj.yatu.projectmanagement.widget.NestFullListViewAdapter;
@@ -60,6 +61,7 @@ public class PmanagerNoFinishFragment extends Fragment{
     }
 
     private void initData() {
+        ProcessUtil.showProcess(getActivity(),"正在查询，请稍后...");
         OkHttpUtils
                 .post()
                 .url(RequstUrls.REQUEST_URL+"findprojectlist?id="+ MyApplication.account)
@@ -67,11 +69,13 @@ public class PmanagerNoFinishFragment extends Fragment{
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        ProcessUtil.dismiss();
                         ToastUtil.showToast(getActivity(),"请求失败！请检查网络设置");
                     }
 
                     @Override
                     public void onResponse(String response) {
+                        ProcessUtil.dismiss();
                         Log.i(TAG,"response=="+response);
                         Gson gson=new Gson();
                         ProjectsBean projectsBean=gson.fromJson(response,ProjectsBean.class);
