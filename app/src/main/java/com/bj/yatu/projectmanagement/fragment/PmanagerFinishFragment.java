@@ -74,13 +74,10 @@ public class PmanagerFinishFragment extends Fragment{
                         ProjectsBean projectsBean=gson.fromJson(response,ProjectsBean.class);
                         profinishList.addAll(projectsBean.getProject());
                         if(projectsBean.isStatus()){
-                            Log.i(TAG,"cccccccccc==>"+profinishList.size());
+                            Log.i(TAG,"profinishList.size==>"+profinishList.size());
 
                             for (int i=0;i<profinishList.size();i++){
-                                Log.i(TAG,"bbbbbbb==>"+profinishList.get(i).getTotalpercent()+"<-->"+profinishList.get(i).getProject_fzr());
                                 if(profinishList.get(i).getTotalpercent()==100){
-                                    Log.i(TAG,"sssssss==>"+profinishList.get(i).getTotalpercent()+"<-->"+profinishList.get(i).getProject_fzr());
-//                                    profinishList.remove(profinishList.get(i));
                                     finishfList.add(profinishList.get(i));
                                 }
                             }

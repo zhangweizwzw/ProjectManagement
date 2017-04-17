@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
+import com.bj.yatu.projectmanagement.model.ResponsePanelBean;
 import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
@@ -33,7 +34,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     private ImageView image_left;
     private RelativeLayout rela2;
     private  NestFullListView plans_lv;
-    private ProjectDetailBean projectDetailBean=new ProjectDetailBean();
+    private ProjectDetailBean projectDetailBean;
     boolean flag=true;
     private String planid;//计划id
     private String nodeid;//节点id
@@ -70,6 +71,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
 
     //查询项目详情
     private void initData() {
+        projectDetailBean=new ProjectDetailBean();
         Log.i(TAG,"id="+projectid);
         OkHttpUtils
                 .post()
@@ -171,6 +173,8 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
+                ((NestFullListView)holder.getView(R.id.panel_lv)).updateUI();
+
                 ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.projectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
                     public void onBind(final int pos2, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
@@ -199,7 +203,10 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0){
+                                Log.i(TAG,"pos1="+pos1);
+                                Log.i(TAG,"pos2="+pos2);
+
+                                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0 ){
                                     ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
                                 }else{
                                     if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
@@ -302,7 +309,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
 
                     @Override
                     public void onResponse(String response){
-                        Log.i(TAG,"ggggggggggg=="+response);
+                        Log.i(TAG,"创建问题response=="+response);
                         Gson gson=new Gson();
                         StatusBean statusBean=gson.fromJson(response,StatusBean.class);
                         if(statusBean.isStatus()){
@@ -352,13 +359,14 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
 
                     @Override
                     public void onResponse(String response){
-                        Log.i(TAG,"bbbbbbbb=="+response);
+                        Log.i(TAG,"添加节点response=="+response);
                         Gson gson=new Gson();
-                        StatusBean statusBean=gson.fromJson(response,StatusBean.class);
-                        if(statusBean.isStatus()){
+                        ResponsePanelBean responsePanelBean=gson.fromJson(response,ResponsePanelBean.class);
+                        if(responsePanelBean.isStatus()){
                             ToastUtil.showToast(ProjectDetailActivity.this,"创建节点成功！");
 
                             ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nBean=new ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean();
+                            nBean.setId(responsePanelBean.getId());
                             nBean.setNode_name(panelname);
                             nBean.setNode_proportion(Double.valueOf(pancelper).doubleValue());
                             nBean.setNode_extras_cost(Double.valueOf(extras).doubleValue());
@@ -366,6 +374,9 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                             nBean.setNode_complete_flat(finishsign);
                             nBean.setNode_end_time(endtime);
                             nBean.setNode_begin_time(panelstarttime);
+
+                            List<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean> qlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
+                            nBean.setQuestions(qlist);
 
                             projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().add(nBean);
                             plans_lv.updateUI();
