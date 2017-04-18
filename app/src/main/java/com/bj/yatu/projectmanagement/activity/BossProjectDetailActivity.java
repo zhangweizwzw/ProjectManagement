@@ -40,7 +40,8 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     private ProjectDetailBean projectDetailBean=new ProjectDetailBean();
     private List<AddPanelBean.ProjectplansBean> panelList=new ArrayList<AddPanelBean.ProjectplansBean>();
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
-    boolean flag=true;
+    boolean flaga=true;//问题
+    boolean flagb=true;//答复
     private String questionid;//问题id
     private String projectid;//项目id
     private int planpoistion=0;//问题poistion
@@ -200,15 +201,30 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                                 ((TextView)holder.getView(R.id.question_tv)).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        if (flag){
-                                            flag=false;
+                                        if (flaga){
+                                            flaga=false;
                                             ((TextView)holder.getView(R.id.question_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flag);
+                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
 
                                         }else {
-                                            flag=true;
+                                            flaga=true;
                                             ((TextView)holder.getView(R.id.question_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flag);
+                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
+                                        }
+                                    }
+                                });
+                                ((TextView)holder.getView(R.id.answerquestion_tv)).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if (flagb){
+                                            flagb=false;
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(null);//文字展开
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
+
+                                        }else {
+                                            flagb=true;
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
                                         }
                                     }
                                 });
@@ -331,6 +347,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                             pBean.setPlan_labor_cost(Double.valueOf(peoplecost).doubleValue());
                             pBean.setPlan_extras_cost(Double.valueOf(extras).doubleValue());
                             pBean.setPlan_complete_flat(finishsign);
+
+                            List<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean> nList=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>();
+                            pBean.setNodes(nList);
 
                             projectDetailBean.getProject().getProjectplans().add(pBean);
                             plans_lv.updateUI();

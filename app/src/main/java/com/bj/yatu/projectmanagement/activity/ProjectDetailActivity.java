@@ -36,7 +36,8 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     private RelativeLayout rela2;
     private  NestFullListView plans_lv;
     private ProjectDetailBean projectDetailBean;
-    boolean flag=true;
+    boolean flaga=true;//问题
+    boolean flagb=true;//答复
     private String planid;//计划id
     private String nodeid;//节点id
     private String projectid="";//项目id
@@ -236,15 +237,30 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                                 ((TextView)holder.getView(R.id.question_tv)).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        if (flag){
-                                            flag=false;
+                                        if (flaga){
+                                            flaga=false;
                                             ((TextView)holder.getView(R.id.question_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flag);
+                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
 
                                         }else {
-                                            flag=true;
+                                            flaga=true;
                                             ((TextView)holder.getView(R.id.question_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flag);
+                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
+                                        }
+                                    }
+                                });
+                                ((TextView)holder.getView(R.id.answerquestion_tv)).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if (flagb){
+                                            flagb=false;
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(null);//文字展开
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
+
+                                        }else {
+                                            flagb=true;
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
+                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
                                         }
                                     }
                                 });
