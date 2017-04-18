@@ -46,6 +46,7 @@
                     android:layout_toRightOf="@+id/text_name"
                     android:background="@drawable/edittext"
                     android:paddingLeft="2dp"
+                    android:maxLength="15"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 

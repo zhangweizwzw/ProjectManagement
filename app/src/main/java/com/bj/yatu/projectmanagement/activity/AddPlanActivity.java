@@ -86,7 +86,12 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                 String extras=extras_et.getText().toString().trim();
                 String starttime=starttime_et.getText().toString().trim();
                 //节点总占比
-                Double dou=prodouble+Double.valueOf(pancelper).doubleValue();
+                Double dou=0.0;
+                if (pancelper.equals("")){
+                    dou=0.0;
+                }else{
+                    dou=prodouble+Double.valueOf(pancelper).doubleValue();
+                }
 
                 if(StringUtil.isEmpty(panelname)){
                     ToastUtil.showToast(this,"请输入节点名称！");
@@ -108,7 +113,9 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                     ToastUtil.showToast(this,"请输入人工成本！");
                 }else if(StringUtil.isEmpty(extras)){
                     ToastUtil.showToast(this,"请输入杂费！");
-                }else{
+                }else if (Double.valueOf(pancelper).doubleValue()==0.0){
+                    ToastUtil.showToast(this,"占比不能为零");
+                } else{
                     goSetup(panelname,finishsign,starttime,endtime,pancelper,peoplecost,extras);
                 }
                 break;

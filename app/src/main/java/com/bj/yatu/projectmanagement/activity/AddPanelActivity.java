@@ -94,7 +94,8 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                 Double costa=0.0;
                 if("".equals(pancelper)){
                     costa=0.0;
-                }else{
+                }
+                else{
                     costa=Double.valueOf(pancelper).doubleValue();
                 }
 
@@ -116,7 +117,9 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                     ToastUtil.showToast(this,"请输入计划占比！");
                 }else if(Double.valueOf(pancelper).doubleValue()>100){//节点占比小于等于100%
                     ToastUtil.showToast(this,"计划占比小于100%！");
-                }else if(StringUtil.isEmpty(peoplecost)){
+                }else if (Double.valueOf(pancelper).doubleValue()==0.0){
+                    ToastUtil.showToast(this,"占比不能为零");
+                } else if(StringUtil.isEmpty(peoplecost)){
                     ToastUtil.showToast(this,"请输入人工成本！");
                 }else if(StringUtil.isEmpty(extras)){
                     ToastUtil.showToast(this,"请输入杂费！");

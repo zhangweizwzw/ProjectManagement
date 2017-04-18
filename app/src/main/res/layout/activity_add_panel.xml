@@ -41,7 +41,8 @@
                 android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
+                android:textSize="@dimen/normal_textsize"
+                android:maxLength="15"/>
 
         </RelativeLayout>
 
@@ -73,7 +74,8 @@
                 android:background="@drawable/edittext"
                 android:paddingLeft="2dp"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
+                android:textSize="@dimen/normal_textsize"
+                android:maxLength="15"/>
 
         </RelativeLayout>
 
