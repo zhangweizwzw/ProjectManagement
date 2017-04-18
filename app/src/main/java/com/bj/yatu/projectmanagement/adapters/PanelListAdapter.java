@@ -52,7 +52,7 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView panelname_et,finishsign_et,endtime_et,pancelper_et,peoplecost_et,extras_et,panelstarttime_et;
-        private Button delete_bt;
+        private TextView delete_bt;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,7 +64,7 @@ public class PanelListAdapter extends RecyclerView.Adapter<PanelListAdapter.View
             extras_et = (TextView) itemView.findViewById(R.id.extras_et);
             panelstarttime_et = (TextView) itemView.findViewById(R.id.panelstarttime_et);
 
-            delete_bt= (Button) itemView.findViewById(R.id.delete_bt);
+            delete_bt= (TextView) itemView.findViewById(R.id.delete_bt);
         }
     }
 

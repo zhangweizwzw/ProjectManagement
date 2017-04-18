@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -20,7 +21,7 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
     private final String TAG="AddPanelActivity";
     private ImageView endtime_im,starttime_im;
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et,starttime_et;
-    private Button setup;
+    private TextView setup;
     private RelativeLayout largerela,smallrela;
     private String prostarttime="";//项目开始时间
     private String firstplanendtime="";//上一个计划结束时间
@@ -57,7 +58,7 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
         pancelper_et= (EditText) findViewById(R.id.pancelper_et);//节点占比
         peoplecost_et= (EditText) findViewById(R.id.peoplecost_et);//人工成本
         extras_et= (EditText) findViewById(R.id.extras_et);//杂费
-        setup= (Button) findViewById(R.id.setup);
+        setup= (TextView) findViewById(R.id.setup);
         setup.setOnClickListener(this);
         //点击空白部分关掉activity
         largerela= (RelativeLayout) findViewById(R.id.largerela);

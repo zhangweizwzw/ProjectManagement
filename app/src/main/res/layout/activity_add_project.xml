@@ -160,7 +160,7 @@
                     android:layout_toRightOf="@+id/manager_text"
                     android:textSize="12sp"
                     app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="350dp" />
+                    app:ms_dropdown_max_height="350dp"/>
 
             </RelativeLayout>
 
@@ -216,22 +216,24 @@
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
-            <Button android:id="@+id/cancel_button"
+            <TextView android:id="@+id/cancel_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_red"
+                android:background="@drawable/jq_button"
                 android:text="@string/canel"
-                android:textColor="@color/white" />
+                android:gravity="center"
+                android:textColor="@color/text_color" />
 
-            <Button android:id="@+id/create_btn"
+            <TextView android:id="@+id/create_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_theme"
+                android:background="@drawable/jq_button"
                 android:text="@string/setup"
-                android:textColor="@color/white" />
+                android:gravity="center"
+                android:textColor="@color/text_color" />
         </LinearLayout>
     </RelativeLayout>
 

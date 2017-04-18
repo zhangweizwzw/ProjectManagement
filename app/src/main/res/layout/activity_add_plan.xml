@@ -289,16 +289,17 @@
 
         </RelativeLayout>
 
-        <Button
+        <TextView
             android:id="@+id/setup"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/rela5"
             android:layout_margin="10dp"
-            android:background="@drawable/button_theme"
+            android:background="@drawable/jq_button"
             android:text="@string/setup"
-            android:textColor="@color/white"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>

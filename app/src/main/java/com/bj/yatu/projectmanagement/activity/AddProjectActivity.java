@@ -1,5 +1,6 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +61,7 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
     private RecyclerView panel_rv;
     private List<AddPanelBean.ProjectplansBean> panelList=new ArrayList<AddPanelBean.ProjectplansBean>();
     private PanelListAdapter panelListAdapter;
-    private Button cancel_button,create_btn;
+    private TextView cancel_button,create_btn;
     private List<String> mlist = new ArrayList<String>();
     private ManagersBean managersBean;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
@@ -121,6 +124,16 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         start_time_et= (EditText) findViewById(R.id.start_time_et);//起始时间
         predicttime_et= (EditText) findViewById(R.id.predicttime_et);//预计完成时间
         pro_name= (EditText) findViewById(R.id.pro_name);//项目名称
+        pro_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    InputMethodManager imm = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(pro_name.getWindowToken(), 0);
+                }
+            }
+        });
 
         start_time_et.setOnClickListener(this);
         start_time_et.setInputType(InputType.TYPE_NULL);
@@ -139,8 +152,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         //项目经理下拉框
         manager= (MaterialSpinner) findViewById(R.id.manager);
 
-        cancel_button= (Button) findViewById(R.id.cancel_button);
-        create_btn= (Button) findViewById(R.id.create_btn);
+        cancel_button= (TextView) findViewById(R.id.cancel_button);
+        create_btn= (TextView) findViewById(R.id.create_btn);
         cancel_button.setOnClickListener(this);
         create_btn.setOnClickListener(this);
     }

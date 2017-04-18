@@ -113,7 +113,7 @@ public class ProjectManagerActivity extends FragmentActivity implements View.OnC
 
         switch (index) {
             case 0:
-                nofinish_layout.setBackgroundColor(getResources().getColor(R.color.table_color));
+                nofinish_layout.setBackgroundColor(getResources().getColor(R.color.tabselect_color));
                 // 如果fragment为空，则创建一个并添加到界面上
                 if (pmanagerNoFinishFragment == null) {
                     pmanagerNoFinishFragment = new PmanagerNoFinishFragment();
@@ -124,7 +124,7 @@ public class ProjectManagerActivity extends FragmentActivity implements View.OnC
                 }
                 break;
             case 1:
-                finish_layout.setBackgroundColor(getResources().getColor(R.color.table_color));
+                finish_layout.setBackgroundColor(getResources().getColor(R.color.tabselect_color));
                 if (pmanagerFinishFragment == null) {
                     pmanagerFinishFragment = new PmanagerFinishFragment();
                     fragmentTransaction.add(R.id.frameLayout, pmanagerFinishFragment);

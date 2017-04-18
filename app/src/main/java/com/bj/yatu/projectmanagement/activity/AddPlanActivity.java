@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -20,7 +21,7 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
     private final String TAG="AddPlanActivity";
     private ImageView endtime_im,starttime_im;
     private EditText endtime_et,panelname_et,finishsign_et,pancelper_et,peoplecost_et,extras_et,starttime_et;
-    private Button setup;
+    private TextView setup;
     private RelativeLayout largerela,smallrela;
     private String planstarttime;//计划开始时间
     private Double prodouble;//计划中的节点总占比
@@ -53,7 +54,7 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
         pancelper_et= (EditText) findViewById(R.id.pancelper_et);//节点占比
         peoplecost_et= (EditText) findViewById(R.id.peoplecost_et);//人工成本
         extras_et= (EditText) findViewById(R.id.extras_et);//杂费
-        setup= (Button) findViewById(R.id.setup);
+        setup= (TextView) findViewById(R.id.setup);
         setup.setOnClickListener(this);
         //点击空白部分关掉activity
         largerela= (RelativeLayout) findViewById(R.id.largerela);

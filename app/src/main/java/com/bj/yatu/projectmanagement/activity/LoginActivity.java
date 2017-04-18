@@ -31,7 +31,7 @@ import okhttp3.Call;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private final String TAG="LoginActivity";
     private TextView text_center;
-    private Button btn_reset,btn_login;
+    private TextView btn_reset,btn_login;
     private EditText account_et,password_et;
 
     Handler mHandler = new Handler() {
@@ -76,8 +76,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         text_center= (TextView) findViewById(R.id.text_center);
         text_center.setText("登录");
 
-        btn_reset= (Button) findViewById(R.id.btn_reset);
-        btn_login= (Button) findViewById(R.id.btn_login);
+        btn_reset= (TextView) findViewById(R.id.btn_reset);
+        btn_login= (TextView) findViewById(R.id.btn_login);
         btn_reset.setOnClickListener(this);
         btn_login.setOnClickListener(this);
 

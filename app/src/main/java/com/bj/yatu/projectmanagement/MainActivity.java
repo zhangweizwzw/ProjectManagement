@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         switch (index) {
             case 0:
-                nofinish_layout.setBackgroundColor(getResources().getColor(R.color.table_color));
+                nofinish_layout.setBackgroundColor(getResources().getColor(R.color.tabselect_color));
                 // 如果fragment为空，则创建一个并添加到界面上
                 if (noFinishFragment == null) {
                     noFinishFragment = new NoFinishFragment();
@@ -121,7 +121,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 break;
             case 1:
-                finish_layout.setBackgroundColor(getResources().getColor(R.color.table_color));
+                finish_layout.setBackgroundColor(getResources().getColor(R.color.tabselect_color));
                 if (finishFragment == null) {
                     finishFragment = new FinishFragment();
                     fragmentTransaction.add(R.id.frameLayout, finishFragment);
