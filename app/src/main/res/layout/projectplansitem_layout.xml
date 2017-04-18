@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!--<View android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividercolor"/>-->
-
     <RelativeLayout android:id="@+id/showpanle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,13 +35,21 @@
                 android:layout_toRightOf="@+id/planname_tv"/>
 
 
+            <ImageView android:id="@+id/denote_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/shang"/>
+
             <TextView android:id="@+id/addpanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/planname_et"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/red"
+                android:layout_toLeftOf="@+id/denote_project"
                 android:textSize="@dimen/normal_textsize"
                 android:text="@string/add_panel"/>
 

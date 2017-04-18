@@ -40,6 +40,13 @@
                 android:textSize="@dimen/normal_textsize"
                 android:layout_toRightOf="@+id/panelname_tv"/>
 
+            <ImageView android:id="@+id/denote_panel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/shang"/>
         </RelativeLayout>
 
         <RelativeLayout android:id="@+id/rela2"

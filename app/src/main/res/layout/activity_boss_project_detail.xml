@@ -125,13 +125,21 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
-                <TextView android:id="@+id/addplan"
+                <ImageView android:id="@+id/denote_project"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/shang"/>
+
+                <TextView android:id="@+id/addplan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10dp"
                     android:text="@string/addplan"
+                    android:layout_toLeftOf="@+id/denote_project"
                     android:textColor="@color/white"
                     android:layout_marginRight="10dp"
                     android:textSize="@dimen/normal_textsize" />

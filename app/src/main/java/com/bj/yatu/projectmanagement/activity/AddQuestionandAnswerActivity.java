@@ -16,7 +16,7 @@ import com.bj.yatu.projectmanagement.utils.ToastUtil;
 public class AddQuestionandAnswerActivity extends BaseActivity implements View.OnClickListener {
     private TextView addtype_tv;
     private EditText content_et;
-    private Button cancel_bt,sure_bt;
+    private TextView cancel_bt,sure_bt;
     private RelativeLayout large_rela,small_rela;
 
     @Override
@@ -30,8 +30,8 @@ public class AddQuestionandAnswerActivity extends BaseActivity implements View.O
     private void initView() {
         addtype_tv= (TextView) findViewById(R.id.addtype_tv);
         content_et= (EditText) findViewById(R.id.content_et);
-        cancel_bt= (Button) findViewById(R.id.cancel_bt);
-        sure_bt= (Button) findViewById(R.id.sure_bt);
+        cancel_bt= (TextView) findViewById(R.id.cancel_bt);
+        sure_bt= (TextView) findViewById(R.id.sure_bt);
         cancel_bt.setOnClickListener(this);
         sure_bt.setOnClickListener(this);
 

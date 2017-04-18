@@ -37,30 +37,32 @@
             android:layout_below="@+id/addtype_tv"
             android:paddingLeft="5dp"/>
 
-        <Button android:id="@+id/cancel_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+        <TextView android:id="@+id/cancel_bt"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:text="@string/canel"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/normal_textsize"
             android:layout_below="@+id/content_et"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/reset"/>
+            android:background="@drawable/jq_button"/>
 
-        <Button android:id="@+id/sure_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+        <TextView android:id="@+id/sure_bt"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:text="@string/sure"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/normal_textsize"
             android:layout_below="@+id/content_et"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_theme"/>
+            android:background="@drawable/jq_button"/>
 
     </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package com.bj.yatu.projectmanagement.activity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,6 +48,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
     private int questionpoistion=0;//问题poistion
+    private ImageView denote_project;
 
 
     @Override
@@ -76,6 +78,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         hopeendtime_tv= (TextView) findViewById(R.id.hopeendtime_tv);
         projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
 
+        denote_project= (ImageView) findViewById(R.id.denote_project);
 
         addplan= (TextView) findViewById(R.id.addplan);//创建计划
         addplan.setOnClickListener(this);
@@ -139,8 +142,10 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         }else{
                             if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
+                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.shang);
                             }else{
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
+                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.xia);
                             }
                         }
                         }
@@ -165,8 +170,10 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                             }else{
                                 if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
                                     ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
+                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
                                 }else{
                                     ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
+                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.xia);
                                 }
                             }
                             }
@@ -371,8 +378,10 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 }else{
                     if(plans_lv.getVisibility()==View.VISIBLE){
                         plans_lv.setVisibility(View.GONE);
+                        denote_project.setImageResource(R.mipmap.shang);
                     }else{
                         plans_lv.setVisibility(View.VISIBLE);
+                        denote_project.setImageResource(R.mipmap.xia);
                     }
                 }
                 break;

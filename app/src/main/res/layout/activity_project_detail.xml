@@ -124,6 +124,14 @@
                     android:text="@string/project_plan"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
+
+                <ImageView android:id="@+id/denote_im"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/shang"/>
             </RelativeLayout>
 
             <com.bj.yatu.projectmanagement.widget.NestFullListView
