@@ -1,5 +1,6 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +27,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import okhttp3.Call;
 
 public class ProjectDetailActivity extends BaseActivity implements View.OnClickListener {
@@ -42,7 +44,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     private String projectid="";//项目id
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
-    private ImageView denote_im;
+    private ImageView denote_im1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,8 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
         hopeendtime_tv= (TextView) findViewById(R.id.hopeendtime_tv);
         projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
 
-        denote_im= (ImageView) findViewById(R.id.denote_im);
+        denote_im1= (ImageView) findViewById(R.id.denote_im1);
+        denote_im1.setImageResource(R.mipmap.shang);
     }
 
     //查询项目详情
@@ -128,12 +131,14 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                             ToastUtil.showToast(ProjectDetailActivity.this,"暂无节点！");
                         }else{
                             if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
+                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
-                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.shang);
+                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
 
                             }else{
+                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
-                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.shang);
                             }
                         }
 
@@ -183,6 +188,8 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
+                ((NestFullListView)holder.getView(R.id.panel_lv)).updateUI();
+
                 ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.projectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
                     public void onBind(final int pos2, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
@@ -218,11 +225,13 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                                     ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
                                 }else{
                                     if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
+                                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
                                         ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
-                                        ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
-                                    }else{
-                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
                                         ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.xia);
+                                    }else{
+                                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
+                                        ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
                                     }
                                 }
                             }
@@ -428,10 +437,12 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     ToastUtil.showToast(this,"暂无计划！");
                 }else{
                     if(plans_lv.getVisibility()==View.VISIBLE){
-                        denote_im.setImageResource(R.mipmap.shang);
+                        ObjectAnimator.ofFloat(denote_im1, "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        denote_im1.setImageResource(R.mipmap.xia);
                         plans_lv.setVisibility(View.GONE);
                     }else{
-                        denote_im.setImageResource(R.mipmap.xia);
+                        ObjectAnimator.ofFloat(denote_im1, "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        denote_im1.setImageResource(R.mipmap.shang );
                         plans_lv.setVisibility(View.VISIBLE);
                     }
                 }

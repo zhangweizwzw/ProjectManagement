@@ -32,6 +32,7 @@
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize"
+                android:layout_marginRight="55dp"
                 android:layout_toRightOf="@+id/planname_tv"/>
 
 
@@ -47,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/planname_et"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:textColor="@color/red"
                 android:layout_toLeftOf="@+id/denote_project"
                 android:textSize="@dimen/normal_textsize"

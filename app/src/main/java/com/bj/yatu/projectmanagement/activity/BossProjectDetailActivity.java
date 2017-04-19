@@ -1,5 +1,6 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -141,11 +142,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                             ToastUtil.showToast(BossProjectDetailActivity.this,"暂无节点！");
                         }else{
                             if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
+                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_plan)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
                                 ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
-                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.shang);
-                            }else{
-                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
                                 ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.xia);
+                            }else{
+                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_plan)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
+                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.shang);
                             }
                         }
                         }
@@ -169,11 +172,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                                 ToastUtil.showToast(BossProjectDetailActivity.this,"暂无问题");
                             }else{
                                 if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
+                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
                                     ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
-                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
-                                }else{
-                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
                                     ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.xia);
+                                }else{
+                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
+                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
                                 }
                             }
                             }
@@ -377,11 +382,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                     ToastUtil.showToast(this,"暂无计划！");
                 }else{
                     if(plans_lv.getVisibility()==View.VISIBLE){
+                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 180.0F).setDuration(500).start();
                         plans_lv.setVisibility(View.GONE);
-                        denote_project.setImageResource(R.mipmap.shang);
-                    }else{
-                        plans_lv.setVisibility(View.VISIBLE);
                         denote_project.setImageResource(R.mipmap.xia);
+                    }else{
+                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        plans_lv.setVisibility(View.VISIBLE);
+                        denote_project.setImageResource(R.mipmap.shang);
                     }
                 }
                 break;
