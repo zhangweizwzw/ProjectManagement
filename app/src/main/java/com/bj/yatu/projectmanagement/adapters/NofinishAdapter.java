@@ -78,7 +78,7 @@ public class NofinishAdapter extends BaseAdapter{
         /**
          * textview的点击事件
          */
-        viewHolder.more.setOnClickListener(new View.OnClickListener() {
+        viewHolder.hint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                context.startActivity(new Intent(context, BossProjectDetailActivity.class));
@@ -133,9 +133,9 @@ public class NofinishAdapter extends BaseAdapter{
     private void setText(ViewHolder viewHolder, View convertView,int position) {
         String todayDate=Dateutil.getTodayDate();//获取当前时间
         String endData=list.get(position).getProject_end_time();
-        viewHolder.name.setText("项目名称："+list.get(position).getProject_name());//项目名
+        viewHolder.name.setText(list.get(position).getProject_name());//项目名
         viewHolder.pb.setProgress((int) list.get(position).getTotalpercent());//百分比
-        viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
+//        viewHolder.hint_name.setText(list.get(position).getProject_name());//项目名称
         viewHolder.fzr.setText(list.get(position).getProject_fzr());//项目经理
         viewHolder.begin_time.setText(list.get(position).getProject_begin_time());//起始时间
         viewHolder.current_time.setText( todayDate);//当前时间
@@ -144,9 +144,10 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.plan.setText(mplan);//计划
         String mfact=list.get(position).getProject_fact();
         viewHolder.fact.setText(mfact);//实际
-        viewHolder.personcost.setText(""+list.get(position).getTotalpersoncost());//人工
-        viewHolder.extracost.setText(""+list.get(position).getTotalextracost());//费用
-        viewHolder.totalcost.setText(""+list.get(position).getTotalcost());//费用小计
+        viewHolder.personcost.setText(list.get(position).getTotalpersoncost()+"元");//人工
+        viewHolder.extracost.setText(list.get(position).getTotalextracost()+"元");//费用
+        viewHolder.totalcost.setText(list.get(position).getTotalcost()+"元");//费用小计
+        
         //当前问题可能为空
         String quesrion=list.get(position).getQuestions();
         if (quesrion!=null){
@@ -161,7 +162,7 @@ public class NofinishAdapter extends BaseAdapter{
             Log.i("==比较日期大小===","超时");
 //            viewHolder.linear.setBackground(context.getResources().getColor(Color.RED));
             viewHolder.linear.setBackgroundColor(context.getResources().getColor(R.color.overtime_bg));
-            viewHolder.relative.setBackgroundColor(context.getResources().getColor(R.color.overtime_title));
+//            viewHolder.relative.setBackgroundColor(context.getResources().getColor(R.color.overtime_title));
         }else{
             Log.i("===比较日期大小===","没有超时");
         }
@@ -177,10 +178,10 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.name= (TextView) convertView.findViewById(R.id.nofinishadapter_tv);
         viewHolder.pb= (MyProgress) convertView.findViewById(R.id.nofinishadapter_pb);
         viewHolder.hint=convertView.findViewById(R.id.include);
-        viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
+//        viewHolder.more= (TextView) convertView.findViewById(R.id.hint_more);
         viewHolder.cp= (TextView) convertView.findViewById(R.id.hint_curentproblem);//百分比
         viewHolder.linear= (LinearLayout) convertView.findViewById(R.id.linaear);//是否超时的背景
-        viewHolder.hint_name= (TextView) convertView.findViewById(R.id.hint_name);//项目名称
+//        viewHolder.hint_name= (TextView) convertView.findViewById(R.id.hint_name);//项目名称
         viewHolder.fzr= (TextView) convertView.findViewById(R.id.hint_pm);//项目经理
         viewHolder.begin_time= (TextView) convertView.findViewById(R.id.hinttime);//起始时间
         viewHolder.current_time= (TextView) convertView.findViewById(R.id.hint_currenttime);//当前时间
@@ -190,12 +191,12 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.personcost= (TextView) convertView.findViewById(R.id.hint_manual);//人工
         viewHolder.extracost= (TextView) convertView.findViewById(R.id.hint_coast);//费用
         viewHolder.totalcost= (TextView) convertView.findViewById(R.id.coastsubtotal);//费用小计
-        viewHolder.relative= (RelativeLayout) convertView.findViewById(R.id.hint_relative1);
+//        viewHolder.relative= (RelativeLayout) convertView.findViewById(R.id.hint_relative1);
     }
 
 
     class ViewHolder{
-        TextView name,hint_name,//项目名称
+        TextView name,//项目名称
                 fzr,//项目经理
                 begin_time,//起始时间
                 end_time,//结束时间
@@ -205,12 +206,12 @@ public class NofinishAdapter extends BaseAdapter{
                 personcost,//人工
                 extracost,//费用
                 totalcost,//小计
-                more,
+//                more,
                 cp;//当前问题
         MyProgress pb;//百分比
         View hint;
         LinearLayout linear;
-        RelativeLayout relative;
+//        RelativeLayout relative;
     }
 
     public void changeImageVisable(View view,int position) {
