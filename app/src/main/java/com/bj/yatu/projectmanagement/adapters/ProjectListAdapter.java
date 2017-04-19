@@ -73,11 +73,10 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.people_tv = (TextView) convertView.findViewById(R.id.people_tv);
 		holder.cost_tv = (TextView) convertView.findViewById(R.id.cost_tv);
 		holder.costmin_tv = (TextView) convertView.findViewById(R.id.costmin_tv);
-		holder.more_tv = (TextView) convertView.findViewById(R.id.more_tv);
 		holder.question_tv = (TextView) convertView.findViewById(R.id.question_tv);
 		holder.projectrate_pro= (MyProgress) convertView.findViewById(R.id.projectrate_pro);
-		holder.largerela= (RelativeLayout) convertView.findViewById(R.id.largerela);
 		holder.rela5= (RelativeLayout) convertView.findViewById(R.id.rela5);
+		holder.largerela= (RelativeLayout) convertView.findViewById(R.id.largerela);
 
 		convertView.setTag(holder);
 //		} else {
@@ -131,7 +130,7 @@ public class ProjectListAdapter extends BaseAdapter {
 			}
 		});
 
-		holder.more_tv.setOnClickListener(new View.OnClickListener() {
+		holder.largerela.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent=new Intent();
@@ -147,9 +146,9 @@ public class ProjectListAdapter extends BaseAdapter {
 
 	public final class OrderViewHolder {
 		private TextView projectname_tv,projectManager_tv,starttitme_tv,nowtime_tv,expectfinishtime_tv,expect_tv;
-		private TextView fact_tv,people_tv,cost_tv,costmin_tv,more_tv,question_tv;
+		private TextView fact_tv,people_tv,cost_tv,costmin_tv,question_tv;
 		private MyProgress projectrate_pro;
-		private RelativeLayout largerela,rela5;
+		private RelativeLayout rela5,largerela;
 	}
 
 }

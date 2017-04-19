@@ -7,10 +7,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
 import com.bj.yatu.projectmanagement.model.ResponsePanelBean;
@@ -24,6 +26,8 @@ import com.bj.yatu.projectmanagement.widget.NestFullViewHolder;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     private ProjectDetailBean projectDetailBean;
     boolean flaga=true;//问题
     boolean flagb=true;//答复
+    boolean flagc=true;//计划名称
     private String planid;//计划id
     private String nodeid;//节点id
     private String projectid="";//项目id
@@ -123,29 +128,37 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
 
-
-                ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
+                //显示与隐藏项目详情
+                ((RelativeLayout)holder.getView(R.id.showdetail_rela)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size()==0){
-                            ToastUtil.showToast(ProjectDetailActivity.this,"暂无节点！");
-                        }else{
-                            if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
-                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
-                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                        //项目名称过长的时候显示与隐藏
+                        if (flagc){
+                            flagc=false;
+                            ((TextView)holder.getView(R.id.planname_et)).setEllipsize(null);//文字展开
+                            ((TextView)holder.getView(R.id.planname_et)).setSingleLine(flagc);
 
-                            }else{
-                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
-                                ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.shang);
-                            }
+                        }else {
+                            flagc=true;
+                            ((TextView)holder.getView(R.id.planname_et)).setEllipsize(TextUtils.TruncateAt.END);//收缩
+                            ((TextView)holder.getView(R.id.planname_et)).setSingleLine(flagc);
                         }
 
+                        //计划详情的显示与隐藏
+                        if(((LinearLayout)holder.getView(R.id.detail_rela)).getVisibility()==View.VISIBLE){
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                            ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
+
+                        }else{
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.shang);
+                            ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
-                //添加节点
+               //添加节点
                 ((TextView)holder.getView(R.id.addpanel)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -188,8 +201,6 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
-                ((NestFullListView)holder.getView(R.id.panel_lv)).updateUI();
-
                 ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.projectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
                     public void onBind(final int pos2, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean nodes, final NestFullViewHolder holder) {
@@ -215,7 +226,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         });
 
 
-                        ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
+                     ((LinearLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Log.i(TAG,"pos1="+pos1);
@@ -224,73 +235,12 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                                 if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0 ){
                                     ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
                                 }else{
-                                    if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
-                                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
-                                        ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.xia);
-                                    }else{
-                                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                        ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
-                                        ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
-                                    }
+                                    MyApplication.qestionlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
+                                    MyApplication.qestionlist.addAll(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions());
+                                    startActivity(new Intent(ProjectDetailActivity.this,QuestionListActivity.class));
                                 }
                             }
-                        });
-
-
-
-
-                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.projectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions()) {
-                            @Override
-                            public void onBind(int pos3, ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
-                                holder.setText(R.id.question_date,question.getQuestiondate());
-                                holder.setText(R.id.question_tv,question.getNode_question());
-                                holder.setText(R.id.answerquestion_tv,question.getNode_question_answer());
-
-
-                                ((TextView)holder.getView(R.id.question_tv)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (flaga){
-                                            flaga=false;
-                                            ((TextView)holder.getView(R.id.question_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
-
-                                        }else {
-                                            flaga=true;
-                                            ((TextView)holder.getView(R.id.question_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
-                                        }
-                                    }
-                                });
-                                ((TextView)holder.getView(R.id.answerquestion_tv)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (flagb){
-                                            flagb=false;
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
-
-                                        }else {
-                                            flagb=true;
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
-                                        }
-                                    }
-                                });
-
-                                ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if(((RelativeLayout)holder.getView(R.id.question_rela)).getVisibility()==View.VISIBLE){
-                                            ((RelativeLayout)holder.getView(R.id.question_rela)).setVisibility(View.GONE);
-                                        }else{
-                                            ((RelativeLayout)holder.getView(R.id.question_rela)).setVisibility(View.VISIBLE);
-                                        }
-                                    }
-                                });
-                            }
-                        });
+                    });
                     }
                 });
 

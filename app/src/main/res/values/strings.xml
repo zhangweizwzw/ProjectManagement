@@ -3,7 +3,7 @@
     <string name="nofinish">未完成</string>
     <string name="finish">已完成</string>
     <string name="projectname">项目名称:</string>
-    <string name="starttime">起始时间:</string>
+    <string name="starttime">项目起始时间:</string>
     <string name="endtime">预计完成时间:</string>
     <string name="managername">项目经理:</string>
     <string name="add_panel">创建节点</string>
@@ -11,7 +11,7 @@
     <string name="project_plan">项目计划</string>
     <string name="add_plan">创建计划</string>
     <string name="panelname">节点名称:</string>
-    <string name="finishdate">完成日期:</string>
+    <string name="finishdate">项目完成日期:</string>
     <string name="startdatea">开始日期:</string>
     <string name="panerper">节点占比:</string>
     <string name="yuan">元</string>
@@ -61,4 +61,5 @@
     <string name="addanswer">提问</string>
     <string name="sure">确定</string>
     <string name="answer">答复</string>
+    <string name="addxiaojie">新建计划小结</string>
 </resources>

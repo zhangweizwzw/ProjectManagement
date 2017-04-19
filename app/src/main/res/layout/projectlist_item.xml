@@ -13,41 +13,32 @@
         <TextView android:id="@+id/projectname_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/normal_textsize"
+            android:textSize="@dimen/large_textsize"
             android:text="项目名称"
-            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_color"/>
+
+        <com.bj.yatu.projectmanagement.common.MyProgress
+            android:id="@+id/projectrate_pro"
+            android:layout_width="match_parent"
+            android:layout_below="@id/projectname_tv"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/text_color"/>
-
-        <TextView android:id="@+id/more_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/normal_textsize"
-            android:text="@string/more"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/white"/>
+            style="@style/StyleProgressBarMini"
+            android:background="@drawable/shape_progressbar_bg"
+            android:max="100"/>
     </RelativeLayout>
 
-    <com.bj.yatu.projectmanagement.common.MyProgress
-        android:id="@+id/projectrate_pro"
-        android:layout_width="match_parent"
-        android:layout_below="@id/rela1"
-        android:layout_height="20dp"
-        android:layout_margin="10dp"
-        style="@style/StyleProgressBarMini"
-        android:background="@drawable/shape_progressbar_bg"
-        android:max="100"/>
-
     <LinearLayout android:id="@+id/lin1"
-        android:layout_below="@id/projectrate_pro"
+        android:layout_below="@id/rela1"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
@@ -103,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
         <RelativeLayout
@@ -157,7 +148,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
         <RelativeLayout
@@ -211,7 +202,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
         <RelativeLayout
@@ -285,7 +276,9 @@
     <RelativeLayout android:id="@+id/rela5"
         android:layout_width="match_parent"
         android:layout_below="@+id/lin4"
-        android:layout_margin="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content">
 
         <TextView android:id="@+id/question_tv1"

@@ -1,73 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/darkgray"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp">
 
-    <!--<View android:id="@+id/view1"
+    <LinearLayout android:id="@+id/showquestion"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividercolor"/>-->
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout android:id="@+id/showquestion"
+    <View android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkgray"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/dividercolor"/>
+
 
         <RelativeLayout android:id="@+id/rela1"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp">
-
-            <TextView android:id="@+id/panelname_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/panelname"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
 
             <TextView android:id="@+id/panelname_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
                 android:focusable="false"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
+                android:textSize="@dimen/large_textsize"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:text="aaa"
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/panelname_tv"/>
-
-            <ImageView android:id="@+id/denote_panel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/shang"/>
-
-            <TextView android:id="@+id/addquestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/red"
-                android:text="@string/addquestion"
-                android:layout_toLeftOf="@+id/denote_panel"
-                android:textSize="@dimen/normal_textsize"/>
-
         </RelativeLayout>
 
-        <RelativeLayout android:id="@+id/rela2"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@+id/rela1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
             <TextView android:id="@+id/finishsign_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,71 +69,11 @@
                 android:layout_toRightOf="@+id/finishsign_tv"/>
 
         </RelativeLayout>
-
-        <RelativeLayout android:id="@+id/relan"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/rela2"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/starttime_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/starttime"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/starttime_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/starttime_tv"/>
-        </RelativeLayout>
-
-
-        <RelativeLayout android:id="@+id/rela3"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/relan"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/endtime_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/finishdate"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/endtime_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/endtime_tv"/>
-        </RelativeLayout>
-
-
-        <RelativeLayout android:id="@+id/rela4"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/rela3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
             <TextView android:id="@+id/panelper_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,17 +103,20 @@
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/large_textsize"/>
-
         </RelativeLayout>
+    </LinearLayout>
 
-        <RelativeLayout android:id="@+id/rela5"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/rela4"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
             <TextView android:id="@+id/peoplecost_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,16 +145,18 @@
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
-
-
-            <TextView android:id="@+id/extras_tv2"
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
+            <TextView android:id="@+id/extras_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yuan"
-                android:layout_marginLeft="3dp"
+                android:text="@string/extras"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -237,32 +164,104 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="3dp"
-                android:layout_toLeftOf="@+id/extras_tv2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/extras_tv"
                 android:focusable="false"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/normal_textsize" />
 
-
-            <TextView android:id="@+id/extras_tv"
+            <TextView android:id="@+id/extras_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/extras"
+                android:text="@string/yuan"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/extras_et"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/extras_et"
-                android:layout_marginRight="5dp"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
+            <TextView android:id="@+id/starttime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/starttime"
+                android:textColor="@color/text_color"
+                android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
 
+            <TextView android:id="@+id/starttime_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:focusable="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_toRightOf="@+id/starttime_tv"/>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content">
+            <TextView android:id="@+id/endtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finishdate"
+                android:textColor="@color/text_color"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/normal_textsize"/>
 
-        <com.bj.yatu.projectmanagement.widget.NestFullListView
+            <TextView android:id="@+id/endtime_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:focusable="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_toRightOf="@+id/endtime_tv"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView android:id="@+id/addquestion"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jq_button"
+        android:textSize="@dimen/normal_textsize"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:layout_below="@id/rela4"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/addquestion"/>
+       <!--
+
+
+        -->
+
+        <!--<com.bj.yatu.projectmanagement.widget.NestFullListView
             android:id="@+id/question_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rela5"
             android:orientation="vertical"
             android:visibility="gone"
-            android:showDividers="middle"/>
-    </RelativeLayout>
-</RelativeLayout>
+            android:showDividers="middle"/>-->
+    </LinearLayout>
+</LinearLayout>

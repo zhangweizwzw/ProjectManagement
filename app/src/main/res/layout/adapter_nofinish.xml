@@ -16,15 +16,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="项目名称：XXXXXXX"
-            android:textSize="@dimen/normal_textsize"
+            android:textSize="@dimen/large_textsize"
+            android:textStyle="bold"
             android:layout_marginLeft="8dp"
             android:textColor="@color/black" />
         <com.bj.yatu.projectmanagement.common.MyProgress
             android:id="@+id/nofinishadapter_pb"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             style="@style/StyleProgressBarMini"
@@ -37,6 +38,5 @@
         layout="@layout/include_hint"
         android:layout_below="@id/linaear"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
+        android:layout_width="wrap_content" />
 </RelativeLayout>
