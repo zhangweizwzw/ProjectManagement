@@ -147,7 +147,7 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.personcost.setText(list.get(position).getTotalpersoncost()+"元");//人工
         viewHolder.extracost.setText(list.get(position).getTotalextracost()+"元");//费用
         viewHolder.totalcost.setText(list.get(position).getTotalcost()+"元");//费用小计
-        
+
         //当前问题可能为空
         String quesrion=list.get(position).getQuestions();
         if (quesrion!=null){
