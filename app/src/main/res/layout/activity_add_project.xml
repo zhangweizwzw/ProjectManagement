@@ -223,7 +223,7 @@
                 android:background="@drawable/jq_button"
                 android:text="@string/canel"
                 android:gravity="center"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/white" />
 
             <TextView android:id="@+id/create_btn"
                 android:layout_width="0dp"
@@ -233,7 +233,7 @@
                 android:background="@drawable/jq_button"
                 android:text="@string/setup"
                 android:gravity="center"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </RelativeLayout>
 

@@ -243,7 +243,7 @@
             android:layout_margin="10dp"
             android:text="@string/delete"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/normal_textsize"/>
 
     </RelativeLayout>

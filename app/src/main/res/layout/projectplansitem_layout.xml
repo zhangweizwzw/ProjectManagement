@@ -254,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/jq_button"
                 android:textSize="@dimen/normal_textsize"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:gravity="center"
                 android:layout_below="@id/rela4"
                 android:layout_gravity="right"

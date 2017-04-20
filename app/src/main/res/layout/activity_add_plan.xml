@@ -321,7 +321,7 @@
             android:background="@drawable/jq_button"
             android:text="@string/setup"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>

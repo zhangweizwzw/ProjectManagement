@@ -77,7 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="重置"
-            android:textColor="@color/text_color"
+            android:textColor="@color/white"
             android:background="@drawable/jq_button"
             android:gravity="center"
             />
@@ -91,7 +91,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="登录"
-            android:textColor="@color/text_color"
+            android:textColor="@color/white"
             android:background="@drawable/jq_button"
             android:gravity="center"/>
         <LinearLayout
