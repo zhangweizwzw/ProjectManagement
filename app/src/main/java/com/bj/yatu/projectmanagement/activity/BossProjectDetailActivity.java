@@ -3,6 +3,7 @@ package com.bj.yatu.projectmanagement.activity;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.media.Image;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -70,6 +71,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     private void initView() {
         projectid=getIntent().getStringExtra("projectid");
 
+
         text_center= (TextView) findViewById(R.id.text_center);
         text_center.setText("项目详情");
         image_left= (ImageView) findViewById(R.id.image_left);
@@ -87,8 +89,12 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         denote_project= (ImageView) findViewById(R.id.denote_project);
 
         addplan= (TextView) findViewById(R.id.addplan);//创建计划
+
         addplan.setOnClickListener(this);
-        if(MyApplication.identity==0){
+
+
+        //当登录人是领导或者已完成 添加计划按钮都隐藏
+        if(MyApplication.identity==0||MyApplication.isprojectfinish){
             addplan.setVisibility(View.GONE);
         }else{
             addplan.setVisibility(View.VISIBLE);
@@ -202,6 +208,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                                 }else{
                                     MyApplication.qestionlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
                                     MyApplication.qestionlist.addAll(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions());
+
                                     startActivity(new Intent(BossProjectDetailActivity.this,BossQuestionListActivity.class));
                                 }
                             }

@@ -9,7 +9,7 @@
     <RelativeLayout android:id="@+id/relaa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="135dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/theme_color">
@@ -65,40 +65,8 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rela2"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@+id/rela1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/finishsign_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="完成标志:"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:id="@+id/finishsign_et"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/finishsign_tv"
-                android:background="@drawable/edittext"
-                android:paddingLeft="2dp"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:maxLength="15"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/relan"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@+id/rela2"
@@ -143,7 +111,7 @@
             android:id="@+id/rela3"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_below="@+id/relan"
+            android:layout_below="@+id/rela1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
@@ -307,12 +275,48 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rela2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rela5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+            android:id="@+id/finishsign_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="备        注:"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/normal_textsize" />
+
+
+
+            <EditText
+                android:id="@+id/finishsign_et"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/finishsign_tv"
+                android:background="@drawable/edittext"
+                android:paddingLeft="2dp"
+                android:gravity="left|top"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/normal_textsize"
+                android:maxLength="15"/>
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/setup"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/rela5"
+            android:layout_below="@+id/rela2"
             android:layout_margin="10dp"
             android:background="@drawable/jq_button"
             android:text="@string/setup"

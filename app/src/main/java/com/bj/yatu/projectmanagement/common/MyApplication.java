@@ -22,6 +22,8 @@ public class MyApplication extends Application{
 
     public static boolean isFirstMain=true; //是否第一次进入项目
 
+    public static boolean isprojectfinish=false; //项目是否完成
+
     public static ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean> qestionlist; //问题集合
 
 

@@ -164,6 +164,9 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                     }
                 });
 
+                if(MyApplication.isprojectfinish){
+                    ((TextView)holder.getView(R.id.addpanel)).setVisibility(View.GONE);
+                }
                //添加节点
                 ((TextView)holder.getView(R.id.addpanel)).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -217,6 +220,10 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         holder.setText(R.id.peoplecost_et,nodes.getNode_labor_cost()+"");
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
                         holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
+
+                        if(MyApplication.isprojectfinish){
+                            ((TextView)holder.getView(R.id.addquestion)).setVisibility(View.GONE);
+                        }
 
                         ((TextView)holder.getView(R.id.addquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override

@@ -4,7 +4,7 @@
     <string name="finish">已完成</string>
     <string name="projectname">项目名称:</string>
     <string name="starttime">项目起始时间:</string>
-    <string name="endtime">预计完成时间:</string>
+    <string name="endtime">完成时间:</string>
     <string name="managername">项目经理:</string>
     <string name="add_panel">创建节点</string>
     <string name="project_panal">项目节点</string>

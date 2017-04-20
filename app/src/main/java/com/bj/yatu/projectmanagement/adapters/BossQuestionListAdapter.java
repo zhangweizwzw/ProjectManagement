@@ -68,9 +68,11 @@ public class BossQuestionListAdapter extends BaseAdapter {
 //		} else {
 		holder = (OrderViewHolder) convertView.getTag();
 //		}
-
-		if(MyApplication.identity==0){
+		//当登录人是领导或者已完成 回复按钮都隐藏
+		if(MyApplication.identity==0||MyApplication.isprojectfinish){
 			holder.answer_tv.setVisibility(View.GONE);
+		}else{
+			holder.answer_tv.setVisibility(View.VISIBLE);
 		}
 
 		final String questiondate=qBean.getQuestiondate();

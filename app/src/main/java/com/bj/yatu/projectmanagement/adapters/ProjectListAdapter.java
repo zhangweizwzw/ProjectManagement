@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -94,7 +95,7 @@ public class ProjectListAdapter extends BaseAdapter {
 		final String projectmoney=projectBean.getTotalextracost()+"";
 		final String projectMinmoney=projectBean.getTotalcost()+"";
 		final String projectproblem=projectBean.getQuestions();
-		double projectPercent=projectBean.getTotalpercent();
+		final double projectPercent=projectBean.getTotalpercent();
 
 		holder.projectrate_pro.setProgress((int)projectPercent);
 		holder.projectname_tv.setText(projectName);
@@ -133,6 +134,12 @@ public class ProjectListAdapter extends BaseAdapter {
 		holder.largerela.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				//判断项目是否完成
+				if(projectPercent==100.0){
+                    MyApplication.isprojectfinish=true;
+				}else{
+                    MyApplication.isprojectfinish=false;
+				}
 				Intent intent=new Intent();
 				intent.setClass(mcontext, ProjectDetailActivity.class);
 				intent.putExtra("projectid",projectBean.getId()+"");

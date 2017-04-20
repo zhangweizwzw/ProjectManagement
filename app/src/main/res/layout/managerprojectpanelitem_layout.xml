@@ -194,10 +194,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp">
-            <RelativeLayout
+           <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_marginLeft="5dp"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/starttime_tv"

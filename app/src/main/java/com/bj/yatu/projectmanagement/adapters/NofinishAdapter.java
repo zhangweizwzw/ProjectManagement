@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.BossProjectDetailActivity;
 import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
+import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectsBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -81,7 +82,12 @@ public class NofinishAdapter extends BaseAdapter{
         viewHolder.hint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                context.startActivity(new Intent(context, BossProjectDetailActivity.class));
+                if(list.get(position).getTotalpercent()==100.0){
+                    MyApplication.isprojectfinish=true;
+                }else{
+                    MyApplication.isprojectfinish=false;
+                }
+
                 Intent intent=new Intent();
                 intent.setClass(context, BossProjectDetailActivity.class);
                 intent.putExtra("projectid",list.get(position).getId()+"");

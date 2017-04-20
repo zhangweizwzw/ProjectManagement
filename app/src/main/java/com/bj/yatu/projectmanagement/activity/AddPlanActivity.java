@@ -94,18 +94,24 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
                     dou=prodouble+Double.valueOf(pancelper).doubleValue();
                 }
 
+
+                /**
+                 * 注释的以后说不定要用
+                 else if(StringUtil.isEmpty(starttime)){
+                 ToastUtil.showToast(this,"请输入开始日期！");
+                 }else if(!Dateutil.isValidDate(starttime)){
+                 ToastUtil.showToast(this,"开始日期格式不正确！");
+                 }else if(Dateutil.compare_date(endtime,starttime)==1){
+                 ToastUtil.showToast(this,"节点结束时间不能在节点开始时间之前！");
+                 }else if(Dateutil.compare_date(starttime,planstarttime)==1){
+                 ToastUtil.showToast(this,"节点开始时间不能在计划开始时间之前！");
+                 }
+                 */
+
                 if(StringUtil.isEmpty(panelname)){
                     ToastUtil.showToast(this,"请输入节点名称！");
                 }else if(StringUtil.isEmpty(finishsign)){
                     ToastUtil.showToast(this,"请输入完成标志！");
-                }else if(StringUtil.isEmpty(starttime)){
-                    ToastUtil.showToast(this,"请输入开始日期！");
-                }else if(!Dateutil.isValidDate(starttime)){
-                    ToastUtil.showToast(this,"开始日期格式不正确！");
-                }else if(Dateutil.compare_date(endtime,starttime)==1){
-                    ToastUtil.showToast(this,"节点结束时间不能在节点开始时间之前！");
-                }else if(Dateutil.compare_date(starttime,planstarttime)==1){
-                    ToastUtil.showToast(this,"节点开始时间不能在计划开始时间之前！");
                 }else if(StringUtil.isEmpty(endtime)){
                     ToastUtil.showToast(this,"请输入完成日期！");
                 }else if(!Dateutil.isValidDate(endtime)){
@@ -140,7 +146,7 @@ public class AddPlanActivity extends BaseActivity implements View.OnClickListene
         intent.putExtra("endtime",endtime);
         intent.putExtra("pancelper",pancelper);
         intent.putExtra("peoplecost",peoplecost);
-        intent.putExtra("panelstarttime",panelstarttime);
+        intent.putExtra("panelstarttime","");
         intent.putExtra("extras",extras);
         setResult(2,intent);
         finish();
