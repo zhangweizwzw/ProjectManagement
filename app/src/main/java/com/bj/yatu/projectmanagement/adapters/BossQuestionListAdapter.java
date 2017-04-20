@@ -14,6 +14,7 @@ import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.activity.AddQuestionandAnswerActivity;
 import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
+import com.bj.yatu.projectmanagement.utils.StringUtil;
 
 import java.util.List;
 
@@ -78,6 +79,10 @@ public class BossQuestionListAdapter extends BaseAdapter {
 		final String questiondate=qBean.getQuestiondate();
 		final String question_answer=qBean.getNode_question_answer();
 		final String question=qBean.getNode_question();
+
+		if(!StringUtil.isEmpty(question_answer)){
+			holder.answer_tv.setVisibility(View.GONE);
+		}
 
 		holder.question_date.setText(questiondate);
 		holder.question_tv.setText(question);

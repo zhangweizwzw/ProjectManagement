@@ -51,11 +51,12 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     boolean flaga=true;//问题
     boolean flagb=true;//答复
     boolean flagc=true;//计划
+    boolean flagd=true;//节点
     private String questionid;//问题id
     private String projectid;//项目id
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
-    private ImageView denote_project;
+    private ImageView display_iv;
 
 
     @Override
@@ -86,7 +87,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         hopeendtime_tv= (TextView) findViewById(R.id.hopeendtime_tv);
         projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
 
-        denote_project= (ImageView) findViewById(R.id.denote_project);
+        display_iv= (ImageView) findViewById(R.id.display_iv);
 
         addplan= (TextView) findViewById(R.id.addplan);//创建计划
 
@@ -148,8 +149,8 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 ((LinearLayout) holder.getView(R.id.close)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                        ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
+                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.display_iv1)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        ((ImageView)holder.getView(R.id.display_iv1)).setImageResource(R.mipmap.jia);
                         ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
                     }
                 });
@@ -172,12 +173,12 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
 
                         //计划详情的显示与隐藏
                         if(((LinearLayout)holder.getView(R.id.detail_rela)).getVisibility()==View.VISIBLE){
-                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.display_iv1)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.display_iv1)).setImageResource(R.mipmap.jia);
                             ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
                         }else{
-                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 360.0F).setDuration(500).start();
-                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.display_iv1)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.display_iv1)).setImageResource(R.mipmap.jian);
                             ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.VISIBLE);
                         }
                     }
@@ -192,9 +193,39 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         holder.setText(R.id.panelper_et,nodes.getNode_proportion()+"");
                         holder.setText(R.id.peoplecost_et,nodes.getNode_labor_cost()+"");
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
-                        holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
+                        holder.setText(R.id.beizhu_et,nodes.getNode_complete_flat());
 
-                        ((LinearLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
+                        //显示与隐藏项目详情
+                        ((RelativeLayout)holder.getView(R.id.rela1)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //项目名称过长的时候显示与隐藏
+                                if (flagd){
+                                    flagd=false;
+                                    ((TextView)holder.getView(R.id.panelname_et)).setEllipsize(null);//文字展开
+                                    ((TextView)holder.getView(R.id.panelname_et)).setSingleLine(flagd);
+
+                                }else {
+                                    flagd=true;
+                                    ((TextView)holder.getView(R.id.panelname_et)).setEllipsize(TextUtils.TruncateAt.END);//收缩
+                                    ((TextView)holder.getView(R.id.panelname_et)).setSingleLine(flagd);
+                                }
+
+                                //计划详情的显示与隐藏
+                                if(((LinearLayout)holder.getView(R.id.jdisplay)).getVisibility()==View.VISIBLE){
+                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.display_iv2)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                                    ((ImageView)holder.getView(R.id.display_iv2)).setImageResource(R.mipmap.jia);
+                                    ((LinearLayout)holder.getView(R.id.jdisplay)).setVisibility(View.GONE);
+                                }else{
+                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.display_iv2)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                                    ((ImageView)holder.getView(R.id.display_iv2)).setImageResource(R.mipmap.jian);
+                                    ((LinearLayout)holder.getView(R.id.jdisplay)).setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+
+
+                        ((LinearLayout)holder.getView(R.id.jdisplay)).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Log.i(TAG,"pos1="+pos1);
@@ -301,13 +332,13 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                     ToastUtil.showToast(this,"暂无计划！");
                 }else{
                     if(plans_lv.getVisibility()==View.VISIBLE){
-                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        ObjectAnimator.ofFloat(display_iv, "rotationX", 0.0F, 180.0F).setDuration(500).start();
                         plans_lv.setVisibility(View.GONE);
-                        denote_project.setImageResource(R.mipmap.you);
+                        display_iv.setImageResource(R.mipmap.jia);
                     }else{
-                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 360.0F).setDuration(500).start();
+                        ObjectAnimator.ofFloat(display_iv, "rotationX", 0.0F, 180.0F).setDuration(500).start();
                         plans_lv.setVisibility(View.VISIBLE);
-                        denote_project.setImageResource(R.mipmap.xia);
+                        display_iv.setImageResource(R.mipmap.jian);
                     }
                 }
                 break;

@@ -8,18 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp">
 
-        <TextView android:id="@+id/answer_tv"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/jq_button"
-            android:layout_marginTop="5dp"
-            android:textSize="@dimen/normal_textsize"
-            android:text="答复"
-            android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/text_color"/>
-
         <TextView android:id="@+id/question_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +16,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:text="aaa"
-            android:layout_below="@+id/answer_tv"
             android:textSize="@dimen/normal_textsize"
             android:textColor="@color/text_color"/>
 
@@ -67,6 +54,19 @@
             android:singleLine="true"
             android:layout_toRightOf="@+id/answerquestion_tv1"
             android:layout_marginLeft="3dp"
+            android:layout_marginRight="60dp"
+            android:textColor="@color/text_color"/>
+
+        <TextView android:id="@+id/answer_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jq_button"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/normal_textsize"
+            android:text="答复"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
             android:textColor="@color/text_color"/>
     </RelativeLayout>
 

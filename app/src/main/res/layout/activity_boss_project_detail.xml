@@ -126,24 +126,26 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rela1"
                 android:layout_marginTop="5dp"
-                android:background="@color/theme_color">
+                android:background="@color/hengtiao">
+
+                <ImageView android:id="@+id/display_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/jia"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/display_iv"
                     android:text="@string/project_plan"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
-
-                <ImageView android:id="@+id/denote_project"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/shang"/>
             </RelativeLayout>
 
             <com.bj.yatu.projectmanagement.widget.NestFullListView

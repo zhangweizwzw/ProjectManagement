@@ -17,7 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@color/darkgray">
+            android:background="@color/hengtiao">
+
+            <ImageView
+                android:id="@+id/display_iv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/jia" />
 
             <TextView
                 android:id="@+id/planname_et"
@@ -25,23 +33,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/display_iv1"
                 android:focusable="false"
                 android:singleLine="true"
+                android:text="aaaa"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/large_textsize"
                 android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/denote_project"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/you" />
         </RelativeLayout>
 
         <LinearLayout
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/showdetail_rela"
-            android:background="@color/darkgray"
+            android:background="@color/white"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -85,43 +85,108 @@
                         android:textSize="@dimen/normal_textsize" />
                 </RelativeLayout>
 
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:id="@+id/planper_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/planper"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/planper_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/planper_tv"
+                    android:focusable="false"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:id="@+id/planper_tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/planper_et"
+                    android:text="%"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/large_textsize" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/planper_tv"
+                        android:id="@+id/starttime_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/planper"
+                        android:text="@string/startdate"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/normal_textsize" />
 
                     <TextView
-                        android:id="@+id/planper_et"
+                        android:id="@+id/starttime_et"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@+id/planper_tv"
+                        android:layout_toRightOf="@+id/starttime_tv"
                         android:focusable="false"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/planper_tv2"
+                        android:id="@+id/endtime_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@+id/planper_et"
-                        android:text="%"
+                        android:text="@string/endtime"
                         android:textColor="@color/text_color"
-                        android:textSize="@dimen/large_textsize" />
+                        android:textSize="@dimen/normal_textsize" />
 
+                    <TextView
+                        android:id="@+id/endtime_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/endtime_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -204,68 +269,6 @@
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@+id/extras_et"
                         android:text="@string/yuan"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/normal_textsize" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/starttime_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/nowtime"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/normal_textsize" />
-
-                    <TextView
-                        android:id="@+id/starttime_et"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@+id/starttime_tv"
-                        android:focusable="false"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/normal_textsize" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/endtime_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/expecttime"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/normal_textsize" />
-
-                    <TextView
-                        android:id="@+id/endtime_et"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@+id/endtime_tv"
-                        android:focusable="false"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/normal_textsize" />
                 </RelativeLayout>

@@ -14,8 +14,10 @@
     <string name="finishdate">项目完成日期:</string>
     <string name="startdatea">开始日期:</string>
     <string name="panerper">节点占比:</string>
+    <string name="zhanbi">占比:</string>
     <string name="yuan">元</string>
     <string name="extras">杂费:</string>
+    <string name="beizhu">备注:</string>
     <string name="setup">创建</string>
     <string name="proplecost">人工成本:</string>
     <string name="canel">取消</string>
