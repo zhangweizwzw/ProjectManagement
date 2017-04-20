@@ -55,7 +55,7 @@
     <string name="planname">计划名称:</string>
     <string name="planper">计划占比:</string>
     <string name="question_context">问题描述：</string>
-    <string name="qustionanswer">领导回复：</string>
+    <string name="qustionanswer">回复：</string>
     <string name="addplan">创建计划</string>
     <string name="addquestion">提问</string>
     <string name="addanswer">提问</string>

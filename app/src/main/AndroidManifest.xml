@@ -59,10 +59,13 @@
             android:name=".activity.AddQuestionandAnswerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
-
-        <activity android:name=".activity.QuestionListActivity"
+        <activity
+            android:name=".activity.QuestionListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
+        <activity android:name=".activity.BossQuestionListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent"/>
     </application>
 
 </manifest>

@@ -106,6 +106,18 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/normal_textsize" />
 
+                <TextView android:id="@+id/addplan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addplan"
+                    android:textColor="@color/text_color"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/jq_button"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/projectmanager_tv"
+                    android:textSize="@dimen/normal_textsize" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -113,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rela1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/theme_color">
 
                 <TextView
@@ -132,17 +144,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
                     android:src="@mipmap/shang"/>
-
-                <TextView android:id="@+id/addplan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:text="@string/addplan"
-                    android:layout_toLeftOf="@+id/denote_project"
-                    android:textColor="@color/white"
-                    android:layout_marginRight="10dp"
-                    android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>
 
             <com.bj.yatu.projectmanagement.widget.NestFullListView

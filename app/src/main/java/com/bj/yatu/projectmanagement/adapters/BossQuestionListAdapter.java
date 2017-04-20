@@ -11,13 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
-import com.bj.yatu.projectmanagement.activity.ProjectDetailActivity;
+import com.bj.yatu.projectmanagement.activity.AddQuestionandAnswerActivity;
 import com.bj.yatu.projectmanagement.common.MyApplication;
-import com.bj.yatu.projectmanagement.common.MyProgress;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
-import com.bj.yatu.projectmanagement.model.ProjectsBean;
-import com.bj.yatu.projectmanagement.utils.Dateutil;
-import com.bj.yatu.projectmanagement.utils.StringUtil;
 
 import java.util.List;
 
@@ -25,7 +21,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class QuestionListAdapter extends BaseAdapter {
+public class BossQuestionListAdapter extends BaseAdapter {
 	private final String TAG="ProjectListAdapter";
 	private LayoutInflater mInflater;
 	private OrderViewHolder holder;
@@ -33,7 +29,7 @@ public class QuestionListAdapter extends BaseAdapter {
 	private List<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean> mData;
 	private boolean flag=true;
 
-	public QuestionListAdapter(Activity context, List<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean> list) {
+	public BossQuestionListAdapter(Activity context, List<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean> list) {
 		mcontext=context;
 		mInflater = LayoutInflater.from(context);
 		this.mData=list;
@@ -60,10 +56,11 @@ public class QuestionListAdapter extends BaseAdapter {
 		//convertView为null的时候初始化convertView。
 		final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean qBean= mData.get(position);
 		holder = new OrderViewHolder();
-		convertView = mInflater.inflate(R.layout.questionlist_layout, null);
+		convertView = mInflater.inflate(R.layout.bossquestionlist_layout, null);
 		holder.question_date = (TextView) convertView.findViewById(R.id.question_date);
 		holder.question_tv = (TextView) convertView.findViewById(R.id.question_tv);
 		holder.answerquestion_tv = (TextView) convertView.findViewById(R.id.answerquestion_tv);
+		holder.answer_tv = (TextView) convertView.findViewById(R.id.answer_tv);
 		holder.rela1= (RelativeLayout) convertView.findViewById(R.id.rela1);
 		holder.rela2= (RelativeLayout) convertView.findViewById(R.id.rela2);
 
@@ -71,6 +68,10 @@ public class QuestionListAdapter extends BaseAdapter {
 //		} else {
 		holder = (OrderViewHolder) convertView.getTag();
 //		}
+
+		if(MyApplication.identity==0){
+			holder.answer_tv.setVisibility(View.GONE);
+		}
 
 		final String questiondate=qBean.getQuestiondate();
 		final String question_answer=qBean.getNode_question_answer();
@@ -81,6 +82,18 @@ public class QuestionListAdapter extends BaseAdapter {
 		holder.answerquestion_tv.setText(question_answer);
 
 		final OrderViewHolder tempHolder = holder;
+
+		tempHolder.answer_tv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				MyApplication.position=position;
+				MyApplication.questionid=qBean.getId();
+				Intent intent=new Intent();
+				intent.putExtra("ctype","答复");
+				intent.setClass(mcontext,AddQuestionandAnswerActivity.class);
+				mcontext.startActivityForResult(intent,3);
+			}
+		});
 
 		tempHolder.rela1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -111,8 +124,7 @@ public class QuestionListAdapter extends BaseAdapter {
 	}
 
 	public final class OrderViewHolder {
-		private TextView question_date,question_tv,answerquestion_tv;
+		private TextView question_date,question_tv,answerquestion_tv,answer_tv;
 		private RelativeLayout rela1,rela2;
 	}
-
 }

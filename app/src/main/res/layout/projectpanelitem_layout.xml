@@ -21,9 +21,8 @@
         <RelativeLayout android:id="@+id/rela1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp">
+            android:background="@color/theme_color">
 
             <TextView android:id="@+id/panelname_et"
                 android:layout_width="wrap_content"
@@ -35,8 +34,17 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:text="aaa"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
                 android:layout_toRightOf="@+id/panelname_tv"/>
+
+            <ImageView android:id="@+id/denote_im1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/you"/>
         </RelativeLayout>
 
     <LinearLayout
@@ -196,7 +204,7 @@
             <TextView android:id="@+id/starttime_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/starttime"
+                android:text="@string/startdate"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>
@@ -219,7 +227,7 @@
             <TextView android:id="@+id/endtime_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/finishdate"
+                android:text="@string/expecttime"
                 android:textColor="@color/text_color"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/normal_textsize"/>

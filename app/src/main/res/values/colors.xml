@@ -8,7 +8,7 @@
     <color name="table_color">#FFFFFF</color>
     <color name="text_color">#333333</color>
     <color name="theme_color">#169BD5</color>
-    <color name="transparent">#00000000</color>
+    <color name="transparent">#e0000000</color>
     <color name="title_color">#7EC0EE</color>
     <color name="nofinish_bg">#4169E1</color>
     <color name="red"> #FF0000</color>

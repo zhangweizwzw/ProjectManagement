@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.bj.yatu.projectmanagement.R;
 import com.bj.yatu.projectmanagement.common.MyApplication;
 import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.AddPanelBean;
+import com.bj.yatu.projectmanagement.model.MessageEvent;
 import com.bj.yatu.projectmanagement.model.ProjectDetailBean;
 import com.bj.yatu.projectmanagement.model.StatusBean;
 import com.bj.yatu.projectmanagement.utils.Dateutil;
@@ -26,6 +28,9 @@ import com.bj.yatu.projectmanagement.widget.NestFullViewHolder;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +49,11 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     boolean flaga=true;//问题
     boolean flagb=true;//答复
+    boolean flagc=true;//计划
     private String questionid;//问题id
     private String projectid;//项目id
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
-    private int questionpoistion=0;//问题poistion
     private ImageView denote_project;
 
 
@@ -134,25 +139,41 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
 
+                ((LinearLayout) holder.getView(R.id.close)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
+                    }
+                });
 
-                    ((RelativeLayout)holder.getView(R.id.showpanle)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                        if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().size()==0){
-                            ToastUtil.showToast(BossProjectDetailActivity.this,"暂无节点！");
+                //显示与隐藏项目详情
+                ((RelativeLayout)holder.getView(R.id.showdetail_rela)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //项目名称过长的时候显示与隐藏
+                        if (flagc){
+                            flagc=false;
+                            ((TextView)holder.getView(R.id.planname_et)).setEllipsize(null);//文字展开
+                            ((TextView)holder.getView(R.id.planname_et)).setSingleLine(flagc);
+
+                        }else {
+                            flagc=true;
+                            ((TextView)holder.getView(R.id.planname_et)).setEllipsize(TextUtils.TruncateAt.END);//收缩
+                            ((TextView)holder.getView(R.id.planname_et)).setSingleLine(flagc);
+                        }
+
+                        //计划详情的显示与隐藏
+                        if(((LinearLayout)holder.getView(R.id.detail_rela)).getVisibility()==View.VISIBLE){
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
+                            ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
                         }else{
-                            if(((NestFullListView)holder.getView(R.id.panel_lv)).getVisibility()==View.VISIBLE){
-                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_plan)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.GONE);
-                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.xia);
-                            }else{
-                                ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_plan)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                ((NestFullListView)holder.getView(R.id.panel_lv)).setVisibility(View.VISIBLE);
-                                ((ImageView)holder.getView(R.id.denote_plan)).setImageResource(R.mipmap.shang);
-                            }
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 360.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                            ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.VISIBLE);
                         }
-                        }
-                    });
+                    }
+                });
 
                 ((NestFullListView)holder.getView(R.id.panel_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean>(R.layout.managerprojectpanelitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes()) {
                     @Override
@@ -165,95 +186,24 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         holder.setText(R.id.extras_et,nodes.getNode_extras_cost()+"");
                         holder.setText(R.id.starttime_et,nodes.getNode_begin_time());
 
-                        ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
+                        ((LinearLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                            if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0){
-                                ToastUtil.showToast(BossProjectDetailActivity.this,"暂无问题");
-                            }else{
-                                if(((NestFullListView)holder.getView(R.id.question_lv)).getVisibility()==View.VISIBLE){
-                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.GONE);
-                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.xia);
+                                Log.i(TAG,"pos1="+pos1);
+                                Log.i(TAG,"pos2="+pos2);
+
+                                planpoistion=pos1;
+                                nodepoistion=pos2;
+
+                                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0 ){
+                                    ToastUtil.showToast(BossProjectDetailActivity.this,"暂无问题");
                                 }else{
-                                    ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_panel)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                                    ((NestFullListView)holder.getView(R.id.question_lv)).setVisibility(View.VISIBLE);
-                                    ((ImageView)holder.getView(R.id.denote_panel)).setImageResource(R.mipmap.shang);
+                                    MyApplication.qestionlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
+                                    MyApplication.qestionlist.addAll(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions());
+                                    startActivity(new Intent(BossProjectDetailActivity.this,BossQuestionListActivity.class));
                                 }
                             }
-                            }
                         });
-
-                        ((NestFullListView)holder.getView(R.id.question_lv)).setAdapter(new NestFullListViewAdapter<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>(R.layout.managerprojectquestionitem_layout, projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions()) {
-                            @Override
-                            public void onBind(final int pos3, final ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean question, final NestFullViewHolder holder) {
-                                holder.setText(R.id.question_date,question.getQuestiondate());
-                                holder.setText(R.id.question_tv,question.getNode_question());
-                                holder.setText(R.id.answerquestion_tv,question.getNode_question_answer());
-
-                                if(MyApplication.identity==0){
-                                    ((TextView)holder.getView(R.id.answerq)).setVisibility(View.GONE);
-                                }
-
-                                ((TextView)holder.getView(R.id.answerq)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        questionid=question.getId()+"";
-                                        planpoistion=pos1;
-                                        nodepoistion=pos2;
-                                        questionpoistion=pos3;
-                                        Intent intent=new Intent();
-                                        intent.putExtra("ctype","答复");
-                                        intent.setClass(BossProjectDetailActivity.this,AddQuestionandAnswerActivity.class);
-                                        startActivityForResult(intent,3);
-                                    }
-                                });
-
-
-                                ((TextView)holder.getView(R.id.question_tv)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (flaga){
-                                            flaga=false;
-                                            ((TextView)holder.getView(R.id.question_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
-
-                                        }else {
-                                            flaga=true;
-                                            ((TextView)holder.getView(R.id.question_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.question_tv)).setSingleLine(flaga);
-                                        }
-                                    }
-                                });
-                                ((TextView)holder.getView(R.id.answerquestion_tv)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (flagb){
-                                            flagb=false;
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(null);//文字展开
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
-
-                                        }else {
-                                            flagb=true;
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setEllipsize(TextUtils.TruncateAt.END);//收缩
-                                            ((TextView)holder.getView(R.id.answerquestion_tv)).setSingleLine(flagb);
-                                        }
-                                    }
-                                });
-
-                                ((RelativeLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if(((RelativeLayout)holder.getView(R.id.question_rela)).getVisibility()==View.VISIBLE){
-                                            ((RelativeLayout)holder.getView(R.id.question_rela)).setVisibility(View.GONE);
-                                        }else{
-                                            ((RelativeLayout)holder.getView(R.id.question_rela)).setVisibility(View.VISIBLE);
-                                        }
-                                    }
-                                });
-                            }
-                        });
-
 
                     }
                 });
@@ -275,50 +225,10 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
             String panelstarttime=data.getStringExtra("panelstarttime").toString();
 
             goCreate(panelname,panelstarttime,endtime,pancelper,peoplecost,extras,finishsign);
-        }else if(requestCode==3&&resultCode==3){
-            String iscontent=data.getStringExtra("iscontent").toString();
-            if("1".equals(iscontent)){
-                String content=data.getStringExtra("content").toString();
-                Log.i(TAG,"答复===>"+content);
-                goQusetion(content);
-            }
         }
     }
 
-    private void goQusetion(final String content) {
-        ProcessUtil.showProcess(this,"正在回复，请稍后...");
-        Log.i(TAG,"questionid=>"+questionid);
-        OkHttpUtils
-                .post()
-                .url(RequstUrls.REQUEST_URL+"answerQuestion")
-                .addParams("id",questionid)
-                .addParams("node_question_answer",content)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        ProcessUtil.dismiss();
-                        ToastUtil.showToast(BossProjectDetailActivity.this,"请求失败！请检查网络设置");
-                    }
 
-                    @Override
-                    public void onResponse(String response){
-                        ProcessUtil.dismiss();
-                        Log.i(TAG,"fffffff=="+response);
-                        Gson gson=new Gson();
-                        StatusBean statusBean=gson.fromJson(response,StatusBean.class);
-                        if(statusBean.isStatus()){
-                            ToastUtil.showToast(BossProjectDetailActivity.this,"回复成功！");
-
-                            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(questionpoistion).setAnswerdate(Dateutil.getTodayDate());
-                            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(questionpoistion).setNode_question_answer(content);
-                            plans_lv.updateUI();
-
-                        }
-                    }
-                });
-
-    }
 
     private void goCreate(final String panelname,final String panelstarttime,final String endtime,final String pancelper,final String peoplecost,final String extras,final String finishsign) {
         ProcessUtil.showProcess(this,"正在添加，请稍后...");
@@ -384,11 +294,11 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                     if(plans_lv.getVisibility()==View.VISIBLE){
                         ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 180.0F).setDuration(500).start();
                         plans_lv.setVisibility(View.GONE);
-                        denote_project.setImageResource(R.mipmap.xia);
+                        denote_project.setImageResource(R.mipmap.you);
                     }else{
-                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        ObjectAnimator.ofFloat(denote_project, "rotationX", 0.0F, 360.0F).setDuration(500).start();
                         plans_lv.setVisibility(View.VISIBLE);
-                        denote_project.setImageResource(R.mipmap.shang);
+                        denote_project.setImageResource(R.mipmap.xia);
                     }
                 }
                 break;
@@ -415,6 +325,34 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 startActivityForResult(intent,2);
 //                startActivityForResult(new Intent(this,AddPanelActivity.class),2);
                 break;
+        }
+    }
+
+    /**
+     * 接收回复问题发过来的广播,把数据更新给项目详情
+     * @param event
+     */
+    @Subscribe
+    public void onEventMainThread(MessageEvent event){
+        if("回复".equals(event.message)){
+            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(MyApplication.position).setAnswerdate(Dateutil.getTodayDate());
+            projectDetailBean.getProject().getProjectplans().get(planpoistion).getNodes().get(nodepoistion).getQuestions().get(MyApplication.position).setNode_question_answer( MyApplication.questioncontent);
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
         }
     }
 }

@@ -1,255 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <!--<View android:id="@+id/view1"
+    <LinearLayout
+        android:id="@+id/close"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividercolor"/>-->
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout android:id="@+id/showpanle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkgray"
-        android:layout_marginTop="10dp">
 
-        <RelativeLayout android:id="@+id/rela1"
+        <RelativeLayout
+            android:id="@+id/showdetail_rela"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/darkgray">
 
-            <TextView android:id="@+id/planname_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/planname"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/planname_et"
+            <TextView
+                android:id="@+id/planname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="5dp"
                 android:focusable="false"
+                android:singleLine="true"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_marginRight="36dp"
-                android:layout_toRightOf="@+id/planname_tv"/>
+                android:textSize="@dimen/large_textsize"
+                android:textStyle="bold" />
 
-            <ImageView android:id="@+id/denote_plan"
-                android:layout_centerVertical="true"
+            <ImageView
+                android:id="@+id/denote_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:src="@mipmap/shang"/>
-
+                android:src="@mipmap/you" />
         </RelativeLayout>
 
-        <RelativeLayout android:id="@+id/rela2"
+        <LinearLayout
+            android:id="@+id/detail_rela"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@+id/rela1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/finishsign_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="完成标志:"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/finishsign_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/finishsign_tv"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout android:id="@+id/relan"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/rela2"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/starttime_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/starttime"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/starttime_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/starttime_tv"/>
-        </RelativeLayout>
-
-        <RelativeLayout android:id="@+id/rela3"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/relan"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/endtime_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/finishdate"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView android:id="@+id/endtime_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/endtime_tv"/>
-        </RelativeLayout>
-
-
-        <RelativeLayout android:id="@+id/rela4"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/rela3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/planper_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/planper"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView
-                android:id="@+id/planper_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/planper_tv"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
-
-            <TextView android:id="@+id/planper_tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/planper_et"
-                android:text="%"
-                android:layout_marginLeft="3dp"
-                android:textStyle="bold"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/large_textsize"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout android:id="@+id/rela5"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/rela4"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView android:id="@+id/peoplecost_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/proplecost"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView
-                android:id="@+id/peoplecost_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/peoplecost_tv"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
-
-            <TextView android:id="@+id/peoplecost_tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/peoplecost_et"
-                android:text="@string/yuan"
-                android:layout_marginLeft="3dp"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-
-            <TextView android:id="@+id/extras_tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/yuan"
-                android:layout_marginLeft="3dp"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView
-                android:id="@+id/extras_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="3dp"
-                android:layout_toLeftOf="@+id/extras_tv2"
-                android:focusable="false"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/normal_textsize" />
-
-
-            <TextView android:id="@+id/extras_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/extras"
-                android:textColor="@color/text_color"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/extras_et"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/normal_textsize"/>
-
-        </RelativeLayout>
-
-        <com.bj.yatu.projectmanagement.widget.NestFullListView
-            android:id="@+id/panel_lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/rela5"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showdetail_rela"
+            android:background="@color/darkgray"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:showDividers="middle"/>
-    </RelativeLayout>
-</RelativeLayout>
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/finishsign_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="完成标志:"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/finishsign_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/finishsign_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/planper_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/planper"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/planper_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/planper_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/planper_tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/planper_et"
+                        android:text="%"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/large_textsize" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/peoplecost_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/proplecost"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/peoplecost_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/peoplecost_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/peoplecost_tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/peoplecost_et"
+                        android:text="@string/yuan"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/extras_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/extras"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/extras_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/extras_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/extras_tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/extras_et"
+                        android:text="@string/yuan"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/starttime_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/nowtime"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/starttime_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/starttime_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/endtime_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/expecttime"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/endtime_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/endtime_tv"
+                        android:focusable="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/normal_textsize" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.bj.yatu.projectmanagement.widget.NestFullListView
+                android:id="@+id/panel_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

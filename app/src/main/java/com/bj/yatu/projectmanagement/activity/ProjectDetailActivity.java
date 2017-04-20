@@ -27,8 +27,6 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +76,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
         projectmanager_tv= (TextView) findViewById(R.id.projectmanager_tv);
 
         denote_im1= (ImageView) findViewById(R.id.denote_im1);
-        denote_im1.setImageResource(R.mipmap.shang);
+        denote_im1.setImageResource(R.mipmap.you);
     }
 
     //查询项目详情
@@ -128,6 +126,15 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 holder.setText(R.id.peoplecost_et,plans.getPlan_labor_cost()+"");
                 holder.setText(R.id.extras_et,plans.getPlan_extras_cost()+"");
 
+                ((LinearLayout) holder.getView(R.id.close)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
+                        ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
+                    }
+                });
+
                 //显示与隐藏项目详情
                 ((RelativeLayout)holder.getView(R.id.showdetail_rela)).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -147,12 +154,11 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         //计划详情的显示与隐藏
                         if(((LinearLayout)holder.getView(R.id.detail_rela)).getVisibility()==View.VISIBLE){
                             ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
                             ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
-
                         }else{
-                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.shang);
+                            ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 360.0F).setDuration(500).start();
+                            ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.xia);
                             ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.VISIBLE);
                         }
                     }
@@ -229,16 +235,16 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                      ((LinearLayout)holder.getView(R.id.showquestion)).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Log.i(TAG,"pos1="+pos1);
-                                Log.i(TAG,"pos2="+pos2);
+                            Log.i(TAG,"pos1="+pos1);
+                            Log.i(TAG,"pos2="+pos2);
 
-                                if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0 ){
-                                    ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
-                                }else{
-                                    MyApplication.qestionlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
-                                    MyApplication.qestionlist.addAll(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions());
-                                    startActivity(new Intent(ProjectDetailActivity.this,QuestionListActivity.class));
-                                }
+                            if(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions().size()==0 ){
+                                ToastUtil.showToast(ProjectDetailActivity.this,"暂无问题");
+                            }else{
+                                MyApplication.qestionlist=new ArrayList<ProjectDetailBean.ProjectBean.ProjectplansBean.NodesBean.QuestionsBean>();
+                                MyApplication.qestionlist.addAll(projectDetailBean.getProject().getProjectplans().get(pos1).getNodes().get(pos2).getQuestions());
+                                startActivity(new Intent(ProjectDetailActivity.this,QuestionListActivity.class));
+                            }
                             }
                     });
                     }
@@ -388,11 +394,11 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                 }else{
                     if(plans_lv.getVisibility()==View.VISIBLE){
                         ObjectAnimator.ofFloat(denote_im1, "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                        denote_im1.setImageResource(R.mipmap.xia);
+                        denote_im1.setImageResource(R.mipmap.you);
                         plans_lv.setVisibility(View.GONE);
                     }else{
-                        ObjectAnimator.ofFloat(denote_im1, "rotationX", 0.0F, 180.0F).setDuration(500).start();
-                        denote_im1.setImageResource(R.mipmap.shang );
+                        ObjectAnimator.ofFloat(denote_im1, "rotationX", 0.0F, 360.0F).setDuration(500).start();
+                        denote_im1.setImageResource(R.mipmap.xia );
                         plans_lv.setVisibility(View.VISIBLE);
                     }
                 }
