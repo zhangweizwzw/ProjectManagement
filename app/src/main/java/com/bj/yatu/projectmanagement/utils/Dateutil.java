@@ -8,6 +8,23 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class Dateutil {
+
+
+    /**
+     * 判断时间格式 格式必须为“YYYY-MM-dd”
+     * 2004-2-30 是无效的
+     * 2003-2-29 是无效的
+     * @return
+     */
+    public static boolean isValidDate(String str) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-M-d");
+        try{
+            Date date = (Date)formatter.parse(str);
+            return str.equals(formatter.format(date));
+        }catch(Exception e){
+            return false;
+        }
+    }
     /**
      * 获取格林威治时间(1970年至今的秒数)
      */

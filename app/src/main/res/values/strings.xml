@@ -60,6 +60,6 @@
     <string name="addquestion">提问</string>
     <string name="addanswer">提问</string>
     <string name="sure">确定</string>
-    <string name="answer">答复</string>
+    <string name="answer">回复</string>
     <string name="addxiaojie">新建计划小结</string>
 </resources>

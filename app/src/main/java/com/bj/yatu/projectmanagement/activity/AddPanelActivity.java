@@ -110,6 +110,10 @@ public class AddPanelActivity extends BaseActivity implements View.OnClickListen
                     ToastUtil.showToast(this,"请输入完成标志！");
                 }else if(StringUtil.isEmpty(starttime)){
                     ToastUtil.showToast(this,"请输入开始日期！");
+                }else if(!Dateutil.isValidDate(starttime)){
+                    ToastUtil.showToast(this,"开始日期格式不正确！");
+                }else if(!Dateutil.isValidDate(endtime)){
+                    ToastUtil.showToast(this,"完成日期格式不正确！");
                 }else if(StringUtil.isEmpty(endtime)){
                     ToastUtil.showToast(this,"请输入完成日期！");
                 }else if(Dateutil.compare_date(endtime,starttime)==1){
