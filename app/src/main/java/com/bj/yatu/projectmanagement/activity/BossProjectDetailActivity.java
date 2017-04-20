@@ -142,6 +142,8 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                 ((LinearLayout) holder.getView(R.id.close)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ObjectAnimator.ofFloat(((ImageView)holder.getView(R.id.denote_project)), "rotationX", 0.0F, 180.0F).setDuration(500).start();
+                        ((ImageView)holder.getView(R.id.denote_project)).setImageResource(R.mipmap.you);
                         ((LinearLayout)holder.getView(R.id.detail_rela)).setVisibility(View.GONE);
                     }
                 });

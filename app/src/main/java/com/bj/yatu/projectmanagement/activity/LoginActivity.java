@@ -154,16 +154,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 @Override
                 public void onResponse(String response) {
                     ProcessUtil.dismiss();
-                    Log.i(TAG,response);
+                    Log.i(TAG,"登录返回="+response);
                     Gson gson=new Gson();
                     UserLoginBean userLoginBean = gson.fromJson(response, UserLoginBean.class);
 //                        UserLoginBean userLoginBean = gson.fromJson(response, new TypeToken<ArrayList<UserLoginBean>>(){}.getType());
                     if(userLoginBean.isStatus()){
-                        int identity= userLoginBean.getUser().getRemark();
+
+                        int identity;
+                        if("领导".equals(userLoginBean.getRemark())){
+                            identity= 0;
+                        }else if("生产主管".equals(userLoginBean.getRemark())){
+                            identity=1;
+                        }else{
+                            identity=2;
+                        }
 
                        MyApplication.identity= identity;
-                       MyApplication.account=userLoginBean.getUser().getId()+"";
-                       MyApplication.username=userLoginBean.getUser().getUsername();
+                       MyApplication.account=userLoginBean.getId()+"";
 
                        Intent intent=new Intent();
                        if(identity==0||identity==1){

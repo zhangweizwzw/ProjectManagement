@@ -206,8 +206,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
 
                         if(managersBean.isStatus()){
                             for (int i=0;i<managersBean.getManager().size();i++){
-                               Log.i(TAG,"AAAAAAAAAAAAAAAA"+i+"<-->"+managersBean.getManager().get(i).getUsername());
-                                managers[i]=managersBean.getManager().get(i).getUsername();
+                               Log.i(TAG,"AAAAAAAAAAAAAAAA"+i+"<-->"+managersBean.getManager().get(i).getUserName());
+                                managers[i]=managersBean.getManager().get(i).getUserName();
                            }
                             mlist= Arrays.asList(managers);
                             manager.setItems(managers);
@@ -286,10 +286,12 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                     //获取项目经理id
                     String managerid="";
                     for (int i=0;i<managersBean.getManager().size();i++){
-                        if(managersBean.getManager().get(i).getUsername().equals(managerName)){
+                        if(managersBean.getManager().get(i).getUserName().equals(managerName)){
                             managerid=managersBean.getManager().get(i).getId()+"";
                         }
                     }
+                    Log.i(TAG,"managerName="+managerName);
+                    Log.i(TAG,"managerid="+managerid);
                     goCreate(proName,startTime,predictTime,managerName,managerid);
                 }
                 break;

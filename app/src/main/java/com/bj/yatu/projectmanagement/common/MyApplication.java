@@ -14,8 +14,6 @@ import java.util.List;
 public class MyApplication extends Application{
     public static String account="1";//用户账号
 
-    public static String username="";//用户姓名
-
     public static int position=0;//回复position
     public static int questionid=0;//回复问题id
     public static String questioncontent="";//回复问题内容
