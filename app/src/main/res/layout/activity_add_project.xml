@@ -159,7 +159,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@+id/manager_text"
                     android:textSize="12sp"
-                    app:ms_dropdown_height="wrap_content"
+                    app:ms_dropdown_height="100dp"
                     app:ms_dropdown_max_height="350dp"/>
 
             </RelativeLayout>
