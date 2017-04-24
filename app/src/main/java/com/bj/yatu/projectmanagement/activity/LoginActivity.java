@@ -1,7 +1,9 @@
 package com.bj.yatu.projectmanagement.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,7 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextView text_center;
     private TextView btn_reset,btn_login;
     private EditText account_et,password_et;
-    private SharedPreferencesUtil sutil;
+    private SharedPreferences preferences;
 
     Handler mHandler = new Handler() {
         @Override
@@ -57,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sutil=new SharedPreferencesUtil(LoginActivity.this,"manager");
+        preferences=getSharedPreferences("manager", Context.MODE_PRIVATE);
 
         initView();
 
@@ -88,8 +90,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         account_et= (EditText) findViewById(R.id.account_et);
         password_et= (EditText) findViewById(R.id.password_et);
 
-        account_et.setText(sutil.getString("account",""));
-        password_et.setText(sutil.getString("password",""));
+        String strname=preferences.getString("account", "");
+        String strpassword=preferences.getString("password", "");
+        account_et.setText(strname);
+        password_et.setText(strpassword);
     }
 
     /**
@@ -123,7 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void checkconection() {
         OkHttpUtils
                 .post()
-                .url(RequstUrls.REQUEST_URL)
+                .url(RequstUrls.REQUEST_URLl)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -166,9 +170,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                        UserLoginBean userLoginBean = gson.fromJson(response, new TypeToken<ArrayList<UserLoginBean>>(){}.getType());
                     if(userLoginBean.isStatus()){
 
-
-                        sutil.setString("account",account);
-                        sutil.setString("password",password);
+                        SharedPreferences.Editor editor=preferences.edit();
+                        editor.putString("account", account);
+                        editor.putString("password", password);
+                        editor.commit();
 
                         int identity;
                         if("领导".equals(userLoginBean.getRemark())){
