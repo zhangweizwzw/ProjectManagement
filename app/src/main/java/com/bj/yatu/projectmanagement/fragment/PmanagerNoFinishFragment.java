@@ -1,11 +1,13 @@
 package com.bj.yatu.projectmanagement.fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,12 +35,13 @@ import okhttp3.Call;
  * Created by admin on 2017/4/5.
  */
 
-public class PmanagerNoFinishFragment extends Fragment{
+public class PmanagerNoFinishFragment extends Fragment implements View.OnClickListener {
     private final String TAG="PmanagerNoFinishFragment";
     private View view;
     private TextView text_center;
     private ListView project_lv;
-    private List<ProjectsBean.ProjectBean> proList=new ArrayList<ProjectsBean.ProjectBean>();
+    private ImageView image_right;
+    private List<ProjectsBean.ProjectBean>  proList;
     private ProjectListAdapter projectListAdapter;
 
     @Override
@@ -56,11 +59,14 @@ public class PmanagerNoFinishFragment extends Fragment{
         text_center.setText("未完成");
 
         project_lv= (ListView) view.findViewById(R.id.project_lv);
-        projectListAdapter=new ProjectListAdapter(false,getActivity(),proList);
-        project_lv.setAdapter(projectListAdapter);
+
+        image_right= (ImageView) view.findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
     }
 
     private void initData() {
+        proList=new ArrayList<ProjectsBean.ProjectBean>();
         ProcessUtil.showProcess(getActivity(),"正在查询，请稍后...");
         OkHttpUtils
                 .post()
@@ -86,10 +92,21 @@ public class PmanagerNoFinishFragment extends Fragment{
                                     proList.remove(i);
                                 }
                             }
-                            projectListAdapter.notifyDataSetChanged();
+//                            projectListAdapter.notifyDataSetChanged();
+                            projectListAdapter=new ProjectListAdapter(false,getActivity(),proList);
+                            project_lv.setAdapter(projectListAdapter);
                         }
                     }
                 });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.image_right:
+                initData();
+                break;
+        }
     }
 }

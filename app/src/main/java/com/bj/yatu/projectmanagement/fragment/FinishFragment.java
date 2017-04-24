@@ -1,5 +1,6 @@
 package com.bj.yatu.projectmanagement.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -7,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bj.yatu.projectmanagement.R;
+import com.bj.yatu.projectmanagement.activity.AddProjectActivity;
 import com.bj.yatu.projectmanagement.adapters.FinishAdapter;
 import com.bj.yatu.projectmanagement.adapters.NofinishAdapter;
 import com.bj.yatu.projectmanagement.common.MyApplication;
@@ -32,13 +35,15 @@ import okhttp3.Call;
  * Created by admin on 2017/4/5.
  */
 
-public class FinishFragment extends Fragment{
+public class FinishFragment extends Fragment implements View.OnClickListener {
     private View view;
     private TextView text_center;
     private ListView listView;
     private List<ProjectsBean.ProjectBean> mlist;
     private List<ProjectsBean.ProjectBean> list;;
     private FinishAdapter finishAdapter;
+    private ImageView image_right;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_finish, container, false);
@@ -51,6 +56,11 @@ public class FinishFragment extends Fragment{
     private void initView() {
         text_center= (TextView) view.findViewById(R.id.text_center);
         text_center.setText("已完成");
+
+        image_right= (ImageView) view.findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
+
         listView= (ListView) view.findViewById(R.id.finish_listview);
 
 //       点击展开隐藏内容
@@ -99,5 +109,14 @@ public class FinishFragment extends Fragment{
                 listView.setAdapter(finishAdapter);
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.image_right:
+                initData();
+                break;
+        }
     }
 }

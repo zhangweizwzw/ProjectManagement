@@ -45,8 +45,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     private ImageView image_left;
     private RelativeLayout rela2;
     private  NestFullListView plans_lv;
-    private ProjectDetailBean projectDetailBean=new ProjectDetailBean();
-    private List<AddPanelBean.ProjectplansBean> panelList=new ArrayList<AddPanelBean.ProjectplansBean>();
+    private ProjectDetailBean projectDetailBean;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     boolean flaga=true;//问题
     boolean flagb=true;//答复
@@ -56,8 +55,7 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
     private String projectid;//项目id
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
-    private ImageView display_iv;
-
+    private ImageView display_iv,image_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +63,16 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         setContentView(R.layout.activity_boss_project_detail);
 
         initView();
-        initData();
+        initData(0);
     }
 
 
     private void initView() {
         projectid=getIntent().getStringExtra("projectid");
 
+        image_right= (ImageView)findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
 
         text_center= (TextView) findViewById(R.id.text_center);
         text_center.setText("项目详情");
@@ -102,7 +103,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    private void initData() {
+    private void initData(final int mint) {
+        projectDetailBean=new ProjectDetailBean();
+
         ProcessUtil.showProcess(this,"正在查询，请稍后...");
         OkHttpUtils
                 .post()
@@ -122,7 +125,11 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
                         projectDetailBean=gson.fromJson(response, ProjectDetailBean.class);
                         if(projectDetailBean.isStatus()){
                             Log.i(TAG,projectDetailBean.isStatus()+"");
-                            setData();
+                            if(mint==0){
+                                setData();
+                            }else{
+                                plans_lv.updateUI();
+                            }
                         }
                     }
                 });
@@ -326,6 +333,9 @@ public class BossProjectDetailActivity extends BaseActivity implements View.OnCl
         switch (view.getId()){
             case R.id.image_left:
                 finish();
+                break;
+            case R.id.image_right:
+                initData(1);
                 break;
             case R.id.rela2:
                 if(projectDetailBean.getProject().getProjectplans().size()==0){

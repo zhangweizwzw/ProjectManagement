@@ -48,7 +48,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     private String projectid="";//项目id
     private int planpoistion=0;//问题poistion
     private int nodepoistion=0;//节点poistion
-    private ImageView display_iv;
+    private ImageView display_iv,image_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,15 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_project_detail);
 
         initView();
-        initData();
+        initData(0);
     }
 
     private void initView() {
         projectid=getIntent().getStringExtra("projectid");
+
+        image_right= (ImageView)findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
 
         text_center= (TextView) findViewById(R.id.text_center);
         text_center.setText("项目详情");
@@ -80,7 +84,7 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     //查询项目详情
-    private void initData() {
+    private void initData(final int mint) {
         ProcessUtil.showProcess(this,"正在查询，请稍后...");
         projectDetailBean=new ProjectDetailBean();
         Log.i(TAG,"id="+projectid);
@@ -102,7 +106,11 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
                         Gson gson=new Gson();
                         projectDetailBean=gson.fromJson(response, ProjectDetailBean.class);
                         if(projectDetailBean.isStatus()){
-                            setData();
+                            if(mint==0){
+                                setData();
+                            }else{
+                                plans_lv.updateUI();
+                            }
                         }
                     }
                 });
@@ -423,6 +431,9 @@ public class ProjectDetailActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.image_left:
                 finish();
+                break;
+            case R.id.image_right:
+                initData(1);
                 break;
             case R.id.rela2:
                 if(projectDetailBean.getProject().getProjectplans().size()==0){
