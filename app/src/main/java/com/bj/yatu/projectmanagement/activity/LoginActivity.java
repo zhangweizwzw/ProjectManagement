@@ -19,6 +19,7 @@ import com.bj.yatu.projectmanagement.common.RequstUrls;
 import com.bj.yatu.projectmanagement.model.UserLoginBean;
 import com.bj.yatu.projectmanagement.utils.Netutil;
 import com.bj.yatu.projectmanagement.utils.ProcessUtil;
+import com.bj.yatu.projectmanagement.utils.SharedPreferencesUtil;
 import com.bj.yatu.projectmanagement.utils.StringUtil;
 import com.bj.yatu.projectmanagement.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextView text_center;
     private TextView btn_reset,btn_login;
     private EditText account_et,password_et;
+    private SharedPreferencesUtil sutil;
 
     Handler mHandler = new Handler() {
         @Override
@@ -54,6 +56,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sutil=new SharedPreferencesUtil(LoginActivity.this,"manager");
 
         initView();
 
@@ -84,6 +88,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         account_et= (EditText) findViewById(R.id.account_et);
         password_et= (EditText) findViewById(R.id.password_et);
 
+        account_et.setText(sutil.getString("account",""));
+        password_et.setText(sutil.getString("password",""));
     }
 
     /**
@@ -136,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-    private void goLogin(String account,String password) {
+    private void goLogin(final String account, final String password) {
         ProcessUtil.showProcess(this,"正在登录，请稍后...");
         OkHttpUtils
             .post()
@@ -159,6 +165,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     UserLoginBean userLoginBean = gson.fromJson(response, UserLoginBean.class);
 //                        UserLoginBean userLoginBean = gson.fromJson(response, new TypeToken<ArrayList<UserLoginBean>>(){}.getType());
                     if(userLoginBean.isStatus()){
+
+
+                        sutil.setString("account",account);
+                        sutil.setString("password",password);
 
                         int identity;
                         if("领导".equals(userLoginBean.getRemark())){

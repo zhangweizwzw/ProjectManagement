@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,14 +31,16 @@ import okhttp3.Call;
  * Created by admin on 2017/4/5.
  */
 
-public class PmanagerFinishFragment extends Fragment{
+public class PmanagerFinishFragment extends Fragment implements View.OnClickListener {
     private final String TAG="PmanagerFinishFragment";
     private View view;
     private TextView text_center;
     private ListView project_lv;
-    private List<ProjectsBean.ProjectBean> profinishList=new ArrayList<ProjectsBean.ProjectBean>();
-    private List<ProjectsBean.ProjectBean> finishfList=new ArrayList<ProjectsBean.ProjectBean>();
+    private List<ProjectsBean.ProjectBean> profinishList;
+    private List<ProjectsBean.ProjectBean> finishfList;
     private ProjectListAdapter projectListAdapter;
+    private ImageView image_right;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_pmanager_finish, container, false);
@@ -53,11 +56,17 @@ public class PmanagerFinishFragment extends Fragment{
         text_center.setText("已完成");
 
         project_lv= (ListView) view.findViewById(R.id.project_lv);
-        projectListAdapter=new ProjectListAdapter(true,getActivity(),finishfList);
-        project_lv.setAdapter(projectListAdapter);
+
+        image_right= (ImageView) view.findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
+
     }
 
     private void initData() {
+        profinishList=new ArrayList<ProjectsBean.ProjectBean>();
+        finishfList=new ArrayList<ProjectsBean.ProjectBean>();
+
         ProcessUtil.showProcess(getActivity(),"正在查询，请稍后...");
         OkHttpUtils
                 .post()
@@ -85,10 +94,20 @@ public class PmanagerFinishFragment extends Fragment{
                                     finishfList.add(profinishList.get(i));
                                 }
                             }
-                            projectListAdapter.notifyDataSetChanged();
+                            projectListAdapter=new ProjectListAdapter(true,getActivity(),finishfList);
+                            project_lv.setAdapter(projectListAdapter);
                         }
                     }
                 });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.image_right:
+                initData();
+                break;
+        }
     }
 }

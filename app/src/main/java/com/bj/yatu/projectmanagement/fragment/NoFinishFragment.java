@@ -38,7 +38,7 @@ import okhttp3.Call;
 public class NoFinishFragment extends Fragment implements View.OnClickListener {
     private final String TAG="TAG";
     private View view;
-    private ImageView addproject;
+    private ImageView addproject,image_right;
     private TextView text_center;
 
     private ListView listView;
@@ -59,6 +59,9 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
     private void initView() {
         text_center= (TextView) view.findViewById(R.id.text_center);
         text_center.setText("未完成");
+        image_right= (ImageView) view.findViewById(R.id.image_right);
+        image_right.setImageResource(R.mipmap.refresh);
+        image_right.setOnClickListener(this);
 
         addproject= (ImageView) view.findViewById(R.id.addproject);
         addproject.bringToFront();//将图片放在最上方
@@ -145,6 +148,9 @@ public class NoFinishFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()){
             case R.id.addproject:
                 startActivityForResult(new Intent(getActivity(), AddProjectActivity.class),4);
+                break;
+            case R.id.image_right:
+                initData();
                 break;
         }
     }
